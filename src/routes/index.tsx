@@ -140,8 +140,7 @@ function Index() {
                     src={p.src} alt={p.alt}
                     width={1024} height={768}
                     loading={i === 0 ? "eager" : "lazy"} decoding="async"
-                    style={p.pos ? { objectPosition: p.pos } : undefined}
-                    className="aspect-[4/3] w-full object-cover transition-transform duration-[400ms] ease-out hover:scale-[1.05]"
+                    className={`aspect-[4/3] w-full transition-transform duration-[400ms] ease-out hover:scale-[1.05] ${("contain" in p && p.contain) ? "object-contain bg-[var(--cream)]" : "object-cover"}`}
                   />
                 </div>
                 <figcaption className="p-4 text-sm italic text-[var(--muted-text)]">{p.caption}</figcaption>
