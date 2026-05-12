@@ -71,7 +71,7 @@ function Index() {
           src={HERO_IMG} alt="Crédence en céramique peinte à la main, atelier Le Vésinet"
           loading="eager" fetchPriority="high" decoding="async"
           width={2560} height={1707}
-          className="absolute inset-0 h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full object-cover object-[center_25%]"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
         <div className="relative z-10 mx-auto flex h-full max-w-5xl flex-col justify-end px-6 pb-16 sm:pb-24">
