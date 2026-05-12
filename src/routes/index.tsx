@@ -37,6 +37,7 @@ const process = [
 
 function Index() {
   const [phoneOpen, setPhoneOpen] = useState(false);
+  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
   const isMobile = typeof navigator !== "undefined" && /Android|iPhone|iPad/i.test(navigator.userAgent);
 
   const onPhoneDesktop = (e: React.MouseEvent) => {
@@ -137,7 +138,12 @@ function Index() {
           <div className="mt-12 grid grid-cols-1 gap-6 min-[380px]:grid-cols-2">
             {projets.map((p, i) => (
               <figure key={i} className="overflow-hidden bg-white">
-                <div className="overflow-hidden">
+                <button
+                  type="button"
+                  onClick={() => setLightbox({ src: p.src, alt: p.alt })}
+                  className="block w-full overflow-hidden cursor-zoom-in"
+                  aria-label={`Agrandir : ${p.alt}`}
+                >
                   <img
                     src={p.src} alt={p.alt}
                     width={1024} height={768}
@@ -145,7 +151,7 @@ function Index() {
                     style={{ objectPosition: p.pos ?? "center", filter: "brightness(1.12) saturate(1.05)" }}
                     className="aspect-[4/3] w-full object-cover transition-transform duration-[400ms] ease-out hover:scale-[1.05]"
                   />
-                </div>
+                </button>
                 <figcaption className="p-4 text-sm italic text-[var(--muted-text)]">{p.caption}</figcaption>
               </figure>
             ))}
