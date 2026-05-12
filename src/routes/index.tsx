@@ -8,7 +8,7 @@ import Faq from "@/components/Faq";
 
 export const Route = createFileRoute("/")({ component: Index });
 
-const HERO_IMG = "/images/laurence.jpeg";
+const HERO_IMG = "/images/hero.jpg";
 const PRIX_BG = "/images/prix.jpg";
 const LAURENCE_IMG = "/images/laurence.jpeg";
 
