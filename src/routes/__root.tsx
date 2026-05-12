@@ -109,7 +109,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { name: "robots", content: "noindex, nofollow" },
       { name: "theme-color", content: "#b8860b" },
-      { property: "og:title", content: "Crédence céramique sur mesure peinte à la main" },
+      { property: "og:title", content: "Crédence céramique sur mesure, peinte à la main · Atelier Le Vésinet" },
       {
         property: "og:description",
         content:
@@ -122,6 +122,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:locale", content: "fr_FR" },
       { property: "og:type", content: "website" },
+      { name: "twitter:title", content: "Crédence céramique sur mesure, peinte à la main · Atelier Le Vésinet" },
+      { name: "description", content: "Crédences en céramique peintes à la main, sur mesure, pour une cuisine d'exception." },
+      { property: "og:description", content: "Crédences en céramique peintes à la main, sur mesure, pour une cuisine d'exception." },
+      { name: "twitter:description", content: "Crédences en céramique peintes à la main, sur mesure, pour une cuisine d'exception." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/7d3abad8-3cb1-416c-80ec-a8c60c0f6f82/id-preview-d9748e7b--30669618-0f7b-4aed-bed7-ffec551ce32d.lovable.app-1778593322652.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/7d3abad8-3cb1-416c-80ec-a8c60c0f6f82/id-preview-d9748e7b--30669618-0f7b-4aed-bed7-ffec551ce32d.lovable.app-1778593322652.png" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
