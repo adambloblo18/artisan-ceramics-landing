@@ -68,9 +68,9 @@ function Index() {
       {/* HERO */}
       <section className="relative h-[100vh] md:h-[85vh] w-full overflow-hidden">
         <img
-          src={HERO_IMG} alt="Crédence céramique peinte à la main"
-          fetchPriority="high" decoding="async"
-          width={1024} height={921}
+          src={HERO_IMG} alt="Crédence en céramique peinte à la main, atelier Le Vésinet"
+          loading="eager" fetchPriority="high" decoding="async"
+          width={2560} height={1707}
           className="absolute inset-0 h-full w-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
