@@ -213,9 +213,9 @@ function Index() {
         <div className="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 md:grid-cols-2 md:items-center">
           <img
             src={LAURENCE_IMG}
-            alt="Portrait de Laurence Brecher dans son atelier"
+            alt="Laurence Brecher, céramiste, dans son atelier du Vésinet"
             width={600} height={900} loading="lazy" decoding="async"
-            className="h-auto w-full object-cover"
+            className="h-auto max-h-[600px] w-full object-cover"
           />
           <div>
             <h2 className="font-display text-3xl italic sm:text-[44px]">Laurence Brecher, céramiste.</h2>
