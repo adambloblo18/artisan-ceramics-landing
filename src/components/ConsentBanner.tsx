@@ -9,10 +9,20 @@ export default function ConsentBanner() {
   const [detail, setDetail] = useState(false);
   const [cats, setCats] = useState<Cats>({ ad: false, analytics: false });
 
+  const hasCookie = () => {
+    try { return document.cookie.includes(KEY + "="); } catch { return false; }
+  };
+
   useEffect(() => {
-    try {
-      if (!document.cookie.includes(KEY + "=")) setShow(true);
-    } catch { /* no-op */ }
+    if (!hasCookie()) setShow(true);
+    const open = () => {
+      // Permet de rouvrir la bannière depuis le footer
+      document.cookie = `${KEY}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
+      setDetail(false);
+      setShow(true);
+    };
+    window.addEventListener("lcm:open-consent", open);
+    return () => window.removeEventListener("lcm:open-consent", open);
   }, []);
 
   const setCookie = (value: string) => {
@@ -36,6 +46,22 @@ export default function ConsentBanner() {
   const refuseAll = () => apply(false, false);
   const saveCustom = () => apply(cats.ad, cats.analytics);
 
+  // Scroll-as-consent : > 30% de la page = accepte implicitement
+  useEffect(() => {
+    if (!show) return;
+    const onScroll = () => {
+      const h = document.documentElement;
+      const max = (h.scrollHeight - h.clientHeight) || 1;
+      const pct = (window.scrollY || h.scrollTop) / max;
+      if (pct > 0.3) {
+        acceptAll();
+        window.removeEventListener("scroll", onScroll);
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [show]);
+
   if (!show) return null;
   return (
     <div
@@ -46,7 +72,7 @@ export default function ConsentBanner() {
       {!detail ? (
         <>
           <p className="text-sm text-[var(--anthracite)]">
-            Nous utilisons des cookies pour mesurer l'audience et améliorer votre expérience. Vous pouvez accepter, refuser ou personnaliser.
+            Nous utilisons des cookies pour mesurer l'audience et améliorer votre expérience. Vous pouvez accepter, refuser ou personnaliser. En continuant à naviguer, vous acceptez leur dépôt.
           </p>
           <div className="mt-4 grid grid-cols-2 gap-2">
             <button
