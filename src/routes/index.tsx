@@ -106,15 +106,24 @@ function Index() {
         </div>
       </section>
 
-      {/* PROBLÈME / PROMESSE */}
+      {/* L'ARTISTE */}
       <section className="bg-white py-20 sm:py-28">
-        <div className="mx-auto max-w-2xl px-6 text-center">
-          <h2 className="font-display text-3xl italic sm:text-[44px] leading-tight">
-            Une cuisine qui vous ressemble vraiment.
-          </h2>
-          <div className="mt-8 space-y-5 text-[17px] leading-[1.7] text-[var(--anthracite)]">
-            <p>Le carrelage industriel se choisit dans un catalogue. Une céramique murale Brecher se rêve d'abord, puis se peint, carreau après carreau, dans notre atelier du Vésinet.</p>
-            <p>Chaque crédence raconte votre histoire : vos couleurs, votre architecture, votre rapport à la matière. Roses, coquelicots, iris ou motifs géométriques Art Nouveau, nous composons avec vous une pièce unique, qui traversera les générations.</p>
+        <div className="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 md:grid-cols-2 md:items-center">
+          <img
+            src={LAURENCE_IMG}
+            alt="Laurence Brecher, céramiste, dans son atelier du Vésinet"
+            width={600} height={900} loading="lazy" decoding="async"
+            className="h-auto max-h-[600px] w-full object-cover"
+          />
+          <div>
+            <h2 className="font-display text-3xl italic sm:text-[44px]">Laurence Brecher, céramiste.</h2>
+            <p className="mt-6 text-[17px] leading-[1.7] text-[var(--anthracite)]">
+              Formée aux Beaux-Arts puis à l'Académie de Port-Royal, Laurence Brecher fait vivre depuis trente ans l'héritage de Guimard, de Gallé et de l'École de Nancy dans son atelier du Vésinet. Ses créations habillent des façades primées, des restaurants parisiens, des hôtels particuliers et des maisons 1900 dans toute la France.
+            </p>
+            <p className="mt-4 text-[17px] leading-[1.7] text-[var(--anthracite)]">
+              Elle reçoit sur rendez-vous, du lundi au samedi, dans son atelier du 14 rue Ernest André, à 20 minutes de Paris en RER A, station Le Vésinet Centre.
+            </p>
+            <a href="#formulaire" className="btn-secondary mt-8">Visiter l'atelier</a>
           </div>
         </div>
       </section>
