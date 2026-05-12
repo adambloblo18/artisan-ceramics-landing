@@ -8,17 +8,15 @@ import Faq from "@/components/Faq";
 
 export const Route = createFileRoute("/")({ component: Index });
 
-const HERO_IMG =
-  "https://www.ceramique-murale.com/wp-content/uploads/2023/10/ceramique-murale-cuisine-credence22-1024x921.jpg";
-
-const PRIX_BG =
-  "https://www.ceramique-murale.com/wp-content/uploads/2026/04/Les-halles.jpg";
+const HERO_IMG = "/images/hero.jpg";
+const PRIX_BG = "/images/prix.jpg";
+const LAURENCE_IMG = "/images/laurence.jpeg";
 
 const projets = [
-  { src: "https://www.ceramique-murale.com/wp-content/uploads/2023/10/ceramique-murale-cuisine-credence22-1024x921.jpg", caption: "Motifs floraux sur tons verts · Île-de-France" },
-  { src: "https://www.ceramique-murale.com/wp-content/uploads/2023/10/ceramique-murale-cuisine-credence1-1024x921.jpg", caption: "Frise pivoines bleues · Maison de famille" },
-  { src: "https://www.ceramique-murale.com/wp-content/uploads/2023/10/ceramique-murale-cuisine-credence4-1024x921.jpg", caption: "Composition tons miel · Cuisine ouverte" },
-  { src: "https://www.ceramique-murale.com/wp-content/uploads/2023/10/ceramique-murale-cuisine-credence33-1024x921.jpg", caption: "Feuillages Art Nouveau · Salle à manger" },
+  { src: "/images/gal1.jpg", caption: "Motifs floraux sur tons verts · Île-de-France" },
+  { src: "/images/gal2.jpg", caption: "Frise pivoines bleues · Maison de famille" },
+  { src: "/images/gal3.jpg", caption: "Composition tons miel · Cuisine ouverte" },
+  { src: "/images/gal4.jpg", caption: "Feuillages Art Nouveau · Salle à manger" },
 ];
 
 const reass = [
