@@ -212,7 +212,7 @@ function Index() {
       <section className="bg-white py-20 sm:py-28">
         <div className="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 md:grid-cols-2 md:items-center">
           <img
-            src="https://picsum.photos/seed/laurence/600/900"
+            src={LAURENCE_IMG}
             alt="Portrait de Laurence Brecher dans son atelier"
             width={600} height={900} loading="lazy" decoding="async"
             className="h-auto w-full object-cover"
