@@ -71,6 +71,7 @@ function Index() {
           src={HERO_IMG} alt="Crédence en céramique peinte à la main, atelier Le Vésinet"
           loading="eager" fetchPriority="high" decoding="async"
           width={2560} height={1707}
+          style={{ filter: "brightness(1.15) saturate(1.05)" }}
           className="absolute inset-0 h-full w-full object-cover object-[center_25%]"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
@@ -113,6 +114,7 @@ function Index() {
             src={LAURENCE_IMG}
             alt="Laurence Brecher, céramiste, dans son atelier du Vésinet"
             width={600} height={900} loading="lazy" decoding="async"
+            style={{ filter: "brightness(1.1) saturate(1.05)" }}
             className="h-auto max-h-[600px] w-full object-cover"
           />
           <div>
