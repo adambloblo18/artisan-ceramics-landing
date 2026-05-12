@@ -278,6 +278,14 @@ function Index() {
             <a href="https://www.ceramique-murale.com/politique-de-confidentialite/" target="_blank" rel="noopener" className="hover:text-white/80">
               Politique de confidentialité
             </a>
+            <span className="mx-2 opacity-50">·</span>
+            <button
+              type="button"
+              onClick={() => window.dispatchEvent(new Event("lcm:open-consent"))}
+              className="underline-offset-2 hover:text-white/80 hover:underline"
+            >
+              Modifier mes choix cookies
+            </button>
           </p>
         </div>
       </footer>
