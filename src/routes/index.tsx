@@ -13,10 +13,10 @@ const PRIX_BG = "/images/prix.jpg";
 const LAURENCE_IMG = "/images/laurence.jpeg";
 
 const projets = [
-  { src: "/images/gal1.jpg", caption: "Motifs floraux sur tons verts · Île-de-France" },
-  { src: "/images/gal2.jpg", caption: "Frise pivoines bleues · Maison de famille" },
-  { src: "/images/gal3.jpg", caption: "Composition tons miel · Cuisine ouverte" },
-  { src: "/images/gal4.jpg", caption: "Feuillages Art Nouveau · Salle à manger" },
+  { src: "/images/gal1.jpg", alt: "Motifs floraux sur tons verts, crédence cuisine", caption: "Motifs floraux sur tons verts · Île-de-France" },
+  { src: "/images/gal2.jpg", alt: "Crédence céramique dessin floral peint à la main", caption: "Composition florale unique · Maison de famille" },
+  { src: "/images/gal3.jpg", alt: "Crédence autour d'un lavabo, frise pivoines bleues", caption: "Frise pivoines bleues · Salle de bain" },
+  { src: "/images/gal4.jpg", alt: "Frise large céramique émaillée Art Nouveau", caption: "Frise Art Nouveau · Atelier d'artiste" },
 ];
 
 const reass = [
