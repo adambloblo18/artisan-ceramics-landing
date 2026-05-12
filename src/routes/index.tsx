@@ -68,14 +68,16 @@ function Index() {
 
       {/* HERO */}
       <section className="relative h-[100vh] md:h-[85vh] w-full overflow-hidden">
-        <img
-          src={HERO_IMG} alt="Crédence en céramique peinte à la main, atelier Le Vésinet"
-          loading="eager" fetchPriority="high" decoding="async"
-          width={2560} height={1707}
-          style={{ filter: "brightness(1.15) saturate(1.05)" }}
-          className="absolute inset-0 h-full w-full object-cover object-[center_25%]"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+        <video
+          autoPlay muted loop playsInline preload="auto"
+          poster="/images/header-poster.jpg"
+          aria-hidden
+          className="absolute inset-0 h-full w-full object-cover"
+        >
+          <source src="/video/header.webm" type="video/webm" />
+          <source src="/video/header.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/40 to-black/20" />
         <div className="relative z-10 mx-auto flex h-full max-w-5xl flex-col justify-end px-6 pb-16 sm:pb-24">
           <p className="eyebrow text-[var(--gold)]">Atelier d'art au Vésinet · Prix du Ravalement Versailles 2025</p>
           <h1 className="mt-4 max-w-3xl font-display text-[40px] leading-[1.05] text-white sm:text-6xl">
