@@ -302,6 +302,31 @@ function Index() {
       <StickyMobileBar onPhoneClick={() => setPhoneOpen(true)} />
       <PhoneModal open={phoneOpen} onClose={() => setPhoneOpen(false)} />
       <ConsentBanner />
+
+      {lightbox && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={lightbox.alt}
+          onClick={() => setLightbox(null)}
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 cursor-zoom-out"
+        >
+          <button
+            type="button"
+            onClick={() => setLightbox(null)}
+            aria-label="Fermer"
+            className="absolute top-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white text-2xl hover:bg-white/20"
+          >
+            ×
+          </button>
+          <img
+            src={lightbox.src}
+            alt={lightbox.alt}
+            onClick={(e) => e.stopPropagation()}
+            className="max-h-[92vh] max-w-[92vw] object-contain"
+          />
+        </div>
+      )}
     </div>
   );
 }
