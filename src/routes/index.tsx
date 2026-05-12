@@ -8,12 +8,12 @@ import Faq from "@/components/Faq";
 
 export const Route = createFileRoute("/")({ component: Index });
 
-const HERO_IMG = "/images/maman.jpg";
+const HERO_IMG = "/images/cuisine-verte.jpg";
 const PRIX_BG = "/images/prix.jpg";
 const LAURENCE_IMG = "/images/laurence.jpeg";
 
 const projets = [
-  { src: "/images/maman.jpg", alt: "Motifs floraux sur tons verts, crédence cuisine", caption: "Motifs floraux sur tons verts · Île-de-France" },
+  { src: "/images/cuisine-verte.jpg", alt: "Motifs floraux sur tons verts, crédence cuisine", caption: "Motifs floraux sur tons verts · Île-de-France" },
   { src: "/images/gal2.jpg", alt: "Crédence céramique dessin floral peint à la main", caption: "Composition florale unique · Maison de famille", pos: "center 30%" },
   { src: "/images/gal3.jpg", alt: "Crédence autour d'un lavabo, frise pivoines bleues", caption: "Frise pivoines bleues · Salle de bain" },
   { src: "/images/gal4.jpg", alt: "Frise large céramique émaillée Art Nouveau", caption: "Frise Art Nouveau · Atelier d'artiste" },
@@ -37,6 +37,7 @@ const process = [
 
 function Index() {
   const [phoneOpen, setPhoneOpen] = useState(false);
+  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
   const isMobile = typeof navigator !== "undefined" && /Android|iPhone|iPad/i.test(navigator.userAgent);
 
   const onPhoneDesktop = (e: React.MouseEvent) => {
@@ -137,7 +138,12 @@ function Index() {
           <div className="mt-12 grid grid-cols-1 gap-6 min-[380px]:grid-cols-2">
             {projets.map((p, i) => (
               <figure key={i} className="overflow-hidden bg-white">
-                <div className="overflow-hidden">
+                <button
+                  type="button"
+                  onClick={() => setLightbox({ src: p.src, alt: p.alt })}
+                  className="block w-full overflow-hidden cursor-zoom-in"
+                  aria-label={`Agrandir : ${p.alt}`}
+                >
                   <img
                     src={p.src} alt={p.alt}
                     width={1024} height={768}
@@ -145,7 +151,7 @@ function Index() {
                     style={{ objectPosition: p.pos ?? "center", filter: "brightness(1.12) saturate(1.05)" }}
                     className="aspect-[4/3] w-full object-cover transition-transform duration-[400ms] ease-out hover:scale-[1.05]"
                   />
-                </div>
+                </button>
                 <figcaption className="p-4 text-sm italic text-[var(--muted-text)]">{p.caption}</figcaption>
               </figure>
             ))}
@@ -296,6 +302,31 @@ function Index() {
       <StickyMobileBar onPhoneClick={() => setPhoneOpen(true)} />
       <PhoneModal open={phoneOpen} onClose={() => setPhoneOpen(false)} />
       <ConsentBanner />
+
+      {lightbox && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={lightbox.alt}
+          onClick={() => setLightbox(null)}
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 cursor-zoom-out"
+        >
+          <button
+            type="button"
+            onClick={() => setLightbox(null)}
+            aria-label="Fermer"
+            className="absolute top-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white text-2xl hover:bg-white/20"
+          >
+            ×
+          </button>
+          <img
+            src={lightbox.src}
+            alt={lightbox.alt}
+            onClick={(e) => e.stopPropagation()}
+            className="max-h-[92vh] max-w-[92vw] object-contain"
+          />
+        </div>
+      )}
     </div>
   );
 }
