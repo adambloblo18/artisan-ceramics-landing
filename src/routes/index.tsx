@@ -71,7 +71,7 @@ function Index() {
           src={HERO_IMG} alt="Crédence en céramique peinte à la main, atelier Le Vésinet"
           loading="eager" fetchPriority="high" decoding="async"
           width={2560} height={1707}
-          className="absolute inset-0 h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full object-cover object-[center_25%]"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
         <div className="relative z-10 mx-auto flex h-full max-w-5xl flex-col justify-end px-6 pb-16 sm:pb-24">
@@ -106,15 +106,24 @@ function Index() {
         </div>
       </section>
 
-      {/* PROBLÈME / PROMESSE */}
+      {/* L'ARTISTE */}
       <section className="bg-white py-20 sm:py-28">
-        <div className="mx-auto max-w-2xl px-6 text-center">
-          <h2 className="font-display text-3xl italic sm:text-[44px] leading-tight">
-            Une cuisine qui vous ressemble vraiment.
-          </h2>
-          <div className="mt-8 space-y-5 text-[17px] leading-[1.7] text-[var(--anthracite)]">
-            <p>Le carrelage industriel se choisit dans un catalogue. Une céramique murale Brecher se rêve d'abord, puis se peint, carreau après carreau, dans notre atelier du Vésinet.</p>
-            <p>Chaque crédence raconte votre histoire : vos couleurs, votre architecture, votre rapport à la matière. Roses, coquelicots, iris ou motifs géométriques Art Nouveau, nous composons avec vous une pièce unique, qui traversera les générations.</p>
+        <div className="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 md:grid-cols-2 md:items-center">
+          <img
+            src={LAURENCE_IMG}
+            alt="Laurence Brecher, céramiste, dans son atelier du Vésinet"
+            width={600} height={900} loading="lazy" decoding="async"
+            className="h-auto max-h-[600px] w-full object-cover"
+          />
+          <div>
+            <h2 className="font-display text-3xl italic sm:text-[44px]">Laurence Brecher, céramiste.</h2>
+            <p className="mt-6 text-[17px] leading-[1.7] text-[var(--anthracite)]">
+              Formée aux Beaux-Arts puis à l'Académie de Port-Royal, Laurence Brecher fait vivre depuis trente ans l'héritage de Guimard, de Gallé et de l'École de Nancy dans son atelier du Vésinet. Ses créations habillent des façades primées, des restaurants parisiens, des hôtels particuliers et des maisons 1900 dans toute la France.
+            </p>
+            <p className="mt-4 text-[17px] leading-[1.7] text-[var(--anthracite)]">
+              Elle reçoit sur rendez-vous, du lundi au samedi, dans son atelier du 14 rue Ernest André, à 20 minutes de Paris en RER A, station Le Vésinet Centre.
+            </p>
+            <a href="#formulaire" className="btn-secondary mt-8">Visiter l'atelier</a>
           </div>
         </div>
       </section>
@@ -208,27 +217,7 @@ function Index() {
         </div>
       </section>
 
-      {/* L'ARTISTE */}
-      <section className="bg-white py-20 sm:py-28">
-        <div className="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 md:grid-cols-2 md:items-center">
-          <img
-            src={LAURENCE_IMG}
-            alt="Laurence Brecher, céramiste, dans son atelier du Vésinet"
-            width={600} height={900} loading="lazy" decoding="async"
-            className="h-auto max-h-[600px] w-full object-cover"
-          />
-          <div>
-            <h2 className="font-display text-3xl italic sm:text-[44px]">Laurence Brecher, céramiste.</h2>
-            <p className="mt-6 text-[17px] leading-[1.7] text-[var(--anthracite)]">
-              Formée aux Beaux-Arts puis à l'Académie de Port-Royal, Laurence Brecher fait vivre depuis trente ans l'héritage de Guimard, de Gallé et de l'École de Nancy dans son atelier du Vésinet. Ses créations habillent des façades primées, des restaurants parisiens, des hôtels particuliers et des maisons 1900 dans toute la France.
-            </p>
-            <p className="mt-4 text-[17px] leading-[1.7] text-[var(--anthracite)]">
-              Elle reçoit sur rendez-vous, du lundi au samedi, dans son atelier du 14 rue Ernest André, à 20 minutes de Paris en RER A, station Le Vésinet Centre.
-            </p>
-            <a href="#formulaire" className="btn-secondary mt-8">Visiter l'atelier</a>
-          </div>
-        </div>
-      </section>
+      {/* (L'ARTISTE déplacé après la réassurance) */}
 
       {/* FORMULAIRE */}
       <section id="formulaire" className="bg-[var(--cream)] py-20 sm:py-28">
@@ -289,6 +278,14 @@ function Index() {
             <a href="https://www.ceramique-murale.com/politique-de-confidentialite/" target="_blank" rel="noopener" className="hover:text-white/80">
               Politique de confidentialité
             </a>
+            <span className="mx-2 opacity-50">·</span>
+            <button
+              type="button"
+              onClick={() => window.dispatchEvent(new Event("lcm:open-consent"))}
+              className="underline-offset-2 hover:text-white/80 hover:underline"
+            >
+              Modifier mes choix cookies
+            </button>
           </p>
         </div>
       </footer>
