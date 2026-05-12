@@ -217,27 +217,7 @@ function Index() {
         </div>
       </section>
 
-      {/* L'ARTISTE */}
-      <section className="bg-white py-20 sm:py-28">
-        <div className="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 md:grid-cols-2 md:items-center">
-          <img
-            src={LAURENCE_IMG}
-            alt="Laurence Brecher, céramiste, dans son atelier du Vésinet"
-            width={600} height={900} loading="lazy" decoding="async"
-            className="h-auto max-h-[600px] w-full object-cover"
-          />
-          <div>
-            <h2 className="font-display text-3xl italic sm:text-[44px]">Laurence Brecher, céramiste.</h2>
-            <p className="mt-6 text-[17px] leading-[1.7] text-[var(--anthracite)]">
-              Formée aux Beaux-Arts puis à l'Académie de Port-Royal, Laurence Brecher fait vivre depuis trente ans l'héritage de Guimard, de Gallé et de l'École de Nancy dans son atelier du Vésinet. Ses créations habillent des façades primées, des restaurants parisiens, des hôtels particuliers et des maisons 1900 dans toute la France.
-            </p>
-            <p className="mt-4 text-[17px] leading-[1.7] text-[var(--anthracite)]">
-              Elle reçoit sur rendez-vous, du lundi au samedi, dans son atelier du 14 rue Ernest André, à 20 minutes de Paris en RER A, station Le Vésinet Centre.
-            </p>
-            <a href="#formulaire" className="btn-secondary mt-8">Visiter l'atelier</a>
-          </div>
-        </div>
-      </section>
+      {/* (L'ARTISTE déplacé après la réassurance) */}
 
       {/* FORMULAIRE */}
       <section id="formulaire" className="bg-[var(--cream)] py-20 sm:py-28">
