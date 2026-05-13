@@ -21,11 +21,8 @@ const details = [
 ];
 
 export default function LeDetail() {
-  const onCta = (e: React.MouseEvent) => {
-    e.preventDefault();
+  const onCta = () => {
     trackEvent("le_detail_galerie_click");
-    const el = document.getElementById("galerie");
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   return (
@@ -60,7 +57,9 @@ export default function LeDetail() {
 
         <div className="mt-12 text-center">
           <a
-            href="#galerie"
+            href="https://www.ceramique-murale.com/realisation-carreau-ceramique-artisanal-art-nouveau/"
+            target="_blank"
+            rel="noopener"
             onClick={onCta}
             className="inline-flex items-center justify-center px-6 py-3 rounded-md border border-[#b8860b] text-[#a07308] font-semibold hover:bg-[#b8860b] hover:text-[#fcfcfc] transition-colors"
           >
