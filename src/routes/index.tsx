@@ -41,13 +41,88 @@ const projets = [
   { src: "/images/gal4.jpg", alt: "Frise large céramique émaillée Art Nouveau", caption: "Frise Art Nouveau · Atelier d'artiste" },
 ];
 
-const reass = [
+const ReassIconCircle = ({ children }: { children: React.ReactNode }) => (
+  <span
+    className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-amber-200 bg-amber-50 text-amber-600"
+    aria-hidden
+  >
+    {children}
+  </span>
+);
+
+const reassSvgProps = {
+  xmlns: "http://www.w3.org/2000/svg",
+  viewBox: "0 0 24 24",
+  fill: "none",
+  stroke: "currentColor",
+  strokeWidth: 1.75,
+  strokeLinecap: "round" as const,
+  strokeLinejoin: "round" as const,
+  className: "h-5 w-5",
+  "aria-hidden": true as const,
+};
+
+const ReassTrophy = () => (
+  <svg {...reassSvgProps}>
+    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
+    <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+    <path d="M4 22h16" />
+    <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" />
+    <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" />
+    <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" />
+  </svg>
+);
+const ReassHand = () => (
+  <svg {...reassSvgProps}>
+    <path d="M18 11V6a2 2 0 0 0-4 0v5" />
+    <path d="M14 10V4a2 2 0 0 0-4 0v6" />
+    <path d="M10 10.5V6a2 2 0 0 0-4 0v8" />
+    <path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15" />
+  </svg>
+);
+const ReassColumn = () => (
+  <svg {...reassSvgProps}>
+    <path d="M4 4h16" />
+    <path d="M4 20h16" />
+    <path d="M4 6v2h16V6" />
+    <path d="M4 18v-2h16v2" />
+    <path d="M8 8v8" />
+    <path d="M16 8v8" />
+    <path d="M12 8v8" />
+  </svg>
+);
+const ReassMapPin = () => (
+  <svg {...reassSvgProps}>
+    <path d="M20 10c0 7-8 12-8 12s-8-5-8-12a8 8 0 1 1 16 0Z" />
+    <circle cx="12" cy="10" r="3" />
+  </svg>
+);
+const ReassTruck = () => (
+  <svg {...reassSvgProps}>
+    <path d="M14 18V6H2v12h2" />
+    <path d="M14 8h4l4 4v6h-2" />
+    <path d="M8 18h6" />
+    <circle cx="6" cy="18" r="2" />
+    <circle cx="17" cy="18" r="2" />
+  </svg>
+);
+
+const reassEmoji = [
   { icon: "🏆", label: "Prix du Ravalement 2025" },
   { icon: "✋", label: "Peinte à la main" },
   { icon: "🏛️", label: "30 ans d'expérience" },
   { icon: "📍", label: "Atelier Le Vésinet (78)" },
   { icon: "🚚", label: "Livraison France entière" },
 ];
+
+const reassSvg: { node: React.ReactNode; label: string }[] = [
+  { node: <ReassTrophy />, label: "Prix du Ravalement 2025" },
+  { node: <ReassHand />, label: "Peinte à la main" },
+  { node: <ReassColumn />, label: "30 ans d'expérience" },
+  { node: <ReassMapPin />, label: "Atelier Le Vésinet (78)" },
+  { node: <ReassTruck />, label: "Livraison France entière" },
+];
+
 
 const process = [
   { n: 1, t: "Premier échange", d: "Vous nous décrivez votre projet. Réponse en 20 minutes pendant les heures ouvrées." },
@@ -68,11 +143,13 @@ function Index() {
 
   const headlineVariant = useABVariant("hero_headline_v1", ["control", "A", "B", "C"]);
   const badgeVariant = useABVariant("hero_badge_v1", ["control", "A", "B"]);
+  const reassVariant = useABVariant("reassurance_icons_v1", ["control", "A"]);
 
   useEffect(() => {
     trackExposure("hero_headline_v1", headlineVariant);
     trackExposure("hero_badge_v1", badgeVariant);
-  }, [headlineVariant, badgeVariant]);
+    trackExposure("reassurance_icons_v1", reassVariant);
+  }, [headlineVariant, badgeVariant, reassVariant]);
 
   const scrollToId = (id: string) => {
     const el = document.getElementById(id);
@@ -253,15 +330,38 @@ function Index() {
       </section>
 
       {/* RÉASSURANCE */}
-      <section className="bg-[var(--cream)] py-8">
+      <section
+        className="bg-[var(--cream)] py-8"
+        data-ab-experiment="reassurance_icons_v1"
+        data-ab-variant={reassVariant}
+      >
         <div className="mx-auto max-w-6xl px-4">
           <ul className="flex snap-x gap-6 overflow-x-auto md:grid md:grid-cols-5 md:gap-0 md:overflow-visible md:divide-x md:divide-[var(--border)]">
-            {reass.map((r) => (
-              <li key={r.label} className="flex min-w-[220px] snap-start flex-col items-center gap-2 px-4 text-center md:min-w-0">
-                <span className="text-2xl text-[var(--gold)]" aria-hidden>{r.icon}</span>
-                <span className="text-sm font-medium text-[var(--anthracite)]">{r.label}</span>
-              </li>
-            ))}
+            {reassVariant === "A"
+              ? reassSvg.map((r) => (
+                  <li
+                    key={r.label}
+                    className="flex min-w-[220px] snap-start flex-col items-center gap-2 px-4 text-center md:min-w-0"
+                  >
+                    <ReassIconCircle>{r.node}</ReassIconCircle>
+                    <span className="text-sm font-medium text-[var(--anthracite)]">
+                      {r.label}
+                    </span>
+                  </li>
+                ))
+              : reassEmoji.map((r) => (
+                  <li
+                    key={r.label}
+                    className="flex min-w-[220px] snap-start flex-col items-center gap-2 px-4 text-center md:min-w-0"
+                  >
+                    <span className="text-2xl text-[var(--gold)]" aria-hidden>
+                      {r.icon}
+                    </span>
+                    <span className="text-sm font-medium text-[var(--anthracite)]">
+                      {r.label}
+                    </span>
+                  </li>
+                ))}
           </ul>
         </div>
       </section>
