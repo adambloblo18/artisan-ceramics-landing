@@ -73,7 +73,7 @@ export default function Temoignages() {
 
         <div className="mt-12 text-center">
           <a
-            href="https://ceramique-murale.com/realisations/"
+            href="https://www.ceramique-murale.com/realisation-carreau-ceramique-artisanal-art-nouveau/"
             target="_blank"
             rel="noopener"
             onClick={() => trackEvent("temoignages_voir_tout_click")}
