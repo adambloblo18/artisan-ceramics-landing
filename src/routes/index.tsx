@@ -281,24 +281,35 @@ function Index() {
       </section>
 
       {/* BANDEAU PRIX */}
-      <section
-        id="award-section"
-        className="relative h-[400px] md:h-[500px] w-full bg-cover bg-center"
-        style={{ backgroundImage: `url(${PRIX_BG})` }}
-      >
-        <div className="absolute inset-0 bg-black/60" />
-        <div className="relative z-10 mx-auto flex h-full max-w-3xl flex-col items-center justify-center px-6 text-center text-white">
-          <p className="eyebrow text-[var(--gold)]">Reconnaissance officielle</p>
+      <section id="award-section" className="relative w-full overflow-hidden">
+        {/* TODO: remplacer bandeau-versailles.jpg par la vraie photo de la façade primée à Versailles dès que Laurence l'a */}
+        <picture>
+          <source type="image/webp" srcSet="/images/bandeau-versailles.webp" />
+          <img
+            src="/images/bandeau-versailles.jpg"
+            alt="Façade primée au Ravalement Versailles 2025"
+            loading="lazy"
+            decoding="async"
+            width={1600}
+            height={900}
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        </picture>
+        <div className="absolute inset-0 bg-[#2a2a2a]/80" />
+        <div className="relative z-10 max-w-3xl mx-auto text-center px-6 py-24 md:py-32 text-[#fcfcfc]">
+          <Trophy className="h-12 w-12 text-[#b8860b] mx-auto mb-4" aria-hidden />
+          <p className="eyebrow text-[#b8860b]">Reconnaissance officielle</p>
           <h2 className="mt-3 font-display text-3xl sm:text-[44px] leading-tight">
             Premier Prix du Ravalement de la Ville de Versailles 2025
           </h2>
-          <p className="mt-4 text-base text-white/90 sm:text-lg">
+          <p className="mt-4 text-base sm:text-lg text-[#fcfcfc]/90">
             Catégorie Restitution de Décors, pour une façade florale qui a rendu à une maison son caractère d'origine.
           </p>
           <a
             href="https://www.ceramique-murale.com/frise-ceramique-versailles-prix-ravalement/"
             target="_blank" rel="noopener"
-            className="mt-6 text-sm text-white underline underline-offset-4"
+            onClick={() => trackEvent("award_realization_click")}
+            className="mt-6 inline-block text-sm text-[#fcfcfc] underline underline-offset-4"
           >
             Découvrir la réalisation primée →
           </a>
