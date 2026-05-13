@@ -34,7 +34,7 @@ const projets = [
 export default function Temoignages() {
   return (
     <section className="bg-[#fcfcfc] py-20 md:py-24">
-      <div className="max-w-6xl mx-auto px-6">
+      <div className="max-w-5xl mx-auto px-6">
         <h2 className="font-display text-3xl md:text-5xl text-[#2a2a2a] text-center">
           Trois projets, trois histoires
         </h2>
@@ -42,36 +42,47 @@ export default function Temoignages() {
           Chaque crédence raconte une rencontre entre un lieu, une intention et la main de Laurence.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-          {projets.map((p) => (
-            <article
-              key={p.titre}
-              className="bg-white rounded-md shadow-md overflow-hidden flex flex-col"
-            >
-              <picture>
-                <source type="image/webp" srcSet={p.webp} />
-                <img
-                  src={p.img}
-                  alt={p.titre}
-                  loading="lazy"
-                  className="aspect-video w-full object-cover"
-                />
-              </picture>
-              <div className="p-6 flex flex-col">
-                <span className="self-start inline-flex items-center rounded-full border border-[#b8860b]/40 bg-[#b8860b]/10 px-3 py-1 text-xs font-medium text-[#a07308]">
-                  {p.pill}
-                </span>
-                <h3 className="font-display text-xl text-[#2a2a2a] mt-3">{p.titre}</h3>
-                <p className="font-body text-sm text-[#2a2a2a]/80 mt-2 leading-relaxed">
-                  {p.recit}
-                </p>
-                <p className="font-body text-xs text-[#2a2a2a]/60 mt-4">{p.meta}</p>
-              </div>
-            </article>
-          ))}
+        <div className="flex flex-col gap-16 md:gap-24 mt-16">
+          {projets.map((p, i) => {
+            const reverse = i % 2 === 1;
+            return (
+              <article
+                key={p.titre}
+                className="md:grid md:grid-cols-2 md:gap-12 md:items-center"
+              >
+                <picture
+                  className={`block ${reverse ? "md:order-2" : "md:order-1"}`}
+                >
+                  <source type="image/webp" srcSet={p.webp} />
+                  <img
+                    src={p.img}
+                    alt={p.titre}
+                    loading="lazy"
+                    className="aspect-[4/5] w-full object-cover rounded-md shadow-xl shadow-[#2a2a2a]/15 md:max-h-[500px]"
+                  />
+                </picture>
+                <div
+                  className={`mt-6 md:mt-0 flex flex-col ${reverse ? "md:order-1" : "md:order-2"}`}
+                >
+                  <span className="self-start inline-flex items-center rounded-full border border-[#b8860b]/40 bg-[#b8860b]/10 px-3 py-1 text-xs font-medium text-[#a07308]">
+                    {p.pill}
+                  </span>
+                  <h3 className="font-display text-2xl md:text-3xl text-[#2a2a2a] mt-4">
+                    {p.titre}
+                  </h3>
+                  <p className="font-body text-base md:text-lg text-[#2a2a2a]/80 mt-4 leading-relaxed max-w-md">
+                    {p.recit}
+                  </p>
+                  <p className="font-body text-xs text-[#2a2a2a]/60 mt-6 uppercase tracking-wider">
+                    {p.meta}
+                  </p>
+                </div>
+              </article>
+            );
+          })}
         </div>
 
-        <div className="mt-12 text-center">
+        <div className="mt-16 text-center">
           <a
             href="https://www.ceramique-murale.com/realisation-carreau-ceramique-artisanal-art-nouveau/"
             target="_blank"
