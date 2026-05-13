@@ -333,8 +333,8 @@ function Index() {
         </picture>
         <div className="absolute inset-0 bg-[#2a2a2a]/80" />
         <div className="relative z-10 max-w-3xl mx-auto text-center px-6 py-24 md:py-32 text-[#fcfcfc]">
-          <Trophy className="h-12 w-12 text-[#b8860b] mx-auto mb-4" aria-hidden />
-          <p className="eyebrow text-[#b8860b]">Reconnaissance officielle</p>
+          <Trophy className="h-12 w-12 text-[#d4a02a] mx-auto mb-4" aria-hidden />
+          <p className="eyebrow text-[#d4a02a]">Reconnaissance officielle</p>
           <h2 className="mt-3 font-display text-3xl sm:text-[44px] leading-tight">
             Premier Prix du Ravalement de la Ville de Versailles 2025
           </h2>
