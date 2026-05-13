@@ -146,7 +146,7 @@ function Index() {
           title: <>Crédences en céramique, peintes à la main.</>,
           subtitle:
             "Faïence émaillée Art Nouveau, créée sur mesure dans notre atelier du Vésinet. Sur rendez-vous, livraison France entière.",
-          primary: "Recevoir mon étude personnalisée",
+          primary: "Découvrir le prix de mon projet",
           secondary: { label: "📞 Appeler Laurence", kind: "phone" as const },
         };
     }
