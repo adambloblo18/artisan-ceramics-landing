@@ -46,14 +46,11 @@ export default function ConsentBanner() {
   const refuseAll = () => apply(false, false);
   const saveCustom = () => apply(cats.ad, cats.analytics);
 
-  // Scroll-as-consent : > 30% de la page = accepte implicitement
+  // Scroll-as-consent : tout scroll = accepte implicitement
   useEffect(() => {
     if (!show) return;
     const onScroll = () => {
-      const h = document.documentElement;
-      const max = (h.scrollHeight - h.clientHeight) || 1;
-      const pct = (window.scrollY || h.scrollTop) / max;
-      if (pct > 0.3) {
+      if ((window.scrollY || document.documentElement.scrollTop) > 5) {
         acceptAll();
         window.removeEventListener("scroll", onScroll);
       }
@@ -67,23 +64,23 @@ export default function ConsentBanner() {
     <div
       role="dialog"
       aria-label="Consentement aux cookies"
-      className="fixed inset-x-0 bottom-4 z-[70] mx-auto w-[calc(100%-2rem)] max-w-[600px] border border-[var(--border)] bg-white p-5 shadow-[0_8px_30px_rgba(0,0,0,0.12)]"
+      className="fixed inset-x-0 bottom-3 z-[70] mx-auto w-[calc(100%-1.5rem)] max-w-[420px] border border-[var(--border)] bg-white p-3 text-xs shadow-[0_8px_30px_rgba(0,0,0,0.12)]"
     >
       {!detail ? (
         <>
-          <p className="text-sm text-[var(--anthracite)]">
-            Nous utilisons des cookies pour mesurer l'audience et améliorer votre expérience. Vous pouvez accepter, refuser ou personnaliser. En continuant à naviguer, vous acceptez leur dépôt.
+          <p className="text-xs leading-snug text-[var(--anthracite)]">
+            Cookies pour mesurer l'audience. En naviguant, vous acceptez leur dépôt.
           </p>
-          <div className="mt-4 grid grid-cols-2 gap-2">
+          <div className="mt-2 grid grid-cols-2 gap-1.5">
             <button
               onClick={refuseAll}
-              className="border-[1.5px] border-[var(--anthracite)] px-4 py-3 text-sm font-semibold text-[var(--anthracite)] transition hover:bg-[var(--anthracite)] hover:text-white"
+              className="border border-[var(--anthracite)] px-2 py-1.5 text-xs font-semibold text-[var(--anthracite)] transition hover:bg-[var(--anthracite)] hover:text-white"
             >
               Refuser
             </button>
             <button
               onClick={acceptAll}
-              className="border-[1.5px] px-4 py-3 text-sm font-semibold transition"
+              className="border px-2 py-1.5 text-xs font-semibold transition"
               style={{ borderColor: "var(--sage)", color: "var(--sage)" }}
               onMouseEnter={(e) => { e.currentTarget.style.background = "var(--sage)"; e.currentTarget.style.color = "#fff"; }}
               onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "var(--sage)"; }}
@@ -91,8 +88,8 @@ export default function ConsentBanner() {
               Tout accepter
             </button>
           </div>
-          <button onClick={() => setDetail(true)} className="mt-3 block w-full text-center text-xs text-[var(--muted-text)] underline">
-            Personnaliser mes choix
+          <button onClick={() => setDetail(true)} className="mt-1.5 block w-full text-center text-[10px] text-[var(--muted-text)] underline">
+            Personnaliser
           </button>
         </>
       ) : (
