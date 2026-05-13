@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import PhoneModal from "@/components/PhoneModal";
 import ConsentBanner from "@/components/ConsentBanner";
