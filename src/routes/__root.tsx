@@ -9,6 +9,7 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import { localBusinessSchema, serviceSchema, faqSchema } from "@/lib/schema-jsonld";
 
 const consentScript = `
 window.dataLayer = window.dataLayer || [];
@@ -167,6 +168,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { children: googleAdsScript },
       { children: telConversionScript },
       { type: "application/ld+json", children: jsonLd },
+      { type: "application/ld+json", children: JSON.stringify(localBusinessSchema) },
+      { type: "application/ld+json", children: JSON.stringify(serviceSchema) },
+      { type: "application/ld+json", children: JSON.stringify(faqSchema) },
     ],
   }),
   shellComponent: RootShell,
