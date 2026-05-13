@@ -116,13 +116,13 @@ function Index() {
       {/* HEADER */}
       <header className="sticky top-0 z-50 h-14 md:h-16 border-b border-[var(--border)] bg-[#fcfcfc]/90 backdrop-blur-md">
         <div className="mx-auto flex h-full max-w-6xl items-center justify-between px-4 sm:px-6">
-          <a href="#main" className="h-display text-[15px] sm:text-xl leading-tight text-[var(--anthracite)]">
+          <a href="#main-content" className="h-display text-[15px] sm:text-xl leading-tight text-[var(--anthracite)]">
             Les Céramiques Murales du Vésinet
           </a>
           <a
             href="tel:+33670025133"
             onClick={onPhoneDesktop}
-            className="flex items-center gap-2 text-sm font-semibold text-[var(--gold)] hover:text-[var(--anthracite)] transition-colors"
+            className="flex items-center gap-2 text-sm font-semibold text-[var(--gold-text-light)] hover:text-[var(--anthracite)] transition-colors"
             aria-label="Appeler Laurence"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
@@ -133,6 +133,7 @@ function Index() {
         </div>
       </header>
 
+      <main id="main-content">
       {/* HERO */}
       <section className="relative min-h-[95vh] md:min-h-[100vh] w-full overflow-hidden">
         <video
@@ -153,7 +154,7 @@ function Index() {
         <div className="absolute inset-0 bg-gradient-to-t from-[#2a2a2a]/85 via-[#2a2a2a]/40 to-transparent" />
 
         <div className="relative z-10 mx-auto flex min-h-[95vh] md:min-h-[100vh] max-w-5xl flex-col justify-end items-center pb-20 md:pb-32 px-6">
-          <span className="inline-flex items-center gap-2 rounded-full border border-[#b8860b]/40 bg-[#b8860b]/10 px-4 py-2 text-xs md:text-sm font-medium text-[#b8860b] mb-6">
+          <span className="inline-flex items-center gap-2 rounded-full border border-[#b8860b]/40 bg-[#b8860b]/10 px-4 py-2 text-xs md:text-sm font-medium text-[#d4a02a] mb-6">
             <Trophy className="h-4 w-4" aria-hidden />
             1er Prix du Ravalement Versailles 2025
           </span>
@@ -234,7 +235,7 @@ function Index() {
               target="_blank"
               rel="noopener"
               onClick={() => trackEvent("artiste_atelier_click")}
-              className="inline-flex items-center justify-center mt-8 px-6 py-3 rounded-md border border-[#b8860b] text-[#b8860b] font-semibold hover:bg-[#b8860b] hover:text-[#fcfcfc] transition-colors"
+              className="inline-flex items-center justify-center mt-8 px-6 py-3 rounded-md border border-[#b8860b] text-[#a07308] font-semibold hover:bg-[#b8860b] hover:text-[#fcfcfc] transition-colors"
             >
               Découvrir mon atelier
             </a>
@@ -332,8 +333,8 @@ function Index() {
         </picture>
         <div className="absolute inset-0 bg-[#2a2a2a]/80" />
         <div className="relative z-10 max-w-3xl mx-auto text-center px-6 py-24 md:py-32 text-[#fcfcfc]">
-          <Trophy className="h-12 w-12 text-[#b8860b] mx-auto mb-4" aria-hidden />
-          <p className="eyebrow text-[#b8860b]">Reconnaissance officielle</p>
+          <Trophy className="h-12 w-12 text-[#d4a02a] mx-auto mb-4" aria-hidden />
+          <p className="eyebrow text-[#d4a02a]">Reconnaissance officielle</p>
           <h2 className="mt-3 font-display text-3xl sm:text-[44px] leading-tight">
             Premier Prix du Ravalement de la Ville de Versailles 2025
           </h2>
@@ -375,6 +376,8 @@ function Index() {
           </div>
         </div>
       </section>
+
+      </main>
 
       {/* FOOTER */}
       <footer className="bg-[var(--anthracite)] px-4 py-12 text-white/70 sm:px-6">
@@ -441,7 +444,7 @@ function Index() {
           <button
             type="button"
             onClick={(e) => { e.stopPropagation(); closeLightbox(); }}
-            aria-label="Fermer"
+            aria-label="Fermer la galerie"
             className="absolute top-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white text-2xl hover:bg-white/20"
           >
             ×
@@ -449,7 +452,7 @@ function Index() {
           <button
             type="button"
             onClick={(e) => { e.stopPropagation(); prevLightbox(); }}
-            aria-label="Précédent"
+            aria-label="Photo précédente"
             className="absolute left-4 top-1/2 -translate-y-1/2 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white text-2xl hover:bg-white/20"
           >
             ‹
@@ -457,7 +460,7 @@ function Index() {
           <button
             type="button"
             onClick={(e) => { e.stopPropagation(); nextLightbox(); }}
-            aria-label="Suivant"
+            aria-label="Photo suivante"
             className="absolute right-4 top-1/2 -translate-y-1/2 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white text-2xl hover:bg-white/20"
           >
             ›

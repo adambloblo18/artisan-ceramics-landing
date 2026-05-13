@@ -34,7 +34,7 @@ export default function PhoneModal({ open, onClose }: Props) {
         <h3 className="h-display mt-3 text-2xl">Appelez Laurence</h3>
         <a
           href="tel:+33670025133"
-          className="mt-6 block font-display text-4xl text-[var(--gold)]"
+          className="mt-6 block font-display text-4xl text-[var(--gold-text-light)]"
         >
           {phone}
         </a>

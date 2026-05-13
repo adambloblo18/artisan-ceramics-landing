@@ -53,7 +53,7 @@ export default function Faq() {
               className="flex w-full items-start justify-between gap-4 py-5 text-left"
             >
               <span className="h-display text-lg sm:text-xl">{it.q}</span>
-              <span className="text-2xl text-[var(--gold)] leading-none" aria-hidden>
+              <span className="text-2xl text-[var(--gold-text-light)] leading-none" aria-hidden>
                 {isOpen ? "×" : "+"}
               </span>
             </button>
