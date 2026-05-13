@@ -296,35 +296,42 @@ function Index() {
 
       {/* GALERIE */}
       <section id="galerie" className="bg-[var(--cream)] py-20 sm:py-28">
-        <div className="mx-auto max-w-7xl px-4 md:px-8">
-          <h2 className="text-center font-['Cormorant_Garamond'] text-4xl md:text-6xl text-[#2a2a2a]">
-            Quelques œuvres récentes
+        <div className="mx-auto max-w-5xl px-4 md:px-8">
+          <div className="flex items-center justify-center gap-4 mb-4">
+            <div className="h-px w-12 bg-[#b8860b]/30" />
+            <span className="font-['DM_Sans'] text-[10px] tracking-[0.4em] uppercase text-[#b8860b] font-medium">Collection</span>
+            <div className="h-px w-12 bg-[#b8860b]/30" />
+          </div>
+          <h2 className="text-center font-['Cormorant_Garamond'] font-light text-3xl md:text-5xl text-[#2a2a2a] tracking-tight">
+            Quelques <span className="italic">œuvres récentes</span>
           </h2>
-          <p className="mt-4 text-center font-['DM_Sans'] text-base text-[#2a2a2a]/60">
+          <p className="mt-4 text-center font-['DM_Sans'] text-sm text-[#2a2a2a]/55">
             Cliquez sur une image pour la voir en grand.
           </p>
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-10">
+          <div className="mt-14 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12">
             {projets.map((p, i) => (
               <figure key={i} className="flex flex-col">
                 <button
                   type="button"
                   onClick={() => openLightbox(i)}
-                  className="block w-full overflow-hidden rounded-md shadow-lg shadow-[#2a2a2a]/15 hover:shadow-2xl hover:scale-[1.02] transition-all duration-500 cursor-zoom-in"
+                  className="group block w-full bg-white p-3 border border-[#e8e2d9] shadow-sm hover:shadow-xl transition-all duration-700 cursor-zoom-in"
                   aria-label={`Agrandir : ${p.alt}`}
                 >
-                  <img
-                    src={p.src}
-                    alt={p.alt}
-                    width={p.width}
-                    height={p.height}
-                    loading={i === 0 ? "eager" : "lazy"}
-                    decoding="async"
-                    className="w-full h-auto block"
-                  />
+                  <div className="overflow-hidden">
+                    <img
+                      src={p.src}
+                      alt={p.alt}
+                      width={p.width}
+                      height={p.height}
+                      loading={i === 0 ? "eager" : "lazy"}
+                      decoding="async"
+                      className="w-full h-auto block transition-transform duration-1000 group-hover:scale-[1.03]"
+                    />
+                  </div>
                 </button>
-                <figcaption className="mt-4">
-                  <p className="font-['Cormorant_Garamond'] text-xl md:text-2xl text-[#2a2a2a]">{p.caption}</p>
-                  <p className="font-['DM_Sans'] text-sm text-[#2a2a2a]/60 mt-1">{p.sublegend}</p>
+                <figcaption className="mt-5 text-center">
+                  <p className="font-['Cormorant_Garamond'] italic text-lg md:text-xl text-[#2a2a2a]">{p.caption}</p>
+                  <p className="font-['DM_Sans'] text-[10px] uppercase tracking-[0.25em] text-[#b8860b]/80 mt-2">{p.sublegend}</p>
                 </figcaption>
               </figure>
             ))}
