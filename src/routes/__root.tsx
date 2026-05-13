@@ -167,6 +167,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       
       { children: clarityScript },
       { children: uetScript },
+      { children: posthogScript },
       { src: "https://www.googletagmanager.com/gtag/js?id=AW-11400865534", async: true },
       { children: googleAdsScript },
       { children: telConversionScript },
