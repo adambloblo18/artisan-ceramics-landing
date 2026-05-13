@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PhoneModal from "@/components/PhoneModal";
 import ConsentBanner from "@/components/ConsentBanner";
 import StickyMobileBar from "@/components/StickyMobileBar";
@@ -38,10 +38,10 @@ const PRIX_BG = "/images/prix.jpg";
 const LAURENCE_IMG = "/images/laurence.jpeg";
 
 const projets = [
-  { src: "/images/cuisine-verte.jpg", alt: "Motifs floraux sur tons verts, crédence cuisine", caption: "Motifs floraux sur tons verts · Île-de-France" },
-  { src: "/images/gal2.jpg", alt: "Crédence céramique dessin floral peint à la main", caption: "Composition florale unique · Maison de famille", pos: "center 30%" },
-  { src: "/images/gal3.jpg", alt: "Crédence autour d'un lavabo, frise pivoines bleues", caption: "Frise pivoines bleues · Salle de bain" },
-  { src: "/images/gal4.jpg", alt: "Frise large céramique émaillée Art Nouveau", caption: "Frise Art Nouveau · Atelier d'artiste" },
+  { src: "/images/galerie-1-cuisine-verte.jpg", alt: "Motifs floraux sur tons verts, crédence cuisine", caption: "Motifs floraux sur tons verts · Île-de-France" },
+  { src: "/images/galerie-2-dessin-floral.jpg", alt: "Crédence céramique dessin floral peint à la main", caption: "Composition florale unique · Maison de famille" },
+  { src: "/images/galerie-3-frise-pivoines.jpg", alt: "Crédence autour d'un lavabo, frise pivoines bleues", caption: "Frise pivoines bleues · Salle de bain" },
+  { src: "/images/galerie-4-frise-art-nouveau.jpeg", alt: "Frise large céramique émaillée Art Nouveau", caption: "Frise Art Nouveau · Atelier d'artiste" },
 ];
 
 const reassPillars = [
@@ -63,7 +63,26 @@ const process = [
 
 function Index() {
   const [phoneOpen, setPhoneOpen] = useState(false);
-  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const lightbox = lightboxIndex !== null ? projets[lightboxIndex] : null;
+  const closeLightbox = () => setLightboxIndex(null);
+  const openLightbox = (i: number) => {
+    setLightboxIndex(i);
+    trackEvent("gallery_image_open", { src: projets[i].src, caption: projets[i].caption });
+  };
+  const nextLightbox = () => setLightboxIndex((i) => (i === null ? null : (i + 1) % projets.length));
+  const prevLightbox = () => setLightboxIndex((i) => (i === null ? null : (i - 1 + projets.length) % projets.length));
+
+  useEffect(() => {
+    if (lightboxIndex === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeLightbox();
+      else if (e.key === "ArrowRight") nextLightbox();
+      else if (e.key === "ArrowLeft") prevLightbox();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [lightboxIndex]);
   const isMobile = typeof navigator !== "undefined" && /Android|iPhone|iPad/i.test(navigator.userAgent);
 
   const onPhoneDesktop = (e: React.MouseEvent) => {
@@ -213,21 +232,21 @@ function Index() {
       <section id="galerie" className="bg-[var(--cream)] py-20 sm:py-28">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <h2 className="text-center font-display text-3xl italic sm:text-[44px]">Quelques crédences réalisées.</h2>
-          <div className="mt-12 grid grid-cols-1 gap-6 min-[380px]:grid-cols-2">
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-7xl mx-auto">
             {projets.map((p, i) => (
               <figure key={i} className="overflow-hidden bg-white">
                 <button
                   type="button"
-                  onClick={() => setLightbox({ src: p.src, alt: p.alt })}
+                  onClick={() => openLightbox(i)}
                   className="block w-full overflow-hidden cursor-zoom-in"
                   aria-label={`Agrandir : ${p.alt}`}
                 >
                   <img
                     src={p.src} alt={p.alt}
-                    width={1024} height={768}
+                    width={800} height={1000}
                     loading={i === 0 ? "eager" : "lazy"} decoding="async"
-                    style={{ objectPosition: p.pos ?? "center", filter: "brightness(1.12) saturate(1.05)" }}
-                    className="aspect-[4/3] w-full object-cover transition-transform duration-[400ms] ease-out hover:scale-[1.05]"
+                    style={{ filter: "brightness(1.12) saturate(1.05)" }}
+                    className="aspect-[4/5] w-full object-cover transition-transform duration-[400ms] ease-out hover:scale-[1.05]"
                   />
                 </button>
                 <figcaption className="p-4 text-sm italic text-[var(--muted-text)]">{p.caption}</figcaption>
@@ -398,23 +417,45 @@ function Index() {
           role="dialog"
           aria-modal="true"
           aria-label={lightbox.alt}
-          onClick={() => setLightbox(null)}
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 cursor-zoom-out"
+          onClick={closeLightbox}
+          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black/90 p-4 cursor-zoom-out"
         >
           <button
             type="button"
-            onClick={() => setLightbox(null)}
+            onClick={(e) => { e.stopPropagation(); closeLightbox(); }}
             aria-label="Fermer"
             className="absolute top-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white text-2xl hover:bg-white/20"
           >
             ×
           </button>
+          <button
+            type="button"
+            onClick={(e) => { e.stopPropagation(); prevLightbox(); }}
+            aria-label="Précédent"
+            className="absolute left-4 top-1/2 -translate-y-1/2 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white text-2xl hover:bg-white/20"
+          >
+            ‹
+          </button>
+          <button
+            type="button"
+            onClick={(e) => { e.stopPropagation(); nextLightbox(); }}
+            aria-label="Suivant"
+            className="absolute right-4 top-1/2 -translate-y-1/2 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white text-2xl hover:bg-white/20"
+          >
+            ›
+          </button>
           <img
             src={lightbox.src}
             alt={lightbox.alt}
             onClick={(e) => e.stopPropagation()}
-            className="max-h-[92vh] max-w-[92vw] object-contain"
+            className="max-h-[80vh] max-w-[92vw] object-contain"
           />
+          <p
+            onClick={(e) => e.stopPropagation()}
+            className="font-['Cormorant_Garamond'] text-xl text-white mt-4 text-center px-4"
+          >
+            {lightbox.caption}
+          </p>
         </div>
       )}
     </div>
