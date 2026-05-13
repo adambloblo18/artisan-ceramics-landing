@@ -42,7 +42,7 @@ const PRIX_BG = "/images/prix.jpg";
 const LAURENCE_IMG = "/images/portrait-laurence.jpg";
 
 const projets = [
-  { src: "/images/galerie-1-cuisine-verte.jpg", alt: "Motifs floraux sur tons verts, crédence cuisine", caption: "Motifs floraux sur tons verts · Île-de-France" },
+  { src: "/images/cuisine-credence-fleurs.png", alt: "Motifs floraux sur tons verts, crédence cuisine", caption: "Motifs floraux sur tons verts · Île-de-France" },
   { src: "/images/galerie-2-dessin-floral.jpg", alt: "Crédence céramique dessin floral peint à la main", caption: "Composition florale unique · Maison de famille" },
   { src: "/images/galerie-3-frise-pivoines.jpg", alt: "Crédence autour d'un lavabo, frise pivoines bleues", caption: "Frise pivoines bleues · Salle de bain" },
   { src: "/images/galerie-4-frise-art-nouveau.jpeg", alt: "Frise large céramique émaillée Art Nouveau", caption: "Frise Art Nouveau · Atelier d'artiste" },
