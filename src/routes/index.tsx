@@ -408,10 +408,12 @@ function Index() {
         </div>
         <div className="mx-auto mt-12 max-w-6xl border-t border-white/10 pt-6 text-center text-xs text-white/50">
           <p>© 2026 Les Céramiques Murales du Vésinet · Atelier du Vésinet</p>
-          <p className="mt-2">
-            <a href="https://www.ceramique-murale.com/politique-de-confidentialite/" target="_blank" rel="noopener" className="hover:text-white/80">
-              Politique de confidentialité
-            </a>
+          <p className="mt-3 text-sm text-[#fcfcfc]/60">
+            <Link to="/mentions-legales" className="hover:text-white/80">Mentions légales</Link>
+            <span className="mx-2 opacity-50">·</span>
+            <Link to="/politique-confidentialite" className="hover:text-white/80">Politique de confidentialité</Link>
+            <span className="mx-2 opacity-50">·</span>
+            <Link to="/cgv" className="hover:text-white/80">CGV</Link>
             <span className="mx-2 opacity-50">·</span>
             <button
               type="button"
