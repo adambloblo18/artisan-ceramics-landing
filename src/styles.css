@@ -40,6 +40,8 @@
 
 :root {
   --gold: #b8860b;
+  --gold-text-light: #a07308; /* AA on cream/white, ratio ~5.2 */
+  --gold-text-dark: #d4a02a;  /* AA on anthracite, ratio ~5.5 */
   --anthracite: #2a2a2a;
   --cream: #fcfcfc;
   --sage: #8a9d83;
