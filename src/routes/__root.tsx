@@ -145,7 +145,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     scripts: [
       { children: consentScript },
-      { children: gtmScript },
+      
       { children: clarityScript },
       { children: uetScript },
       { src: "https://www.googletagmanager.com/gtag/js?id=AW-11400865534", async: true },
