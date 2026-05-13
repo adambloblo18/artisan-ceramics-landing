@@ -37,6 +37,16 @@ const clarityScript = `(function(c,l,a,r,i,t,y){
 
 const uetScript = `(function(w,d,t,r,u){var f,n,i;w[u]=w[u]||[],f=function(){var o={ti:"343242701"};o.q=w[u],w[u]=new UET(o),w[u].push("pageLoad")},n=d.createElement(t),n.src=r,n.async=1,n.onload=n.onreadystatechange=function(){var s=this.readyState;s&&s!=="loaded"&&s!=="complete"||(f(),n.onload=n.onreadystatechange=null)},i=d.getElementsByTagName(t)[0],i.parentNode.insertBefore(n,i)})(window,document,"script","//bat.bing.com/bat.js","uetq");`;
 
+const googleAdsScript = `gtag('js', new Date()); gtag('config', 'AW-11400865534');`;
+
+const telConversionScript = `document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('a[href^="tel:"]').forEach(function(el) {
+    el.addEventListener('click', function() {
+      window.gtag && gtag('event', 'conversion', { 'send_to': 'AW-11400865534/LKHFCIKk4d8bEP7Nrbwq' });
+    });
+  });
+});`;
+
 const jsonLd = JSON.stringify({
   "@context": "https://schema.org",
   "@type": ["LocalBusiness", "Store"],
@@ -147,6 +157,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { children: gtmScript },
       { children: clarityScript },
       { children: uetScript },
+      { src: "https://www.googletagmanager.com/gtag/js?id=AW-11400865534", async: true },
+      { children: googleAdsScript },
+      { children: telConversionScript },
       { type: "application/ld+json", children: jsonLd },
     ],
   }),
