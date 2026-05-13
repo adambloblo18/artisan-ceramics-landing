@@ -1,97 +1,74 @@
 import { useEffect, useState } from "react";
-import {
-  useABVariant,
-  trackExposure,
-  trackConversion,
-} from "@/lib/ab-helpers";
+import { Phone, Mail } from "lucide-react";
+import { trackEvent } from "@/lib/analytics";
 
 interface Props {
-  /** Kept for backward compat (desktop phone modal); not used by variants A/B. */
+  /** Kept for backward compat; unused. */
   onPhoneClick?: () => void;
 }
 
-const SCROLL_TARGET_ID = "formulaire";
 const PHONE_HREF = "tel:+33670025133";
 
+function isDesktop() {
+  if (typeof window === "undefined") return true;
+  return window.matchMedia("(min-width: 768px)").matches;
+}
+
 export default function StickyMobileBar(_props: Props) {
-  const variant = useABVariant("sticky_mobile_cta_v1", [
-    "control",
-    "A",
-    "B",
-  ]);
   const [show, setShow] = useState(false);
+  const [desktop, setDesktop] = useState(true);
 
   useEffect(() => {
-    trackExposure("sticky_mobile_cta_v1", variant);
-  }, [variant]);
+    const mq = window.matchMedia("(min-width: 768px)");
+    const apply = () => setDesktop(mq.matches);
+    apply();
+    mq.addEventListener("change", apply);
+    return () => mq.removeEventListener("change", apply);
+  }, []);
 
   useEffect(() => {
-    if (variant === "control") return;
-    const onScroll = () =>
-      setShow(window.scrollY > window.innerHeight * 0.6);
+    if (desktop) return;
+    const onScroll = () => setShow(window.scrollY > window.innerHeight * 0.5);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, [variant]);
+  }, [desktop]);
 
-  if (variant === "control") return null;
+  if (desktop) return null;
 
-  const scrollToForm = (e: React.MouseEvent) => {
+  const onPhone = () => trackEvent("sticky_mobile_phone_click");
+
+  const onDevis = (e: React.MouseEvent) => {
     e.preventDefault();
-    trackConversion("sticky_mobile_form_click", { variant });
-    const el = document.getElementById(SCROLL_TARGET_ID);
+    const el = document.getElementById("contact-form");
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    trackEvent("sticky_mobile_devis_click");
   };
 
-  const onPhoneClick = () => {
-    trackConversion("sticky_mobile_phone_click", { variant });
-  };
-
-  const wrapperBase = `fixed inset-x-0 bottom-0 z-40 border-t border-[var(--border)] bg-white shadow-[0_-2px_8px_rgba(0,0,0,0.08)] transition-opacity duration-200 md:hidden ${
-    show ? "opacity-100" : "pointer-events-none opacity-0"
-  }`;
-
-  if (variant === "A") {
-    return (
-      <div
-        data-ab-experiment="sticky_mobile_cta_v1"
-        data-ab-variant={variant}
-        className={`${wrapperBase} flex h-16`}
-      >
-        <a
-          href={PHONE_HREF}
-          onClick={onPhoneClick}
-          className="flex flex-1 items-center justify-center gap-2 border-r border-[var(--border)] bg-white text-sm font-semibold text-[var(--anthracite)]"
-        >
-          📞 Appeler
-        </a>
-        <a
-          href={`#${SCROLL_TARGET_ID}`}
-          onClick={scrollToForm}
-          className="flex flex-1 items-center justify-center gap-2 text-sm font-semibold text-white"
-          style={{ background: "#b8860b" }}
-        >
-          Devis gratuit
-        </a>
-      </div>
-    );
-  }
-
-  // variant B
   return (
-    <div
-      data-ab-experiment="sticky_mobile_cta_v1"
-      data-ab-variant={variant}
-      className={`${wrapperBase} p-2`}
+    <nav
+      role="navigation"
+      aria-label="Actions rapides"
+      className={`md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#2a2a2a]/95 backdrop-blur-md border-t border-[#b8860b]/30 px-3 py-3 flex flex-row gap-2 transition-transform duration-300 ease-out ${
+        show ? "translate-y-0" : "translate-y-full"
+      }`}
     >
       <a
-        href={`#${SCROLL_TARGET_ID}`}
-        onClick={scrollToForm}
-        className="flex h-12 w-full items-center justify-center gap-2 text-sm font-semibold text-white"
-        style={{ background: "#b8860b" }}
+        href={PHONE_HREF}
+        onClick={onPhone}
+        className="flex-[3] inline-flex items-center justify-center gap-2 rounded-md bg-[#b8860b] text-[#2a2a2a] font-semibold py-3"
       >
-        Mon devis en 30 secondes →
+        <Phone className="h-4 w-4" aria-hidden />
+        Appeler Laurence
       </a>
-    </div>
+      <a
+        href="#contact-form"
+        onClick={onDevis}
+        className="flex-[2] inline-flex items-center justify-center gap-2 rounded-md border border-[#fcfcfc] bg-transparent text-[#fcfcfc] font-semibold py-3"
+      >
+        <Mail className="h-4 w-4" aria-hidden />
+        Devis
+      </a>
+    </nav>
   );
 }

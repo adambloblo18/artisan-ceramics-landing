@@ -6,10 +6,8 @@ import StickyMobileBar from "@/components/StickyMobileBar";
 import MultiStepForm from "@/components/MultiStepForm";
 import Faq from "@/components/Faq";
 import VisualiseurSection from "@/components/sections/VisualiseurSection";
-import { trackConversion } from "@/lib/ab-helpers";
+import { trackEvent } from "@/lib/analytics";
 import { Trophy, ArrowRight, Phone, Hand, Landmark, MapPin, Truck } from "lucide-react";
-
-const trackEvent = trackConversion;
 
 export const Route = createFileRoute("/")({ component: Index });
 
