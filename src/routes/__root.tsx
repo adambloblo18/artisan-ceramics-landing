@@ -9,6 +9,7 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import { localBusinessSchema, serviceSchema, faqSchema } from "@/lib/schema-jsonld";
 
 const consentScript = `
 window.dataLayer = window.dataLayer || [];
