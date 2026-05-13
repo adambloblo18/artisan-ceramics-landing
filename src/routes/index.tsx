@@ -63,7 +63,26 @@ const process = [
 
 function Index() {
   const [phoneOpen, setPhoneOpen] = useState(false);
-  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const lightbox = lightboxIndex !== null ? projets[lightboxIndex] : null;
+  const closeLightbox = () => setLightboxIndex(null);
+  const openLightbox = (i: number) => {
+    setLightboxIndex(i);
+    trackEvent("gallery_image_open", { src: projets[i].src, caption: projets[i].caption });
+  };
+  const nextLightbox = () => setLightboxIndex((i) => (i === null ? null : (i + 1) % projets.length));
+  const prevLightbox = () => setLightboxIndex((i) => (i === null ? null : (i - 1 + projets.length) % projets.length));
+
+  useEffect(() => {
+    if (lightboxIndex === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeLightbox();
+      else if (e.key === "ArrowRight") nextLightbox();
+      else if (e.key === "ArrowLeft") prevLightbox();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [lightboxIndex]);
   const isMobile = typeof navigator !== "undefined" && /Android|iPhone|iPad/i.test(navigator.userAgent);
 
   const onPhoneDesktop = (e: React.MouseEvent) => {
@@ -213,21 +232,21 @@ function Index() {
       <section id="galerie" className="bg-[var(--cream)] py-20 sm:py-28">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <h2 className="text-center font-display text-3xl italic sm:text-[44px]">Quelques crédences réalisées.</h2>
-          <div className="mt-12 grid grid-cols-1 gap-6 min-[380px]:grid-cols-2">
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-7xl mx-auto">
             {projets.map((p, i) => (
               <figure key={i} className="overflow-hidden bg-white">
                 <button
                   type="button"
-                  onClick={() => setLightbox({ src: p.src, alt: p.alt })}
+                  onClick={() => openLightbox(i)}
                   className="block w-full overflow-hidden cursor-zoom-in"
                   aria-label={`Agrandir : ${p.alt}`}
                 >
                   <img
                     src={p.src} alt={p.alt}
-                    width={1024} height={768}
+                    width={800} height={1000}
                     loading={i === 0 ? "eager" : "lazy"} decoding="async"
-                    style={{ objectPosition: p.pos ?? "center", filter: "brightness(1.12) saturate(1.05)" }}
-                    className="aspect-[4/3] w-full object-cover transition-transform duration-[400ms] ease-out hover:scale-[1.05]"
+                    style={{ filter: "brightness(1.12) saturate(1.05)" }}
+                    className="aspect-[4/5] w-full object-cover transition-transform duration-[400ms] ease-out hover:scale-[1.05]"
                   />
                 </button>
                 <figcaption className="p-4 text-sm italic text-[var(--muted-text)]">{p.caption}</figcaption>
