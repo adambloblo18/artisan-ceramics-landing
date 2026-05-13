@@ -70,11 +70,7 @@ function Index() {
     if (!isMobile) { e.preventDefault(); setPhoneOpen(true); }
   };
 
-  const reassVariant = useABVariant("reassurance_icons_v1", ["control", "A"]);
 
-  useEffect(() => {
-    trackExposure("reassurance_icons_v1", reassVariant);
-  }, [reassVariant]);
 
   const scrollToId = (id: string) => {
     const el = document.getElementById(id);
