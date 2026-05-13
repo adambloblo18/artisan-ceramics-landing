@@ -1,12 +1,34 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PhoneModal from "@/components/PhoneModal";
 import ConsentBanner from "@/components/ConsentBanner";
 import StickyMobileBar from "@/components/StickyMobileBar";
 import MultiStepForm from "@/components/MultiStepForm";
 import Faq from "@/components/Faq";
+import { useABVariant, trackExposure, trackConversion } from "@/lib/ab-helpers";
 
 export const Route = createFileRoute("/")({ component: Index });
+
+const TrophyIcon = ({ className = "h-4 w-4" }: { className?: string }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={2}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+    aria-hidden
+  >
+    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
+    <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+    <path d="M4 22h16" />
+    <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" />
+    <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" />
+    <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" />
+  </svg>
+);
 
 const HERO_IMG = "/images/cuisine-verte.jpg";
 const PRIX_BG = "/images/prix.jpg";
@@ -43,6 +65,92 @@ function Index() {
   const onPhoneDesktop = (e: React.MouseEvent) => {
     if (!isMobile) { e.preventDefault(); setPhoneOpen(true); }
   };
+
+  const headlineVariant = useABVariant("hero_headline_v1", ["control", "A", "B", "C"]);
+  const badgeVariant = useABVariant("hero_badge_v1", ["control", "A", "B"]);
+
+  useEffect(() => {
+    trackExposure("hero_headline_v1", headlineVariant);
+    trackExposure("hero_badge_v1", badgeVariant);
+  }, [headlineVariant, badgeVariant]);
+
+  const scrollToId = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  const onPrimaryCta = (e: React.MouseEvent) => {
+    e.preventDefault();
+    trackConversion("hero_cta_primary_click", { variant: headlineVariant });
+    scrollToId("formulaire");
+  };
+
+  const onPhoneCta = (e: React.MouseEvent) => {
+    e.preventDefault();
+    trackConversion("hero_cta_secondary_click", { variant: headlineVariant });
+    if (isMobile) {
+      window.location.href = "tel:+33670025133";
+    } else {
+      setPhoneOpen(true);
+    }
+  };
+
+  const onGalleryCta = (e: React.MouseEvent) => {
+    e.preventDefault();
+    trackConversion("hero_cta_secondary_click", { variant: headlineVariant });
+    scrollToId("galerie");
+  };
+
+  const onBadgeClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    trackConversion("hero_badge_click", { variant: badgeVariant });
+    scrollToId("award-section");
+  };
+
+  const headlineContent = (() => {
+    switch (headlineVariant) {
+      case "A":
+        return {
+          title: <>Faites entrer l'Art Nouveau dans votre cuisine.</>,
+          subtitle:
+            "Chaque carreau est dessiné, peint et cuit à la main au Vésinet. Une œuvre unique, posée chez vous, livrée partout en France.",
+          primary: "Voir mon devis en 30 secondes",
+          secondary: { label: "📞 Parler à Laurence", kind: "phone" as const },
+        };
+      case "B":
+        return {
+          title: (
+            <>
+              Primée Versailles 2025.
+              <br />
+              Peinte main au Vésinet.
+              <br />
+              Livrée chez vous.
+            </>
+          ),
+          subtitle:
+            "Faïence émaillée Art Nouveau, sur mesure pour cuisines, salles de bain et façades. 30 ans d'atelier, expédition France entière.",
+          primary: "Réserver un appel avec Laurence",
+          secondary: { label: "Voir les réalisations", kind: "gallery" as const },
+        };
+      case "C":
+        return {
+          title: <>La crédence qui n'existe nulle part ailleurs.</>,
+          subtitle:
+            "Vous décrivez votre projet, Laurence dessine, peint et cuit chaque carreau dans son atelier. Une pièce unique, signée, livrée chez vous.",
+          primary: "Lancer mon projet sur mesure",
+          secondary: { label: "📞 Appeler Laurence", kind: "phone" as const },
+        };
+      default:
+        return {
+          title: <>Crédences en céramique, peintes à la main.</>,
+          subtitle:
+            "Faïence émaillée Art Nouveau, créée sur mesure dans notre atelier du Vésinet. Sur rendez-vous, livraison France entière.",
+          primary: "Recevoir mon étude personnalisée",
+          secondary: { label: "📞 Appeler Laurence", kind: "phone" as const },
+        };
+    }
+  })();
 
   return (
     <div id="main" className="min-h-screen bg-[var(--cream)]">
