@@ -122,7 +122,7 @@ function Index() {
           <a
             href="tel:+33670025133"
             onClick={onPhoneDesktop}
-            className="flex items-center gap-2 text-sm font-semibold text-[var(--gold)] hover:text-[var(--anthracite)] transition-colors"
+            className="flex items-center gap-2 text-sm font-semibold text-[var(--gold-text-light)] hover:text-[var(--anthracite)] transition-colors"
             aria-label="Appeler Laurence"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
