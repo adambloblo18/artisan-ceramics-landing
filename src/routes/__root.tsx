@@ -217,10 +217,10 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <a
-        href="#main"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:bg-anthracite focus:text-cream focus:px-4 focus:py-2"
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-[#b8860b] focus:text-[#2a2a2a] focus:px-4 focus:py-2 focus:rounded"
       >
-        Aller au contenu
+        Aller au contenu principal
       </a>
       <Outlet />
     </QueryClientProvider>
