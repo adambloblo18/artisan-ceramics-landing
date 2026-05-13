@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import PhoneModal from "@/components/PhoneModal";
 import ConsentBanner from "@/components/ConsentBanner";
 import StickyMobileBar from "@/components/StickyMobileBar";
+import FloatingPhoneDesktop from "@/components/FloatingPhoneDesktop";
 import MultiStepForm from "@/components/MultiStepForm";
 import Faq from "@/components/Faq";
 import VisualiseurSection from "@/components/sections/VisualiseurSection";
@@ -440,6 +441,7 @@ function Index() {
       </footer>
 
       <StickyMobileBar onPhoneClick={() => setPhoneOpen(true)} />
+      <FloatingPhoneDesktop />
       <PhoneModal open={phoneOpen} onClose={() => setPhoneOpen(false)} />
       <ConsentBanner />
 
