@@ -218,7 +218,7 @@ function Index() {
             1er Prix du Ravalement Versailles 2025
           </span>
 
-          <h1 className="font-[\"Cormorant_Garamond\"] text-4xl md:text-6xl lg:text-7xl leading-tight text-center text-[#fcfcfc]">
+          <h1 className={`font-["Cormorant_Garamond"] text-4xl md:text-6xl lg:text-7xl leading-tight text-center text-[#fcfcfc]`}>
             Votre crédence céramique,<br />peinte à la main au Vésinet.
           </h1>
 
