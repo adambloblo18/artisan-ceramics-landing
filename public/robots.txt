@@ -1,2 +1,12 @@
+# Bloquer l'indexation organique, autoriser les bots Ads
+User-agent: AdsBot-Google
+Allow: /
+
+User-agent: AdsBot-Google-Mobile
+Allow: /
+
+User-agent: adidxbot
+Allow: /
+
 User-agent: *
 Disallow: /
