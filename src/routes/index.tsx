@@ -380,6 +380,8 @@ function Index() {
 
       </main>
 
+      <TrustStrip />
+
       {/* FOOTER */}
       <footer className="bg-[var(--anthracite)] px-4 py-12 text-white/70 sm:px-6">
         <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-3">
