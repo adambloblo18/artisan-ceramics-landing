@@ -293,6 +293,8 @@ function Index() {
 
       <Temoignages />
 
+      <Prescripteurs />
+
       <VisualiseurSection />
 
       {/* PRIX */}
