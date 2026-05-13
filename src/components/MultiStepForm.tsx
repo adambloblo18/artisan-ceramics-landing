@@ -3,9 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { ArrowRight, Loader2, Check } from "lucide-react";
-import { trackConversion } from "@/lib/ab-helpers";
-
-const trackEvent = trackConversion;
+import { trackEvent } from "@/lib/analytics";
 
 const REDIRECT_URL =
   "https://ceramique-murale.com/merci-pour-votre-demande-de-projet/";

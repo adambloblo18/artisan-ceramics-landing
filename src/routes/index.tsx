@@ -6,10 +6,8 @@ import StickyMobileBar from "@/components/StickyMobileBar";
 import MultiStepForm from "@/components/MultiStepForm";
 import Faq from "@/components/Faq";
 import VisualiseurSection from "@/components/sections/VisualiseurSection";
-import { trackConversion } from "@/lib/ab-helpers";
+import { trackEvent } from "@/lib/analytics";
 import { Trophy, ArrowRight, Phone, Hand, Landmark, MapPin, Truck } from "lucide-react";
-
-const trackEvent = trackConversion;
 
 export const Route = createFileRoute("/")({ component: Index });
 
@@ -356,7 +354,7 @@ function Index() {
       {/* (L'ARTISTE déplacé après la réassurance) */}
 
       {/* FORMULAIRE */}
-      <section id="formulaire" className="bg-[var(--cream)] py-20 sm:py-28">
+      <section id="formulaire" className="bg-[var(--cream)] py-20 sm:py-28 pb-24 md:pb-28">
         <div className="mx-auto max-w-3xl px-4 sm:px-6">
           <h2 className="text-center font-display text-3xl italic sm:text-[44px]">Parlons de votre projet.</h2>
           <p className="mt-3 text-center text-[var(--muted-text)]">

@@ -1,7 +1,5 @@
 import { useState } from "react";
-import { trackConversion } from "@/lib/ab-helpers";
-
-const trackEvent = trackConversion;
+import { trackEvent } from "@/lib/analytics";
 
 const items = [
   {

@@ -1,7 +1,5 @@
 import { Sparkles, Upload, Palette, Calculator, ArrowRight } from "lucide-react";
-import { trackConversion } from "@/lib/ab-helpers";
-
-const trackEvent = trackConversion;
+import { trackEvent } from "@/lib/analytics";
 
 const bullets = [
   { Icon: Upload, label: "Upload votre photo en 1 clic" },
