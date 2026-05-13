@@ -60,26 +60,23 @@ export default function MultiStepForm() {
     if (!data.rgpd) { setError("Merci d'accepter d'être recontacté."); return; }
 
     setSubmitting(true);
-    const key = (import.meta as any).env?.VITE_WEB3FORMS_KEY ?? "";
     try {
-      const res = await fetch("https://api.web3forms.com/submit", {
+      const fd = new FormData();
+      fd.append("_next", "https://www.ceramique-murale.com/merci-pour-votre-demande-de-projet/");
+      fd.append("_captcha", "false");
+      fd.append("_subject", "Nouvelle demande Crédence");
+      fd.append("projet", data.projet);
+      fd.append("taille", data.taille);
+      fd.append("dimension", data.dimension);
+      fd.append("delai", data.delai);
+      fd.append("prenom", data.prenom);
+      fd.append("email", data.email);
+      fd.append("telephone", data.telephone);
+      fd.append("ville", data.ville);
+      fd.append("message", data.message);
+      const res = await fetch("https://formsubmit.co/ceramiquemurale@gmail.com", {
         method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({
-          access_key: key,
-          subject: "Nouveau lead Crédence — Landing Lovable",
-          from_name: "ceramique-credence-test.pages.dev",
-          redirect: false,
-          projet: data.projet,
-          taille: data.taille,
-          dimension: data.dimension,
-          delai: data.delai,
-          prenom: data.prenom,
-          email: data.email,
-          telephone: data.telephone,
-          ville: data.ville,
-          message: data.message,
-        }),
+        body: fd,
       });
       if (!res.ok) throw new Error("submit failed");
       try {
