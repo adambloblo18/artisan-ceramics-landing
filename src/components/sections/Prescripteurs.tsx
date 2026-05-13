@@ -15,18 +15,18 @@ const MAILTO =
 
 export default function Prescripteurs() {
   return (
-    <section className="bg-[#2a2a2a] py-20 md:py-24 text-[#fcfcfc]">
+    <section className="bg-[#2a2a2a] py-20 md:py-24 text-[#f9f7f2]">
       <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         <div>
           <span className="inline-flex rounded-full border border-[#b8860b]/40 bg-[#b8860b]/10 px-4 py-2 text-xs font-medium text-[#d4a02a]">
             Architectes &amp; Décorateurs
           </span>
-          <h2 className="font-display text-3xl md:text-5xl text-[#fcfcfc] mt-4 leading-tight">
+          <h2 className="font-display text-3xl md:text-5xl text-[#f9f7f2] mt-4 leading-tight">
             Travaillons sur vos
             <br />
             projets clients
           </h2>
-          <p className="font-body text-base md:text-lg text-[#fcfcfc]/85 mt-6 leading-relaxed">
+          <p className="font-body text-base md:text-lg text-[#f9f7f2]/85 mt-6 leading-relaxed">
             Nous accompagnons les architectes et décorateurs sur les projets résidentiels et
             hospitality. Échantillons techniques sous 5 jours, devis détaillé pour vos planches
             matériaux, livraison France entière et internationale, coordination avec votre
@@ -37,7 +37,7 @@ export default function Prescripteurs() {
             {benefits.map((b) => (
               <li key={b} className="flex items-start gap-3">
                 <Check className="h-5 w-5 text-[#8a9d83] shrink-0 mt-0.5" aria-hidden />
-                <span className="font-body text-sm md:text-base text-[#fcfcfc]/90">{b}</span>
+                <span className="font-body text-sm md:text-base text-[#f9f7f2]/90">{b}</span>
               </li>
             ))}
           </ul>
@@ -45,7 +45,7 @@ export default function Prescripteurs() {
           <a
             href={MAILTO}
             onClick={() => trackEvent("prescripteurs_cta_click")}
-            className="inline-flex items-center justify-center mt-10 px-6 py-3 rounded-md border border-[#fcfcfc] text-[#fcfcfc] font-semibold hover:bg-[#fcfcfc] hover:text-[#2a2a2a] transition-colors"
+            className="inline-flex items-center justify-center mt-10 px-6 py-3 rounded-md border border-[#f9f7f2] text-[#f9f7f2] font-semibold hover:bg-[#f9f7f2] hover:text-[#2a2a2a] transition-colors"
           >
             Demander notre book prescripteurs
           </a>

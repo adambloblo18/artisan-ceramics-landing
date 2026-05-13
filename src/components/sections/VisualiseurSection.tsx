@@ -9,18 +9,18 @@ const bullets = [
 
 export default function VisualiseurSection() {
   return (
-    <section className="bg-[#2a2a2a] py-20 md:py-24 text-[#fcfcfc]">
+    <section className="bg-[#2a2a2a] py-20 md:py-24 text-[#f9f7f2]">
       <div className="max-w-5xl mx-auto px-6 text-center">
         <div className="inline-flex items-center gap-2 rounded-full border border-[#b8860b]/40 bg-[#b8860b]/10 px-4 py-2 text-xs md:text-sm font-medium text-[#d4a02a]">
           <Sparkles className="h-4 w-4" aria-hidden />
           Outil exclusif
         </div>
 
-        <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-5xl text-[#fcfcfc] mt-6 leading-tight">
+        <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-5xl text-[#f9f7f2] mt-6 leading-tight">
           Visualisez votre crédence<br />avant même de la commander
         </h2>
 
-        <p className="font-['DM_Sans'] text-base md:text-lg text-[#fcfcfc]/85 max-w-2xl mx-auto mt-6">
+        <p className="font-['DM_Sans'] text-base md:text-lg text-[#f9f7f2]/85 max-w-2xl mx-auto mt-6">
           Uploadez la photo de votre cuisine ou salle de bain. Choisissez un motif. Ajustez la taille. Voyez le rendu en quelques secondes. C'est gratuit et sans inscription.
         </p>
 
@@ -28,7 +28,7 @@ export default function VisualiseurSection() {
           {bullets.map(({ Icon, label }) => (
             <li key={label} className="flex flex-col items-center text-center">
               <Icon className="h-8 w-8 text-[#8a9d83]" aria-hidden />
-              <span className="font-['DM_Sans'] text-base mt-3 text-[#fcfcfc]">{label}</span>
+              <span className="font-['DM_Sans'] text-base mt-3 text-[#f9f7f2]">{label}</span>
             </li>
           ))}
         </ul>
@@ -44,7 +44,7 @@ export default function VisualiseurSection() {
             Essayer le visualiseur
             <ArrowRight className="h-4 w-4 ml-2" aria-hidden />
           </a>
-          <p className="text-sm text-[#fcfcfc]/60 mt-3">Sans inscription. Sans engagement.</p>
+          <p className="text-sm text-[#f9f7f2]/60 mt-3">Sans inscription. Sans engagement.</p>
         </div>
       </div>
     </section>

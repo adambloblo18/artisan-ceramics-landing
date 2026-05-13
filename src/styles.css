@@ -43,19 +43,19 @@
   --gold-text-light: #a07308; /* AA on cream/white, ratio ~5.2 */
   --gold-text-dark: #d4a02a;  /* AA on anthracite, ratio ~5.5 */
   --anthracite: #2a2a2a;
-  --cream: #fcfcfc;
+  --cream: #f9f7f2;
   --sage: #8a9d83;
   --muted-text: #6b6b6b;
 
   --radius: 2px;
-  --background: #fcfcfc;
+  --background: #f9f7f2;
   --foreground: #2a2a2a;
   --card: #ffffff;
   --card-foreground: #2a2a2a;
   --popover: #ffffff;
   --popover-foreground: #2a2a2a;
   --primary: #b8860b;
-  --primary-foreground: #fcfcfc;
+  --primary-foreground: #f9f7f2;
   --secondary: #f7f7f7;
   --secondary-foreground: #2a2a2a;
   --muted: #f7f7f7;
@@ -63,7 +63,7 @@
   --accent: #f7f7f7;
   --accent-foreground: #2a2a2a;
   --destructive: #c0392b;
-  --destructive-foreground: #fcfcfc;
+  --destructive-foreground: #f9f7f2;
   --border: #e8e8e8;
   --input: #e8e8e8;
   --ring: #b8860b;

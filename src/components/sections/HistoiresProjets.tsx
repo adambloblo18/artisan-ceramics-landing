@@ -32,7 +32,7 @@ const histoires = [
 
 export default function HistoiresProjets() {
   return (
-    <section className="bg-[#fcfcfc] py-20 md:py-24">
+    <section className="bg-[#f9f7f2] py-20 md:py-24">
       <div className="max-w-6xl mx-auto px-6">
         <h2 className="font-display text-3xl md:text-5xl text-[#2a2a2a] text-center">
           Trois projets, trois histoires
@@ -75,7 +75,7 @@ export default function HistoiresProjets() {
             target="_blank"
             rel="noopener"
             onClick={() => trackEvent("histoires_voir_plus_click")}
-            className="inline-flex items-center justify-center px-6 py-3 rounded-md border border-[#b8860b] text-[#a07308] font-semibold hover:bg-[#b8860b] hover:text-[#fcfcfc] transition-colors"
+            className="inline-flex items-center justify-center px-6 py-3 rounded-md border border-[#b8860b] text-[#a07308] font-semibold hover:bg-[#b8860b] hover:text-[#f9f7f2] transition-colors"
           >
             Voir toutes les réalisations
             <ArrowRight className="h-4 w-4 ml-2" aria-hidden />

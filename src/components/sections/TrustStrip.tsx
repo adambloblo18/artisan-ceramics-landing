@@ -14,7 +14,7 @@ export default function TrustStrip() {
   return (
     <section
       aria-labelledby="trust-strip-title"
-      className="bg-[#fcfcfc] py-8 border-t border-[#2a2a2a]/10"
+      className="bg-[#f9f7f2] py-8 border-t border-[#2a2a2a]/10"
     >
       <div className="max-w-6xl mx-auto px-6">
         <p

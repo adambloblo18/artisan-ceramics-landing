@@ -19,7 +19,7 @@ function MentionsLegales() {
   }, []);
 
   return (
-    <main className="bg-[#fcfcfc]">
+    <main className="bg-[#f9f7f2]">
       <article className="max-w-3xl mx-auto px-6 py-20 text-[#2a2a2a]/80 font-body leading-relaxed">
         <h1 className="font-display text-4xl text-[#2a2a2a]">Mentions légales</h1>
 

@@ -66,7 +66,7 @@ export default function StickyMobileBar(_props: Props) {
         href="#contact-form"
         onClick={onDevis}
         aria-label="Ouvrir le formulaire de contact"
-        className="flex-[2] inline-flex items-center justify-center gap-2 rounded-md border border-[#fcfcfc] bg-transparent text-[#fcfcfc] font-semibold py-3"
+        className="flex-[2] inline-flex items-center justify-center gap-2 rounded-md border border-[#f9f7f2] bg-transparent text-[#f9f7f2] font-semibold py-3"
       >
         <Mail className="h-4 w-4" aria-hidden />
         Devis

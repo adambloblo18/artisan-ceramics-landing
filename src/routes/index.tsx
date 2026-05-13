@@ -158,7 +158,7 @@ function Index() {
   return (
     <div id="main" className="min-h-screen bg-[var(--cream)]">
       {/* HEADER */}
-      <header className="sticky top-0 z-50 h-14 md:h-16 border-b border-[var(--border)] bg-[#fcfcfc]/90 backdrop-blur-md">
+      <header className="sticky top-0 z-50 h-14 md:h-16 border-b border-[var(--border)] bg-[#f9f7f2]/90 backdrop-blur-md">
         <div className="mx-auto flex h-full max-w-6xl items-center justify-between px-4 sm:px-6">
           <a href="#main-content" className="h-display text-[15px] sm:text-xl leading-tight text-[var(--anthracite)]">
             Les Céramiques Murales du Vésinet
@@ -203,11 +203,11 @@ function Index() {
             1er Prix du Ravalement Versailles 2025
           </span>
 
-          <h1 className={`font-["Cormorant_Garamond"] text-4xl md:text-6xl lg:text-7xl leading-tight text-center text-[#fcfcfc]`}>
-            Votre crédence céramique,<br />peinte à la main au Vésinet.
+          <h1 className={`font-["Cormorant_Garamond"] font-light text-4xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight text-center text-[#f9f7f2]`}>
+            Votre crédence céramique,<br /><span className="italic font-light">peinte à la main au Vésinet.</span>
           </h1>
 
-          <p className="text-base md:text-lg text-[#fcfcfc]/90 mt-6 max-w-2xl text-center leading-relaxed">
+          <p className="text-base md:text-lg text-[#f9f7f2]/90 mt-6 max-w-2xl text-center leading-relaxed">
             Chaque pièce est dessinée, peinte et cuite à la main pour s'adapter à votre cuisine. 30 ans d'atelier, expédition France entière.
           </p>
 
@@ -223,7 +223,7 @@ function Index() {
             <a
               href="tel:+33670025133"
               onClick={onPhoneCta}
-              className="inline-flex items-center justify-center gap-2 rounded-md border border-[#fcfcfc] bg-transparent px-8 py-4 font-semibold text-[#fcfcfc] hover:bg-[#fcfcfc]/10 transition-colors"
+              className="inline-flex items-center justify-center gap-2 rounded-md border border-[#f9f7f2] bg-transparent px-8 py-4 font-semibold text-[#f9f7f2] hover:bg-[#f9f7f2]/10 transition-colors"
             >
               <Phone className="h-4 w-4" aria-hidden />
               06 70 02 51 33
@@ -239,7 +239,7 @@ function Index() {
       
 
       {/* RÉASSURANCE */}
-      <section className="bg-[#fcfcfc]">
+      <section className="bg-[#f9f7f2]">
         <ul className="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-8 max-w-6xl mx-auto px-6 py-12 md:py-16">
           {reassPillars.map(({ Icon, title, subtitle }) => (
             <li key={title} className="flex flex-col items-center text-center">
@@ -286,7 +286,7 @@ function Index() {
               target="_blank"
               rel="noopener"
               onClick={() => trackEvent("artiste_atelier_click")}
-              className="inline-flex items-center justify-center mt-8 px-6 py-3 rounded-md border border-[#b8860b] text-[#a07308] font-semibold hover:bg-[#b8860b] hover:text-[#fcfcfc] transition-colors"
+              className="inline-flex items-center justify-center mt-8 px-6 py-3 rounded-md border border-[#b8860b] text-[#a07308] font-semibold hover:bg-[#b8860b] hover:text-[#f9f7f2] transition-colors"
             >
               Découvrir mon atelier
             </a>
@@ -296,35 +296,42 @@ function Index() {
 
       {/* GALERIE */}
       <section id="galerie" className="bg-[var(--cream)] py-20 sm:py-28">
-        <div className="mx-auto max-w-7xl px-4 md:px-8">
-          <h2 className="text-center font-['Cormorant_Garamond'] text-4xl md:text-6xl text-[#2a2a2a]">
-            Quelques œuvres récentes
+        <div className="mx-auto max-w-5xl px-4 md:px-8">
+          <div className="flex items-center justify-center gap-4 mb-4">
+            <div className="h-px w-12 bg-[#b8860b]/30" />
+            <span className="font-['DM_Sans'] text-[10px] tracking-[0.4em] uppercase text-[#b8860b] font-medium">Collection</span>
+            <div className="h-px w-12 bg-[#b8860b]/30" />
+          </div>
+          <h2 className="text-center font-['Cormorant_Garamond'] font-light text-3xl md:text-5xl text-[#2a2a2a] tracking-tight">
+            Quelques <span className="italic">œuvres récentes</span>
           </h2>
-          <p className="mt-4 text-center font-['DM_Sans'] text-base text-[#2a2a2a]/60">
+          <p className="mt-4 text-center font-['DM_Sans'] text-sm text-[#2a2a2a]/55">
             Cliquez sur une image pour la voir en grand.
           </p>
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-10">
+          <div className="mt-14 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12">
             {projets.map((p, i) => (
               <figure key={i} className="flex flex-col">
                 <button
                   type="button"
                   onClick={() => openLightbox(i)}
-                  className="block w-full overflow-hidden rounded-md shadow-lg shadow-[#2a2a2a]/15 hover:shadow-2xl hover:scale-[1.02] transition-all duration-500 cursor-zoom-in"
+                  className="group block w-full bg-white p-3 border border-[#e8e2d9] shadow-sm hover:shadow-xl transition-all duration-700 cursor-zoom-in"
                   aria-label={`Agrandir : ${p.alt}`}
                 >
-                  <img
-                    src={p.src}
-                    alt={p.alt}
-                    width={p.width}
-                    height={p.height}
-                    loading={i === 0 ? "eager" : "lazy"}
-                    decoding="async"
-                    className="w-full h-auto block"
-                  />
+                  <div className="overflow-hidden">
+                    <img
+                      src={p.src}
+                      alt={p.alt}
+                      width={p.width}
+                      height={p.height}
+                      loading={i === 0 ? "eager" : "lazy"}
+                      decoding="async"
+                      className="w-full h-auto block transition-transform duration-1000 group-hover:scale-[1.03]"
+                    />
+                  </div>
                 </button>
-                <figcaption className="mt-4">
-                  <p className="font-['Cormorant_Garamond'] text-xl md:text-2xl text-[#2a2a2a]">{p.caption}</p>
-                  <p className="font-['DM_Sans'] text-sm text-[#2a2a2a]/60 mt-1">{p.sublegend}</p>
+                <figcaption className="mt-5 text-center">
+                  <p className="font-['Cormorant_Garamond'] italic text-lg md:text-xl text-[#2a2a2a]">{p.caption}</p>
+                  <p className="font-['DM_Sans'] text-[10px] uppercase tracking-[0.25em] text-[#b8860b]/80 mt-2">{p.sublegend}</p>
                 </figcaption>
               </figure>
             ))}
@@ -399,20 +406,20 @@ function Index() {
           />
         </picture>
         <div className="absolute inset-0 bg-[#2a2a2a]/80" />
-        <div className="relative z-10 max-w-3xl mx-auto text-center px-6 py-24 md:py-32 text-[#fcfcfc]">
+        <div className="relative z-10 max-w-3xl mx-auto text-center px-6 py-24 md:py-32 text-[#f9f7f2]">
           <Trophy className="h-12 w-12 text-[#d4a02a] mx-auto mb-4" aria-hidden />
           <p className="eyebrow text-[#d4a02a]">Reconnaissance officielle</p>
           <h2 className="mt-3 font-display text-3xl sm:text-[44px] leading-tight">
             Premier Prix du Ravalement de la Ville de Versailles 2025
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-[#fcfcfc]/90">
+          <p className="mt-4 text-base sm:text-lg text-[#f9f7f2]/90">
             Catégorie Restitution de Décors, pour une façade florale qui a rendu à une maison son caractère d'origine.
           </p>
           <a
             href="https://www.ceramique-murale.com/frise-ceramique-versailles-prix-ravalement/"
             target="_blank" rel="noopener"
             onClick={() => trackEvent("award_realization_click")}
-            className="mt-6 inline-block text-sm text-[#fcfcfc] underline underline-offset-4"
+            className="mt-6 inline-block text-sm text-[#f9f7f2] underline underline-offset-4"
           >
             Découvrir la réalisation primée →
           </a>
@@ -480,7 +487,7 @@ function Index() {
         </div>
         <div className="mx-auto mt-12 max-w-6xl border-t border-white/10 pt-6 text-center text-xs text-white/50">
           <p>© 2026 Les Céramiques Murales du Vésinet · Atelier du Vésinet</p>
-          <p className="mt-3 text-sm text-[#fcfcfc]/60">
+          <p className="mt-3 text-sm text-[#f9f7f2]/60">
             <Link to="/mentions-legales" className="hover:text-white/80">Mentions légales</Link>
             <span className="mx-2 opacity-50">·</span>
             <Link to="/politique-confidentialite" className="hover:text-white/80">Politique de confidentialité</Link>
