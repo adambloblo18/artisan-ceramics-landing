@@ -40,10 +40,10 @@ const initial: FormData = {
 };
 
 const projets = [
-  { id: "credence", label: "Crédence cuisine", icon: "🍳" },
-  { id: "sdb", label: "Salle de bain", icon: "🛁" },
-  { id: "facade", label: "Façade ou extérieur", icon: "🏛️" },
-  { id: "autre", label: "Autre projet", icon: "✨" },
+  { id: "credence", label: "Crédence cuisine", icon: "" },
+  { id: "sdb", label: "Salle de bain", icon: "" },
+  { id: "facade", label: "Façade ou extérieur", icon: "" },
+  { id: "autre", label: "Autre projet", icon: "" },
 ];
 const tailles = [
   { id: "petit", label: "Petit", desc: "moins de 1 m²" },
