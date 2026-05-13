@@ -46,14 +46,11 @@ export default function ConsentBanner() {
   const refuseAll = () => apply(false, false);
   const saveCustom = () => apply(cats.ad, cats.analytics);
 
-  // Scroll-as-consent : > 30% de la page = accepte implicitement
+  // Scroll-as-consent : tout scroll = accepte implicitement
   useEffect(() => {
     if (!show) return;
     const onScroll = () => {
-      const h = document.documentElement;
-      const max = (h.scrollHeight - h.clientHeight) || 1;
-      const pct = (window.scrollY || h.scrollTop) / max;
-      if (pct > 0.3) {
+      if ((window.scrollY || document.documentElement.scrollTop) > 5) {
         acceptAll();
         window.removeEventListener("scroll", onScroll);
       }
