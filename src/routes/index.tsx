@@ -194,80 +194,60 @@ function Index() {
       </header>
 
       {/* HERO */}
-      <section
-        className="relative h-[100vh] md:h-[85vh] w-full overflow-hidden"
-        data-ab-experiment="hero_headline_v1"
-        data-ab-variant={headlineVariant}
-      >
+      <section className="relative min-h-[95vh] md:min-h-[100vh] w-full overflow-hidden">
         <video
-          autoPlay muted loop playsInline preload="auto"
-          poster="/images/header-poster.jpg"
-          aria-hidden
-          className="absolute inset-0 h-full w-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster="/images/hero-credence.jpg"
+          width="1920"
+          height="1080"
+          aria-label="Crédence en céramique peinte à la main, atelier Le Vésinet"
+          className="absolute inset-0 w-full h-full object-cover"
         >
           <source src="/video/header.webm" type="video/webm" />
           <source src="/video/header.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/40 to-black/20" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#2a2a2a]/85 via-[#2a2a2a]/40 to-transparent" />
 
-        {badgeVariant === "B" && (
-          <button
-            type="button"
-            onClick={onBadgeClick}
-            data-ab-experiment="hero_badge_v1"
-            data-ab-variant={badgeVariant}
-            className="absolute top-0 left-0 right-0 z-20 flex items-center justify-center gap-2 bg-amber-400 px-4 py-2 text-sm font-semibold text-stone-900 hover:bg-amber-300 transition-colors"
-          >
-            <TrophyIcon className="h-4 w-4 shrink-0" />
-            <span className="hidden sm:inline">Premier Prix du Ravalement Versailles 2025 · Découvrir la réalisation primée</span>
-            <span className="sm:hidden">Primé Versailles 2025 · Découvrir</span>
-          </button>
-        )}
+        <div className="relative z-10 mx-auto flex min-h-[95vh] md:min-h-[100vh] max-w-5xl flex-col justify-end items-center pb-20 md:pb-32 px-6">
+          <span className="inline-flex items-center gap-2 rounded-full border border-[#b8860b]/40 bg-[#b8860b]/10 px-4 py-2 text-xs md:text-sm font-medium text-[#b8860b] mb-6">
+            <Trophy className="h-4 w-4" aria-hidden />
+            1er Prix du Ravalement Versailles 2025
+          </span>
 
-        <div className="relative z-10 mx-auto flex h-full max-w-5xl flex-col justify-end px-6 pb-16 sm:pb-24">
-          {badgeVariant === "control" && (
-            <p
-              className="eyebrow text-[var(--gold)]"
-              data-ab-experiment="hero_badge_v1"
-              data-ab-variant={badgeVariant}
-            >
-              Atelier d'art au Vésinet · Prix du Ravalement Versailles 2025
-            </p>
-          )}
-          {badgeVariant === "A" && (
-            <button
-              type="button"
-              onClick={onBadgeClick}
-              data-ab-experiment="hero_badge_v1"
-              data-ab-variant={badgeVariant}
-              className="self-start inline-flex items-center gap-2 rounded-full border border-amber-300/40 bg-amber-300/10 px-4 py-1.5 text-xs sm:text-sm font-medium text-amber-200 hover:bg-amber-300/20 transition-colors"
-            >
-              <TrophyIcon className="h-4 w-4" />
-              <span>1er Prix du Ravalement, Versailles 2025 →</span>
-            </button>
-          )}
-
-          <h1 className="mt-4 max-w-3xl font-display text-[40px] leading-[1.05] text-white sm:text-6xl">
-            {headlineContent.title}
+          <h1 className="font-[\"Cormorant_Garamond\"] text-4xl md:text-6xl lg:text-7xl leading-tight text-center text-[#fcfcfc]">
+            Votre crédence céramique,<br />peinte à la main au Vésinet.
           </h1>
-          <p className="mt-5 max-w-2xl text-[17px] text-white/90 sm:text-[20px]">
-            {headlineContent.subtitle}
+
+          <p className="text-base md:text-lg text-[#fcfcfc]/90 mt-6 max-w-2xl text-center leading-relaxed">
+            Chaque pièce est dessinée, peinte et cuite à la main pour s'adapter à votre cuisine. 30 ans d'atelier, expédition France entière.
           </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a href="#formulaire" onClick={onPrimaryCta} className="btn-primary">
-              {headlineContent.primary}
+
+          <div className="flex flex-col md:flex-row gap-3 mt-8">
+            <a
+              href="#formulaire"
+              onClick={onPrimaryCta}
+              className="inline-flex items-center justify-center gap-2 rounded-md bg-[#b8860b] px-8 py-4 font-semibold text-[#2a2a2a] hover:bg-[#a87708] transition-colors"
+            >
+              Recevoir mon étude personnalisée
+              <ArrowRight className="h-4 w-4" aria-hidden />
             </a>
-            {headlineContent.secondary.kind === "phone" ? (
-              <a href="tel:+33670025133" onClick={onPhoneCta} className="btn-secondary-light">
-                {headlineContent.secondary.label}
-              </a>
-            ) : (
-              <a href="#galerie" onClick={onGalleryCta} className="btn-secondary-light">
-                {headlineContent.secondary.label}
-              </a>
-            )}
+            <a
+              href="tel:+33670025133"
+              onClick={onPhoneCta}
+              className="inline-flex items-center justify-center gap-2 rounded-md border border-[#fcfcfc] bg-transparent px-8 py-4 font-semibold text-[#fcfcfc] hover:bg-[#fcfcfc]/10 transition-colors"
+            >
+              <Phone className="h-4 w-4" aria-hidden />
+              06 70 02 51 33
+            </a>
           </div>
-          <p className="mt-4 text-sm italic text-white/80">Réponse en 20 minutes pendant les heures ouvrées.</p>
+
+          <p className="text-xs md:text-sm text-stone-300 mt-4 text-center">
+            Réponse en 20 minutes pendant les heures ouvrées.
+          </p>
         </div>
       </section>
 
