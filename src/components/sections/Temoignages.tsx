@@ -21,13 +21,13 @@ const projets = [
     meta: "Île-de-France · 2024",
   },
   {
-    img: "/images/galerie-4-frise-art-nouveau.jpeg",
-    webp: "/images/galerie-4-frise-art-nouveau.webp",
-    pill: "Atelier",
-    titre: "Une frise Art Nouveau pour un atelier d'artiste",
+    img: "/images/frise-vaucresson.jpg",
+    webp: "/images/frise-vaucresson.jpg",
+    pill: "Façade",
+    titre: "Une frise florale pour une maison à Vaucresson",
     recit:
-      "Un peintre voulait honorer ses inspirations Art Nouveau dans son propre atelier. Laurence a créé une frise large émaillée, jouant sur les motifs végétaux stylisés caractéristiques du mouvement. Une pièce unique, sortie de l'atelier au Vésinet en 2024.",
-    meta: "Île-de-France · 2024",
+      "Les propriétaires de « La Salvarina » voulaient habiller leur façade en pierre meulière avec des motifs floraux Art Nouveau. Sept carreaux peints à la main, plus le cartouche signé sous la fenêtre, posés dans l'esprit des villas du début du XXᵉ siècle.",
+    meta: "Vaucresson · Façade extérieure",
   },
 ];
 
