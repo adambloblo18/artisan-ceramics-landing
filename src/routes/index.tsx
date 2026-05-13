@@ -116,7 +116,7 @@ function Index() {
       {/* HEADER */}
       <header className="sticky top-0 z-50 h-14 md:h-16 border-b border-[var(--border)] bg-[#fcfcfc]/90 backdrop-blur-md">
         <div className="mx-auto flex h-full max-w-6xl items-center justify-between px-4 sm:px-6">
-          <a href="#main" className="h-display text-[15px] sm:text-xl leading-tight text-[var(--anthracite)]">
+          <a href="#main-content" className="h-display text-[15px] sm:text-xl leading-tight text-[var(--anthracite)]">
             Les Céramiques Murales du Vésinet
           </a>
           <a
