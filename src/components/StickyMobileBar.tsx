@@ -56,6 +56,7 @@ export default function StickyMobileBar(_props: Props) {
       <a
         href={PHONE_HREF}
         onClick={onPhone}
+        aria-label="Appeler Laurence au 06 70 02 51 33"
         className="flex-[3] inline-flex items-center justify-center gap-2 rounded-md bg-[#b8860b] text-[#2a2a2a] font-semibold py-3"
       >
         <Phone className="h-4 w-4" aria-hidden />
@@ -64,6 +65,7 @@ export default function StickyMobileBar(_props: Props) {
       <a
         href="#contact-form"
         onClick={onDevis}
+        aria-label="Ouvrir le formulaire de contact"
         className="flex-[2] inline-flex items-center justify-center gap-2 rounded-md border border-[#fcfcfc] bg-transparent text-[#fcfcfc] font-semibold py-3"
       >
         <Mail className="h-4 w-4" aria-hidden />
