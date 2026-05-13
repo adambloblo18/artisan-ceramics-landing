@@ -68,19 +68,19 @@ export default function ConsentBanner() {
     >
       {!detail ? (
         <>
-          <p className="text-sm text-[var(--anthracite)]">
-            Nous utilisons des cookies pour mesurer l'audience et améliorer votre expérience. Vous pouvez accepter, refuser ou personnaliser. En continuant à naviguer, vous acceptez leur dépôt.
+          <p className="text-xs leading-snug text-[var(--anthracite)]">
+            Cookies pour mesurer l'audience. En naviguant, vous acceptez leur dépôt.
           </p>
-          <div className="mt-4 grid grid-cols-2 gap-2">
+          <div className="mt-2 grid grid-cols-2 gap-1.5">
             <button
               onClick={refuseAll}
-              className="border-[1.5px] border-[var(--anthracite)] px-4 py-3 text-sm font-semibold text-[var(--anthracite)] transition hover:bg-[var(--anthracite)] hover:text-white"
+              className="border border-[var(--anthracite)] px-2 py-1.5 text-xs font-semibold text-[var(--anthracite)] transition hover:bg-[var(--anthracite)] hover:text-white"
             >
               Refuser
             </button>
             <button
               onClick={acceptAll}
-              className="border-[1.5px] px-4 py-3 text-sm font-semibold transition"
+              className="border px-2 py-1.5 text-xs font-semibold transition"
               style={{ borderColor: "var(--sage)", color: "var(--sage)" }}
               onMouseEnter={(e) => { e.currentTarget.style.background = "var(--sage)"; e.currentTarget.style.color = "#fff"; }}
               onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "var(--sage)"; }}
@@ -88,8 +88,8 @@ export default function ConsentBanner() {
               Tout accepter
             </button>
           </div>
-          <button onClick={() => setDetail(true)} className="mt-3 block w-full text-center text-xs text-[var(--muted-text)] underline">
-            Personnaliser mes choix
+          <button onClick={() => setDetail(true)} className="mt-1.5 block w-full text-center text-[10px] text-[var(--muted-text)] underline">
+            Personnaliser
           </button>
         </>
       ) : (
