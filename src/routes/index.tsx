@@ -235,7 +235,7 @@ function Index() {
               target="_blank"
               rel="noopener"
               onClick={() => trackEvent("artiste_atelier_click")}
-              className="inline-flex items-center justify-center mt-8 px-6 py-3 rounded-md border border-[#b8860b] text-[#b8860b] font-semibold hover:bg-[#b8860b] hover:text-[#fcfcfc] transition-colors"
+              className="inline-flex items-center justify-center mt-8 px-6 py-3 rounded-md border border-[#b8860b] text-[#a07308] font-semibold hover:bg-[#b8860b] hover:text-[#fcfcfc] transition-colors"
             >
               Découvrir mon atelier
             </a>
