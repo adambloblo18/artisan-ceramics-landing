@@ -175,7 +175,11 @@ function Index() {
       </header>
 
       {/* HERO */}
-      <section className="relative h-[100vh] md:h-[85vh] w-full overflow-hidden">
+      <section
+        className="relative h-[100vh] md:h-[85vh] w-full overflow-hidden"
+        data-ab-experiment="hero_headline_v1"
+        data-ab-variant={headlineVariant}
+      >
         <video
           autoPlay muted loop playsInline preload="auto"
           poster="/images/header-poster.jpg"
@@ -186,19 +190,63 @@ function Index() {
           <source src="/video/header.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/40 to-black/20" />
+
+        {badgeVariant === "B" && (
+          <button
+            type="button"
+            onClick={onBadgeClick}
+            data-ab-experiment="hero_badge_v1"
+            data-ab-variant={badgeVariant}
+            className="absolute top-0 left-0 right-0 z-20 flex items-center justify-center gap-2 bg-amber-400 px-4 py-2 text-sm font-semibold text-stone-900 hover:bg-amber-300 transition-colors"
+          >
+            <TrophyIcon className="h-4 w-4 shrink-0" />
+            <span className="hidden sm:inline">Premier Prix du Ravalement Versailles 2025 · Découvrir la réalisation primée</span>
+            <span className="sm:hidden">Primé Versailles 2025 · Découvrir</span>
+          </button>
+        )}
+
         <div className="relative z-10 mx-auto flex h-full max-w-5xl flex-col justify-end px-6 pb-16 sm:pb-24">
-          <p className="eyebrow text-[var(--gold)]">Atelier d'art au Vésinet · Prix du Ravalement Versailles 2025</p>
+          {badgeVariant === "control" && (
+            <p
+              className="eyebrow text-[var(--gold)]"
+              data-ab-experiment="hero_badge_v1"
+              data-ab-variant={badgeVariant}
+            >
+              Atelier d'art au Vésinet · Prix du Ravalement Versailles 2025
+            </p>
+          )}
+          {badgeVariant === "A" && (
+            <button
+              type="button"
+              onClick={onBadgeClick}
+              data-ab-experiment="hero_badge_v1"
+              data-ab-variant={badgeVariant}
+              className="self-start inline-flex items-center gap-2 rounded-full border border-amber-300/40 bg-amber-300/10 px-4 py-1.5 text-xs sm:text-sm font-medium text-amber-200 hover:bg-amber-300/20 transition-colors"
+            >
+              <TrophyIcon className="h-4 w-4" />
+              <span>1er Prix du Ravalement, Versailles 2025 →</span>
+            </button>
+          )}
+
           <h1 className="mt-4 max-w-3xl font-display text-[40px] leading-[1.05] text-white sm:text-6xl">
-            Crédences en céramique, peintes à la main.
+            {headlineContent.title}
           </h1>
           <p className="mt-5 max-w-2xl text-[17px] text-white/90 sm:text-[20px]">
-            Faïence émaillée Art Nouveau, créée sur mesure dans notre atelier du Vésinet. Sur rendez-vous, livraison France entière.
+            {headlineContent.subtitle}
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a href="#formulaire" className="btn-primary">Recevoir mon étude personnalisée</a>
-            <a href="tel:+33670025133" onClick={onPhoneDesktop} className="btn-secondary-light">
-              📞 Appeler Laurence
+            <a href="#formulaire" onClick={onPrimaryCta} className="btn-primary">
+              {headlineContent.primary}
             </a>
+            {headlineContent.secondary.kind === "phone" ? (
+              <a href="tel:+33670025133" onClick={onPhoneCta} className="btn-secondary-light">
+                {headlineContent.secondary.label}
+              </a>
+            ) : (
+              <a href="#galerie" onClick={onGalleryCta} className="btn-secondary-light">
+                {headlineContent.secondary.label}
+              </a>
+            )}
           </div>
           <p className="mt-4 text-sm italic text-white/80">Réponse en 20 minutes pendant les heures ouvrées.</p>
         </div>
