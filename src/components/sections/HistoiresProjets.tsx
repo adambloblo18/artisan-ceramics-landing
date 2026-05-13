@@ -21,12 +21,12 @@ const histoires = [
     meta: "Frise salle de bain · 1,5 m² · Livré en 7 semaines",
   },
   {
-    img: "/images/galerie-4-frise-art-nouveau.jpeg",
-    webp: "/images/galerie-4-frise-art-nouveau.webp",
-    titre: "Une fresque pour un atelier d'artiste",
+    img: "/images/frise-vaucresson.jpg",
+    webp: "/images/frise-vaucresson.jpg",
+    titre: "Une frise florale pour une maison à Vaucresson",
     histoire:
-      "Un peintre nous a confié l'habillage de son atelier parisien. Frise Art Nouveau large, motifs floraux inspirés de Mucha. 5 m² de céramique émaillée, livrés numérotés pour une pose précise.",
-    meta: "Frise atelier · 5 m² · Livré en 11 semaines",
+      "Les propriétaires de « La Salvarina » voulaient habiller leur façade en pierre meulière avec des motifs floraux Art Nouveau. Sept carreaux peints à la main, plus le cartouche signé sous la fenêtre, posés dans l'esprit des villas du début du XXᵉ siècle.",
+    meta: "Frise de façade · Vaucresson · Pose extérieure",
   },
 ];
 
