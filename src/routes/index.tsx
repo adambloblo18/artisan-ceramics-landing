@@ -6,6 +6,7 @@ import StickyMobileBar from "@/components/StickyMobileBar";
 import MultiStepForm from "@/components/MultiStepForm";
 import Faq from "@/components/Faq";
 import VisualiseurSection from "@/components/sections/VisualiseurSection";
+import HistoiresProjets from "@/components/sections/HistoiresProjets";
 import TrustStrip from "@/components/sections/TrustStrip";
 import { trackEvent } from "@/lib/analytics";
 import { Trophy, ArrowRight, Phone, Hand, Landmark, MapPin, Truck } from "lucide-react";
@@ -287,6 +288,8 @@ function Index() {
           </ol>
         </div>
       </section>
+
+      <HistoiresProjets />
 
       <VisualiseurSection />
 
