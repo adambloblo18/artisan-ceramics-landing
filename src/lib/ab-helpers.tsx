@@ -34,13 +34,14 @@ export function useABVariant(
   experimentKey: string,
   variants: VariantKey[],
 ): VariantKey {
-  const [variant, setVariant] = useState<VariantKey>(() =>
-    typeof window === "undefined"
-      ? variants[0]
-      : readOrAssignLocal(experimentKey, variants),
-  );
+  // Always start with variants[0] so SSR and first client render match.
+  const [variant, setVariant] = useState<VariantKey>(variants[0]);
 
   useEffect(() => {
+    // Resolve the real variant on the client (localStorage / random).
+    const local = readOrAssignLocal(experimentKey, variants);
+    setVariant((prev) => (prev === local ? prev : local));
+
     let cancelled = false;
 
     const resolve = () => {
