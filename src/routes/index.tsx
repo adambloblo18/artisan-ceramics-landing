@@ -253,20 +253,25 @@ function Index() {
 
       {/* L'ARTISTE */}
       <section className="bg-white">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto px-6 py-20 md:py-24">
-          <picture>
-            <source type="image/webp" srcSet="/images/portrait-laurence.webp" />
-            <img
-              src={LAURENCE_IMG}
-              alt="Laurence Brecher, céramiste, dans son atelier du Vésinet"
-              loading="lazy"
-              decoding="async"
-              width={600}
-              height={800}
-              className="w-full max-h-[600px] object-cover rounded-md shadow-lg"
-            />
-          </picture>
-          <div>
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center max-w-6xl mx-auto px-6 py-24 md:py-32">
+          <div className="md:col-span-5">
+            <picture>
+              <source type="image/webp" srcSet="/images/portrait-laurence.webp" />
+              <img
+                src={LAURENCE_IMG}
+                alt="Laurence Brecher, céramiste, dans son atelier du Vésinet"
+                loading="lazy"
+                decoding="async"
+                width={800}
+                height={1000}
+                className="w-full max-h-[750px] object-cover rounded-md shadow-2xl shadow-[#2a2a2a]/20"
+              />
+            </picture>
+            <blockquote className="font-['Cormorant_Garamond'] italic text-xl md:text-2xl text-[#2a2a2a]/70 mt-6 text-center md:text-left">
+              « La main porte ce qu'aucune machine ne saura jamais reproduire. »
+            </blockquote>
+          </div>
+          <div className="md:col-span-7">
             <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-5xl text-[#2a2a2a] leading-tight">
               Laurence Brecher,<br />30 ans à la pince
             </h2>
