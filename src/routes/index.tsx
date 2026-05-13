@@ -178,40 +178,16 @@ function Index() {
       </section>
 
       {/* RÉASSURANCE */}
-      <section
-        className="bg-[var(--cream)] py-8"
-        data-ab-experiment="reassurance_icons_v1"
-        data-ab-variant={reassVariant}
-      >
-        <div className="mx-auto max-w-6xl px-4">
-          <ul className="flex snap-x gap-6 overflow-x-auto md:grid md:grid-cols-5 md:gap-0 md:overflow-visible md:divide-x md:divide-[var(--border)]">
-            {reassVariant === "A"
-              ? reassSvg.map((r) => (
-                  <li
-                    key={r.label}
-                    className="flex min-w-[220px] snap-start flex-col items-center gap-2 px-4 text-center md:min-w-0"
-                  >
-                    <ReassIconCircle>{r.node}</ReassIconCircle>
-                    <span className="text-sm font-medium text-[var(--anthracite)]">
-                      {r.label}
-                    </span>
-                  </li>
-                ))
-              : reassEmoji.map((r) => (
-                  <li
-                    key={r.label}
-                    className="flex min-w-[220px] snap-start flex-col items-center gap-2 px-4 text-center md:min-w-0"
-                  >
-                    <span className="text-2xl text-[var(--gold)]" aria-hidden>
-                      {r.icon}
-                    </span>
-                    <span className="text-sm font-medium text-[var(--anthracite)]">
-                      {r.label}
-                    </span>
-                  </li>
-                ))}
-          </ul>
-        </div>
+      <section className="bg-[#fcfcfc]">
+        <ul className="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-8 max-w-6xl mx-auto px-6 py-12 md:py-16">
+          {reassPillars.map(({ Icon, title, subtitle }) => (
+            <li key={title} className="flex flex-col items-center text-center">
+              <Icon className="h-7 w-7 text-[#b8860b]" aria-hidden />
+              <h3 className="font-['Cormorant_Garamond'] text-lg md:text-xl text-[#2a2a2a] mt-3">{title}</h3>
+              <p className="font-['DM_Sans'] text-sm text-[#2a2a2a]/70 mt-1">{subtitle}</p>
+            </li>
+          ))}
+        </ul>
       </section>
 
       {/* L'ARTISTE */}
