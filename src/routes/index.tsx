@@ -282,7 +282,7 @@ function Index() {
               Quand vous commandez une crédence, c'est elle qui prépare la terre, peint chaque carreau à la pince, cuit deux fois à 1020°C. Aucun intermédiaire, aucune machine, juste sa main.
             </p>
             <a
-              href="https://ceramique-murale.com/latelier/"
+              href="https://www.ceramique-murale.com/laurence-brecher-creatrice-de-ceramique-murale-decorative/"
               target="_blank"
               rel="noopener"
               onClick={() => trackEvent("artiste_atelier_click")}
