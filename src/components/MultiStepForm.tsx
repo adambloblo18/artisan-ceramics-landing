@@ -5,9 +5,23 @@ import { z } from "zod";
 import { ArrowRight, Loader2, Check } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
 
-const REDIRECT_URL =
-  "https://ceramique-murale.com/merci-pour-votre-demande-de-projet/";
+const REDIRECT_BASE =
+  "https://www.ceramique-murale.com/merci-pour-votre-demande-de-projet/";
 const ENDPOINT = "https://formsubmit.co/ceramiquemurale@gmail.com";
+
+function buildRedirectUrl(values: { nom: string; telephone: string }) {
+  const parts = values.nom.trim().split(/\s+/);
+  const fn = parts[0] ?? "";
+  const ln = parts.slice(1).join(" ");
+  const params = new URLSearchParams({
+    phone: values.telephone,
+    fn,
+    ln,
+    value: "500",
+    tx: `LEAD-${Date.now()}`,
+  });
+  return `${REDIRECT_BASE}?${params.toString()}`;
+}
 
 const phoneRegex =
   /^(?:(?:\+|00)33[\s.-]?(?:\(0\)[\s.-]?)?|0)[1-9](?:(?:[\s.-]?\d{2}){4})$/;
@@ -65,7 +79,8 @@ export default function MultiStepForm() {
         : "Nouveau lead [Particulier]";
 
     const fd = new window.FormData();
-    fd.append("_next", REDIRECT_URL);
+    const redirectUrl = buildRedirectUrl(values);
+    fd.append("_next", redirectUrl);
     fd.append("_captcha", "false");
     fd.append("_subject", subject);
     fd.append("nom", values.nom);
@@ -77,7 +92,7 @@ export default function MultiStepForm() {
       const res = await fetch(ENDPOINT, { method: "POST", body: fd });
       if (!res.ok) throw new Error("submit failed");
       trackEvent("form_submitted", { type: values.type });
-      setSubmitted(true);
+      window.location.href = redirectUrl;
     } catch {
       setSubmitError(
         "Une erreur est survenue, merci de réessayer ou d'appeler Laurence au 06 70 02 51 33.",
