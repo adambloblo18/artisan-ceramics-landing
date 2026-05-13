@@ -143,11 +143,13 @@ function Index() {
 
   const headlineVariant = useABVariant("hero_headline_v1", ["control", "A", "B", "C"]);
   const badgeVariant = useABVariant("hero_badge_v1", ["control", "A", "B"]);
+  const reassVariant = useABVariant("reassurance_icons_v1", ["control", "A"]);
 
   useEffect(() => {
     trackExposure("hero_headline_v1", headlineVariant);
     trackExposure("hero_badge_v1", badgeVariant);
-  }, [headlineVariant, badgeVariant]);
+    trackExposure("reassurance_icons_v1", reassVariant);
+  }, [headlineVariant, badgeVariant, reassVariant]);
 
   const scrollToId = (id: string) => {
     const el = document.getElementById(id);
