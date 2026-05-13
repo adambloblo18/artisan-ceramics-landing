@@ -12,6 +12,7 @@ import Temoignages from "@/components/sections/Temoignages";
 import Prescripteurs from "@/components/sections/Prescripteurs";
 import TrustStrip from "@/components/sections/TrustStrip";
 import Showcase from "@/components/sections/Showcase";
+import LeDetail from "@/components/sections/LeDetail";
 import { trackEvent } from "@/lib/analytics";
 import { Trophy, ArrowRight, Phone, Hand, Landmark, MapPin, Truck } from "lucide-react";
 
@@ -325,6 +326,8 @@ function Index() {
           </div>
         </div>
       </section>
+
+      <LeDetail />
 
       {/* PROCESS */}
       <section className="bg-white py-20 sm:py-28">
