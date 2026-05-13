@@ -53,6 +53,8 @@ export default function HistoiresProjets() {
                   src={h.img}
                   alt={h.titre}
                   loading="lazy"
+                  width={800}
+                  height={1000}
                   className="aspect-[4/5] w-full object-cover"
                 />
               </picture>

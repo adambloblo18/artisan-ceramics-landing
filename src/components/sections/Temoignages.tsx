@@ -58,6 +58,8 @@ export default function Temoignages() {
                     src={p.img}
                     alt={p.titre}
                     loading="lazy"
+                    width={800}
+                    height={1000}
                     className="aspect-[4/5] w-full object-cover rounded-md shadow-xl shadow-[#2a2a2a]/15 md:max-h-[500px]"
                   />
                 </picture>
