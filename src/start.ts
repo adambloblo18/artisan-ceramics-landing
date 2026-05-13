@@ -1,6 +1,10 @@
 import { createStart, createMiddleware } from "@tanstack/react-start";
 
 import { renderErrorPage } from "./lib/error-page";
+import { initPostHog } from "./lib/posthog";
+
+// Client-only init (no-op on the server).
+initPostHog();
 
 const errorMiddleware = createMiddleware().server(async ({ next }) => {
   try {
