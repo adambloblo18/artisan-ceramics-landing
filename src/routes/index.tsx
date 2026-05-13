@@ -133,6 +133,7 @@ function Index() {
         </div>
       </header>
 
+      <main id="main-content">
       {/* HERO */}
       <section className="relative min-h-[95vh] md:min-h-[100vh] w-full overflow-hidden">
         <video
