@@ -460,7 +460,7 @@ function Index() {
           <button
             type="button"
             onClick={(e) => { e.stopPropagation(); nextLightbox(); }}
-            aria-label="Suivant"
+            aria-label="Photo suivante"
             className="absolute right-4 top-1/2 -translate-y-1/2 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white text-2xl hover:bg-white/20"
           >
             ›
