@@ -67,7 +67,7 @@ export default function ConsentBanner() {
     <div
       role="dialog"
       aria-label="Consentement aux cookies"
-      className="fixed inset-x-0 bottom-3 z-[70] mx-auto w-[calc(100%-1.5rem)] max-w-[420px] border border-[var(--border)] bg-white p-3 text-xs shadow-[0_8px_30px_rgba(0,0,0,0.12)]"
+      className="fixed bottom-3 right-3 z-[70] w-[calc(100%-1.5rem)] max-w-[420px] border border-[var(--border)] bg-white p-3 text-xs shadow-[0_8px_30px_rgba(0,0,0,0.12)]"
     >
       {!detail ? (
         <>
