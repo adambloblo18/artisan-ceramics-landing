@@ -126,27 +126,46 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1, maximum-scale=5" },
       { title: "Crédence céramique sur mesure peinte main, Atelier Le Vésinet · 1er Prix Versailles 2025" },
+      { name: "theme-color", content: "#2a2a2a" },
       {
         name: "description",
         content:
-          "Crédence céramique peinte à la main au Vésinet. Chaque pièce est unique, dessinée pour votre cuisine. 1er Prix du Ravalement Versailles 2025. Devis sous 20 minutes.",
+          "Crédence céramique peinte à la main au Vésinet. Chaque pièce est unique, dessinée pour votre cuisine. 1er Prix Versailles 2025. Devis sous 20 minutes.",
       },
-      { name: "theme-color", content: "#b8860b" },
+      // Open Graph
+      { property: "og:type", content: "website" },
       { property: "og:title", content: "Crédence céramique sur mesure peinte main · Atelier Le Vésinet" },
       {
         property: "og:description",
         content:
           "Crédence céramique peinte à la main. 30 ans d'atelier, 1er Prix Versailles 2025. Devis gratuit sous 20 minutes.",
       },
-      { property: "og:image", content: "https://credence-ceramique.lovable.app/images/hero-credence.jpg" },
+      { property: "og:image", content: "https://credence-ceramique.lovable.app/images/og-image.jpg" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: "Crédence céramique peinte à la main, atelier Le Vésinet" },
+      { property: "og:url", content: "https://credence-ceramique.lovable.app/" },
       { property: "og:locale", content: "fr_FR" },
-      { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "Atelier Le Vésinet" },
+      // Twitter
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Crédence céramique sur mesure peinte main · Atelier Le Vésinet" },
-      { name: "twitter:image", content: "https://credence-ceramique.lovable.app/images/hero-credence.jpg" },
+      {
+        name: "twitter:description",
+        content: "Crédence céramique peinte à la main. 30 ans d'atelier, 1er Prix Versailles 2025.",
+      },
+      { name: "twitter:image", content: "https://credence-ceramique.lovable.app/images/og-image.jpg" },
+      // Robots & language
+      { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
+      { httpEquiv: "content-language", content: "fr-FR" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
+      { rel: "icon", href: "/favicon.ico", sizes: "any" },
+      { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32x32.png" },
+      { rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon-16x16.png" },
+      { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
+      { rel: "manifest", href: "/site.webmanifest" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "preconnect", href: "https://www.googletagmanager.com" },
