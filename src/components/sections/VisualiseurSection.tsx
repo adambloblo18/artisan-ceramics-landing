@@ -11,7 +11,7 @@ export default function VisualiseurSection() {
   return (
     <section className="bg-[#2a2a2a] py-20 md:py-24 text-[#fcfcfc]">
       <div className="max-w-5xl mx-auto px-6 text-center">
-        <div className="inline-flex items-center gap-2 rounded-full border border-[#b8860b]/40 bg-[#b8860b]/10 px-4 py-2 text-xs md:text-sm font-medium text-[#b8860b]">
+        <div className="inline-flex items-center gap-2 rounded-full border border-[#b8860b]/40 bg-[#b8860b]/10 px-4 py-2 text-xs md:text-sm font-medium text-[#d4a02a]">
           <Sparkles className="h-4 w-4" aria-hidden />
           Outil exclusif
         </div>
