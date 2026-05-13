@@ -42,10 +42,38 @@ const PRIX_BG = "/images/prix.jpg";
 const LAURENCE_IMG = "/images/portrait-laurence.jpg";
 
 const projets = [
-  { src: "/images/cuisine-credence-fleurs.png", alt: "Motifs floraux sur tons verts, crédence cuisine", caption: "Motifs floraux sur tons verts · Île-de-France" },
-  { src: "/images/galerie-2-dessin-floral.jpg", alt: "Crédence céramique dessin floral peint à la main", caption: "Composition florale unique · Maison de famille" },
-  { src: "/images/galerie-3-frise-pivoines.jpg", alt: "Crédence autour d'un lavabo, frise pivoines bleues", caption: "Frise pivoines bleues · Salle de bain" },
-  { src: "/images/galerie-4-frise-art-nouveau.jpeg", alt: "Frise large céramique émaillée Art Nouveau", caption: "Frise Art Nouveau · Atelier d'artiste" },
+  {
+    src: "/images/cuisine-credence-fleurs.png",
+    alt: "Motifs floraux sur tons verts, crédence cuisine",
+    caption: "Motifs floraux sur tons verts",
+    sublegend: "Île-de-France · 2025 · 2,8 m²",
+    width: 1024,
+    height: 921,
+  },
+  {
+    src: "/images/galerie-2-dessin-floral.jpg",
+    alt: "Crédence céramique dessin floral peint à la main",
+    caption: "Composition florale unique",
+    sublegend: "Maison de famille · 2024",
+    width: 1920,
+    height: 1280,
+  },
+  {
+    src: "/images/galerie-3-frise-pivoines.jpg",
+    alt: "Crédence autour d'un lavabo, frise pivoines bleues",
+    caption: "Frise pivoines bleues",
+    sublegend: "Salle de bain · Île-de-France · 2024",
+    width: 1024,
+    height: 758,
+  },
+  {
+    src: "/images/frise-vaucresson.jpg",
+    alt: "Frise florale céramique sur façade en pierre meulière, maison à Vaucresson",
+    caption: "Frise florale de façade",
+    sublegend: "Maison « La Salvarina » · Vaucresson",
+    width: 1280,
+    height: 1707,
+  },
 ];
 
 const reassPillars = [
@@ -250,26 +278,36 @@ function Index() {
 
       {/* GALERIE */}
       <section id="galerie" className="bg-[var(--cream)] py-20 sm:py-28">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <h2 className="text-center font-display text-3xl italic sm:text-[44px]">Quelques crédences réalisées.</h2>
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-7xl mx-auto">
+        <div className="mx-auto max-w-7xl px-4 md:px-8">
+          <h2 className="text-center font-['Cormorant_Garamond'] text-4xl md:text-6xl text-[#2a2a2a]">
+            Quelques œuvres récentes
+          </h2>
+          <p className="mt-4 text-center font-['DM_Sans'] text-base text-[#2a2a2a]/60">
+            Cliquez sur une image pour la voir en grand.
+          </p>
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-10">
             {projets.map((p, i) => (
-              <figure key={i} className="overflow-hidden bg-white">
+              <figure key={i} className="flex flex-col">
                 <button
                   type="button"
                   onClick={() => openLightbox(i)}
-                  className="block w-full overflow-hidden cursor-zoom-in"
+                  className="block w-full overflow-hidden rounded-md shadow-lg shadow-[#2a2a2a]/15 hover:shadow-2xl hover:scale-[1.02] transition-all duration-500 cursor-zoom-in"
                   aria-label={`Agrandir : ${p.alt}`}
                 >
                   <img
-                    src={p.src} alt={p.alt}
-                    width={800} height={1000}
-                    loading={i === 0 ? "eager" : "lazy"} decoding="async"
-                    style={{ filter: "brightness(1.12) saturate(1.05)" }}
-                    className="aspect-[4/5] w-full object-cover transition-transform duration-[400ms] ease-out hover:scale-[1.05]"
+                    src={p.src}
+                    alt={p.alt}
+                    width={p.width}
+                    height={p.height}
+                    loading={i === 0 ? "eager" : "lazy"}
+                    decoding="async"
+                    className="w-full h-auto block"
                   />
                 </button>
-                <figcaption className="p-4 text-sm italic text-[var(--muted-text)]">{p.caption}</figcaption>
+                <figcaption className="mt-4">
+                  <p className="font-['Cormorant_Garamond'] text-xl md:text-2xl text-[#2a2a2a]">{p.caption}</p>
+                  <p className="font-['DM_Sans'] text-sm text-[#2a2a2a]/60 mt-1">{p.sublegend}</p>
+                </figcaption>
               </figure>
             ))}
           </div>
@@ -481,14 +519,15 @@ function Index() {
             src={lightbox.src}
             alt={lightbox.alt}
             onClick={(e) => e.stopPropagation()}
-            className="max-h-[80vh] max-w-[92vw] object-contain"
+            className="max-h-[95vh] max-w-[95vw] object-contain"
           />
-          <p
+          <div
             onClick={(e) => e.stopPropagation()}
-            className="font-['Cormorant_Garamond'] text-xl text-white mt-4 text-center px-4"
+            className="mt-4 text-center px-4"
           >
-            {lightbox.caption}
-          </p>
+            <p className="font-['Cormorant_Garamond'] text-2xl text-white">{lightbox.caption}</p>
+            <p className="font-['Cormorant_Garamond'] text-base text-white/70 mt-1">{lightbox.sublegend}</p>
+          </div>
         </div>
       )}
     </div>
