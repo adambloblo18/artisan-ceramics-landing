@@ -444,7 +444,7 @@ function Index() {
           <button
             type="button"
             onClick={(e) => { e.stopPropagation(); closeLightbox(); }}
-            aria-label="Fermer"
+            aria-label="Fermer la galerie"
             className="absolute top-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white text-2xl hover:bg-white/20"
           >
             ×
