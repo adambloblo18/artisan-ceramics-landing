@@ -154,7 +154,7 @@ function Index() {
         <div className="absolute inset-0 bg-gradient-to-t from-[#2a2a2a]/85 via-[#2a2a2a]/40 to-transparent" />
 
         <div className="relative z-10 mx-auto flex min-h-[95vh] md:min-h-[100vh] max-w-5xl flex-col justify-end items-center pb-20 md:pb-32 px-6">
-          <span className="inline-flex items-center gap-2 rounded-full border border-[#b8860b]/40 bg-[#b8860b]/10 px-4 py-2 text-xs md:text-sm font-medium text-[#b8860b] mb-6">
+          <span className="inline-flex items-center gap-2 rounded-full border border-[#b8860b]/40 bg-[#b8860b]/10 px-4 py-2 text-xs md:text-sm font-medium text-[#d4a02a] mb-6">
             <Trophy className="h-4 w-4" aria-hidden />
             1er Prix du Ravalement Versailles 2025
           </span>
