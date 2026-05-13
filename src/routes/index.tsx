@@ -354,7 +354,7 @@ function Index() {
       {/* (L'ARTISTE déplacé après la réassurance) */}
 
       {/* FORMULAIRE */}
-      <section id="formulaire" className="bg-[var(--cream)] py-20 sm:py-28">
+      <section id="formulaire" className="bg-[var(--cream)] py-20 sm:py-28 pb-24 md:pb-28">
         <div className="mx-auto max-w-3xl px-4 sm:px-6">
           <h2 className="text-center font-display text-3xl italic sm:text-[44px]">Parlons de votre projet.</h2>
           <p className="mt-3 text-center text-[var(--muted-text)]">
