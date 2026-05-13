@@ -46,6 +46,8 @@ export default function LeDetail() {
                 alt={d.alt}
                 loading="lazy"
                 decoding="async"
+                width={800}
+                height={800}
                 className="aspect-square w-full object-cover rounded-md shadow-md shadow-[#2a2a2a]/10"
                 style={{ objectPosition: "center" }}
               />
