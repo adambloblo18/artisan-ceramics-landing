@@ -27,7 +27,7 @@ export default function FloatingPhoneDesktop() {
         className="group relative h-16 w-16 rounded-full bg-[#b8860b] shadow-2xl shadow-[#b8860b]/30 flex items-center justify-center hover:scale-105 transition-transform animate-[subtle-pulse_3s_ease-in-out_infinite]"
       >
         <Phone className="h-7 w-7 text-[#2a2a2a]" />
-        <span className="pointer-events-none absolute right-full mr-3 top-1/2 -translate-y-1/2 bg-[#2a2a2a] text-[#fcfcfc] text-sm px-3 py-2 rounded-md whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
+        <span className="pointer-events-none absolute right-full mr-3 top-1/2 -translate-y-1/2 bg-[#2a2a2a] text-[#f9f7f2] text-sm px-3 py-2 rounded-md whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
           Appeler Laurence · 06 70 02 51 33
         </span>
       </a>
