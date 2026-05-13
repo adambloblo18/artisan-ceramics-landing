@@ -38,6 +38,9 @@ export default function ConsentBanner() {
       ad_personalization: ad ? "granted" : "denied",
       analytics_storage: analytics ? "granted" : "denied",
     });
+    if (typeof window !== 'undefined' && (window as any).posthog) {
+      (window as any).posthog.opt_in_capturing();
+    }
     setCookie(`ad=${ad ? 1 : 0};an=${analytics ? 1 : 0}`);
     setShow(false);
   };
