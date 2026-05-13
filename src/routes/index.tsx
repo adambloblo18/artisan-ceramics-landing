@@ -6,7 +6,7 @@ import StickyMobileBar from "@/components/StickyMobileBar";
 import MultiStepForm from "@/components/MultiStepForm";
 import Faq from "@/components/Faq";
 import { useABVariant, trackExposure, trackConversion } from "@/lib/ab-helpers";
-import { Trophy, ArrowRight, Phone } from "lucide-react";
+import { Trophy, ArrowRight, Phone, Hand, Landmark, MapPin, Truck } from "lucide-react";
 
 const trackEvent = trackConversion;
 
