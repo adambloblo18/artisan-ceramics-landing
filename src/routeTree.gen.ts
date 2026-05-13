@@ -9,8 +9,27 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as PolitiqueConfidentialiteRouteImport } from './routes/politique-confidentialite'
+import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
+import { Route as CgvRouteImport } from './routes/cgv'
 import { Route as IndexRouteImport } from './routes/index'
 
+const PolitiqueConfidentialiteRoute =
+  PolitiqueConfidentialiteRouteImport.update({
+    id: '/politique-confidentialite',
+    path: '/politique-confidentialite',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const MentionsLegalesRoute = MentionsLegalesRouteImport.update({
+  id: '/mentions-legales',
+  path: '/mentions-legales',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CgvRoute = CgvRouteImport.update({
+  id: '/cgv',
+  path: '/cgv',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +38,66 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/cgv': typeof CgvRoute
+  '/mentions-legales': typeof MentionsLegalesRoute
+  '/politique-confidentialite': typeof PolitiqueConfidentialiteRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/cgv': typeof CgvRoute
+  '/mentions-legales': typeof MentionsLegalesRoute
+  '/politique-confidentialite': typeof PolitiqueConfidentialiteRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/cgv': typeof CgvRoute
+  '/mentions-legales': typeof MentionsLegalesRoute
+  '/politique-confidentialite': typeof PolitiqueConfidentialiteRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/cgv' | '/mentions-legales' | '/politique-confidentialite'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/cgv' | '/mentions-legales' | '/politique-confidentialite'
+  id:
+    | '__root__'
+    | '/'
+    | '/cgv'
+    | '/mentions-legales'
+    | '/politique-confidentialite'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CgvRoute: typeof CgvRoute
+  MentionsLegalesRoute: typeof MentionsLegalesRoute
+  PolitiqueConfidentialiteRoute: typeof PolitiqueConfidentialiteRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/politique-confidentialite': {
+      id: '/politique-confidentialite'
+      path: '/politique-confidentialite'
+      fullPath: '/politique-confidentialite'
+      preLoaderRoute: typeof PolitiqueConfidentialiteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mentions-legales': {
+      id: '/mentions-legales'
+      path: '/mentions-legales'
+      fullPath: '/mentions-legales'
+      preLoaderRoute: typeof MentionsLegalesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cgv': {
+      id: '/cgv'
+      path: '/cgv'
+      fullPath: '/cgv'
+      preLoaderRoute: typeof CgvRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,6 +110,9 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CgvRoute: CgvRoute,
+  MentionsLegalesRoute: MentionsLegalesRoute,
+  PolitiqueConfidentialiteRoute: PolitiqueConfidentialiteRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
