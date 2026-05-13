@@ -35,7 +35,7 @@ const TrophyIcon = ({ className = "h-4 w-4" }: { className?: string }) => (
 
 const HERO_IMG = "/images/cuisine-verte.jpg";
 const PRIX_BG = "/images/prix.jpg";
-const LAURENCE_IMG = "/images/laurence.jpeg";
+const LAURENCE_IMG = "/images/portrait-laurence.jpg";
 
 const projets = [
   { src: "/images/galerie-1-cuisine-verte.jpg", alt: "Motifs floraux sur tons verts, crédence cuisine", caption: "Motifs floraux sur tons verts · Île-de-France" },
@@ -206,24 +206,39 @@ function Index() {
       </section>
 
       {/* L'ARTISTE */}
-      <section className="bg-white py-20 sm:py-28">
-        <div className="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 md:grid-cols-2 md:items-center">
-          <img
-            src={LAURENCE_IMG}
-            alt="Laurence Brecher, céramiste, dans son atelier du Vésinet"
-            width={600} height={900} loading="lazy" decoding="async"
-            style={{ filter: "brightness(1.1) saturate(1.05)" }}
-            className="h-auto max-h-[600px] w-full object-cover"
-          />
+      <section className="bg-white">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto px-6 py-20 md:py-24">
+          <picture>
+            <source type="image/webp" srcSet="/images/portrait-laurence.webp" />
+            <img
+              src={LAURENCE_IMG}
+              alt="Laurence Brecher, céramiste, dans son atelier du Vésinet"
+              loading="lazy"
+              decoding="async"
+              width={600}
+              height={800}
+              className="w-full max-h-[600px] object-cover rounded-md shadow-lg"
+            />
+          </picture>
           <div>
-            <h2 className="font-display text-3xl italic sm:text-[44px]">Laurence Brecher, céramiste.</h2>
+            <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-5xl text-[#2a2a2a] leading-tight">
+              Laurence Brecher,<br />30 ans à la pince
+            </h2>
             <p className="mt-6 text-[17px] leading-[1.7] text-[var(--anthracite)]">
-              Formée aux Beaux-Arts puis à l'Académie de Port-Royal, Laurence Brecher fait vivre depuis trente ans l'héritage de Guimard, de Gallé et de l'École de Nancy dans son atelier du Vésinet. Ses créations habillent des façades primées, des restaurants parisiens, des hôtels particuliers et des maisons 1900 dans toute la France.
+              Laurence dessine, peint et cuit chaque pièce à la main dans son atelier du Vésinet. Diplômée des Beaux Arts, elle s'est spécialisée dans la céramique murale d'intérieur et de façade. Son 1er Prix du Ravalement Versailles 2025 récompense 30 ans de travail patient.
             </p>
             <p className="mt-4 text-[17px] leading-[1.7] text-[var(--anthracite)]">
-              Elle reçoit sur rendez-vous, du lundi au samedi, dans son atelier du 14 rue Ernest André, à 20 minutes de Paris en RER A, station Le Vésinet Centre.
+              Quand vous commandez une crédence, c'est elle qui prépare la terre, peint chaque carreau à la pince, cuit deux fois à 1020°C. Aucun intermédiaire, aucune machine, juste sa main.
             </p>
-            <a href="#formulaire" className="btn-secondary mt-8">Visiter l'atelier</a>
+            <a
+              href="https://ceramique-murale.com/latelier/"
+              target="_blank"
+              rel="noopener"
+              onClick={() => trackEvent("artiste_atelier_click")}
+              className="inline-flex items-center justify-center mt-8 px-6 py-3 rounded-md border border-[#b8860b] text-[#b8860b] font-semibold hover:bg-[#b8860b] hover:text-[#fcfcfc] transition-colors"
+            >
+              Découvrir mon atelier
+            </a>
           </div>
         </div>
       </section>
