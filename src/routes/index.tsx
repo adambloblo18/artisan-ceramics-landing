@@ -290,7 +290,7 @@ function Index() {
         </div>
       </section>
 
-      <HistoiresProjets />
+      <Temoignages />
 
       <VisualiseurSection />
 
