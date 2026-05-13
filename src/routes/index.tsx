@@ -11,6 +11,7 @@ import HistoiresProjets from "@/components/sections/HistoiresProjets";
 import Temoignages from "@/components/sections/Temoignages";
 import Prescripteurs from "@/components/sections/Prescripteurs";
 import TrustStrip from "@/components/sections/TrustStrip";
+import Showcase from "@/components/sections/Showcase";
 import { trackEvent } from "@/lib/analytics";
 import { Trophy, ArrowRight, Phone, Hand, Landmark, MapPin, Truck } from "lucide-react";
 
@@ -115,6 +116,15 @@ function Index() {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [lightboxIndex]);
+
+  useEffect(() => {
+    const onOpen = (e: Event) => {
+      const detail = (e as CustomEvent<{ index?: number }>).detail;
+      if (detail && typeof detail.index === "number") setLightboxIndex(detail.index);
+    };
+    window.addEventListener("open-lightbox", onOpen as EventListener);
+    return () => window.removeEventListener("open-lightbox", onOpen as EventListener);
+  }, []);
   const isMobile = typeof navigator !== "undefined" && /Android|iPhone|iPad/i.test(navigator.userAgent);
 
   const onPhoneDesktop = (e: React.MouseEvent) => {
@@ -224,6 +234,8 @@ function Index() {
           </p>
         </div>
       </section>
+
+      <Showcase />
 
       {/* RÉASSURANCE */}
       <section className="bg-[#fcfcfc]">
