@@ -5,8 +5,8 @@ import { trackEvent } from "@/lib/analytics";
 // Histoires reconstruites à partir de projets réels — ne pas publier sans relecture.
 const histoires = [
   {
-    img: "/images/galerie-1-cuisine-verte.jpg",
-    webp: "/images/galerie-1-cuisine-verte.webp",
+    img: "/images/cuisine-credence-fleurs.png",
+    webp: "/images/cuisine-credence-fleurs.png",
     titre: "Une cuisine de famille en Île-de-France",
     histoire:
       "Le couple voulait un motif qui rappelle les rideaux Liberty hérités de la grand-mère. Laurence a peint 28 carreaux sur tons verts pour habiller toute la crédence, en gardant la signature florale Art Nouveau.",

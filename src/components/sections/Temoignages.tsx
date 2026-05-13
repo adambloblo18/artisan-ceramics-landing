@@ -3,8 +3,8 @@ import { trackEvent } from "@/lib/analytics";
 
 const projets = [
   {
-    img: "/images/galerie-1-cuisine-verte.jpg",
-    webp: "/images/galerie-1-cuisine-verte.webp",
+    img: "/images/cuisine-credence-fleurs.png",
+    webp: "/images/cuisine-credence-fleurs.png",
     pill: "Cuisine",
     titre: "Une crédence verte pour une famille en Île-de-France",
     recit:
