@@ -290,7 +290,7 @@ function Index() {
       </section>
 
       {/* GALERIE */}
-      <section className="bg-[var(--cream)] py-20 sm:py-28">
+      <section id="galerie" className="bg-[var(--cream)] py-20 sm:py-28">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <h2 className="text-center font-display text-3xl italic sm:text-[44px]">Quelques crédences réalisées.</h2>
           <div className="mt-12 grid grid-cols-1 gap-6 min-[380px]:grid-cols-2">
@@ -362,6 +362,7 @@ function Index() {
 
       {/* BANDEAU PRIX */}
       <section
+        id="award-section"
         className="relative h-[400px] md:h-[500px] w-full bg-cover bg-center"
         style={{ backgroundImage: `url(${PRIX_BG})` }}
       >
