@@ -5,7 +5,7 @@ export type VariantKey = "control" | "A" | "B" | "C" | "D";
 
 declare global {
   interface Window {
-    gtag?: (...args: any[]) => void;
+    gtag?: (...args: unknown[]) => void;
   }
 }
 
