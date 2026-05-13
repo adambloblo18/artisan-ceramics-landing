@@ -124,31 +124,25 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1, maximum-scale=5" },
-      { title: "Crédence céramique sur mesure, peinte à la main · Atelier Le Vésinet" },
+      { title: "Crédence céramique sur mesure peinte main, Atelier Le Vésinet · 1er Prix Versailles 2025" },
       {
         name: "description",
         content:
-          "Crédences en céramique Art Nouveau, peintes à la main par Laurence Brecher, lauréate du Prix du Ravalement de Versailles 2025. Atelier au Vésinet. Réponse en 20 minutes.",
+          "Crédence céramique peinte à la main au Vésinet. Chaque pièce est unique, dessinée pour votre cuisine. 1er Prix du Ravalement Versailles 2025. Devis sous 20 minutes.",
       },
-      { name: "robots", content: "noindex, nofollow" },
       { name: "theme-color", content: "#b8860b" },
-      { property: "og:title", content: "Crédence céramique sur mesure, peinte à la main · Atelier Le Vésinet" },
+      { property: "og:title", content: "Crédence céramique sur mesure peinte main · Atelier Le Vésinet" },
       {
         property: "og:description",
         content:
-          "Faïence émaillée Art Nouveau, créée à la main au Vésinet. Lauréat 2025 du Prix du Ravalement de Versailles.",
+          "Crédence céramique peinte à la main. 30 ans d'atelier, 1er Prix Versailles 2025. Devis gratuit sous 20 minutes.",
       },
-      {
-        property: "og:image",
-        content:
-          "https://www.ceramique-murale.com/wp-content/uploads/2023/10/ceramique-murale-cuisine-credence22-1024x921.jpg",
-      },
+      { property: "og:image", content: "https://credence-ceramique.lovable.app/images/hero-credence.jpg" },
       { property: "og:locale", content: "fr_FR" },
       { property: "og:type", content: "website" },
-      { name: "twitter:title", content: "Crédence céramique sur mesure, peinte à la main · Atelier Le Vésinet" },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/7d3abad8-3cb1-416c-80ec-a8c60c0f6f82/id-preview-d9748e7b--30669618-0f7b-4aed-bed7-ffec551ce32d.lovable.app-1778593322652.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/7d3abad8-3cb1-416c-80ec-a8c60c0f6f82/id-preview-d9748e7b--30669618-0f7b-4aed-bed7-ffec551ce32d.lovable.app-1778593322652.png" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Crédence céramique sur mesure peinte main · Atelier Le Vésinet" },
+      { name: "twitter:image", content: "https://credence-ceramique.lovable.app/images/hero-credence.jpg" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -157,6 +151,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://www.googletagmanager.com" },
       { rel: "preconnect", href: "https://www.clarity.ms" },
       { rel: "preconnect", href: "https://bat.bing.com" },
+      { rel: "preload", as: "image", href: "/images/hero-credence.webp", type: "image/webp", fetchPriority: "high" },
       {
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=DM+Sans:wght@400;500;600&display=swap",
