@@ -116,6 +116,15 @@ function Index() {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [lightboxIndex]);
+
+  useEffect(() => {
+    const onOpen = (e: Event) => {
+      const detail = (e as CustomEvent<{ index?: number }>).detail;
+      if (detail && typeof detail.index === "number") setLightboxIndex(detail.index);
+    };
+    window.addEventListener("open-lightbox", onOpen as EventListener);
+    return () => window.removeEventListener("open-lightbox", onOpen as EventListener);
+  }, []);
   const isMobile = typeof navigator !== "undefined" && /Android|iPhone|iPad/i.test(navigator.userAgent);
 
   const onPhoneDesktop = (e: React.MouseEvent) => {
