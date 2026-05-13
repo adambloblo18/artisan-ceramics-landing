@@ -1,12 +1,34 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PhoneModal from "@/components/PhoneModal";
 import ConsentBanner from "@/components/ConsentBanner";
 import StickyMobileBar from "@/components/StickyMobileBar";
 import MultiStepForm from "@/components/MultiStepForm";
 import Faq from "@/components/Faq";
+import { useABVariant, trackExposure, trackConversion } from "@/lib/ab-helpers";
 
 export const Route = createFileRoute("/")({ component: Index });
+
+const TrophyIcon = ({ className = "h-4 w-4" }: { className?: string }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={2}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+    aria-hidden
+  >
+    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
+    <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+    <path d="M4 22h16" />
+    <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" />
+    <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" />
+    <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" />
+  </svg>
+);
 
 const HERO_IMG = "/images/cuisine-verte.jpg";
 const PRIX_BG = "/images/prix.jpg";
@@ -44,6 +66,92 @@ function Index() {
     if (!isMobile) { e.preventDefault(); setPhoneOpen(true); }
   };
 
+  const headlineVariant = useABVariant("hero_headline_v1", ["control", "A", "B", "C"]);
+  const badgeVariant = useABVariant("hero_badge_v1", ["control", "A", "B"]);
+
+  useEffect(() => {
+    trackExposure("hero_headline_v1", headlineVariant);
+    trackExposure("hero_badge_v1", badgeVariant);
+  }, [headlineVariant, badgeVariant]);
+
+  const scrollToId = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  const onPrimaryCta = (e: React.MouseEvent) => {
+    e.preventDefault();
+    trackConversion("hero_cta_primary_click", { variant: headlineVariant });
+    scrollToId("formulaire");
+  };
+
+  const onPhoneCta = (e: React.MouseEvent) => {
+    e.preventDefault();
+    trackConversion("hero_cta_secondary_click", { variant: headlineVariant });
+    if (isMobile) {
+      window.location.href = "tel:+33670025133";
+    } else {
+      setPhoneOpen(true);
+    }
+  };
+
+  const onGalleryCta = (e: React.MouseEvent) => {
+    e.preventDefault();
+    trackConversion("hero_cta_secondary_click", { variant: headlineVariant });
+    scrollToId("galerie");
+  };
+
+  const onBadgeClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    trackConversion("hero_badge_click", { variant: badgeVariant });
+    scrollToId("award-section");
+  };
+
+  const headlineContent = (() => {
+    switch (headlineVariant) {
+      case "A":
+        return {
+          title: <>Faites entrer l'Art Nouveau dans votre cuisine.</>,
+          subtitle:
+            "Chaque carreau est dessiné, peint et cuit à la main au Vésinet. Une œuvre unique, posée chez vous, livrée partout en France.",
+          primary: "Voir mon devis en 30 secondes",
+          secondary: { label: "📞 Parler à Laurence", kind: "phone" as const },
+        };
+      case "B":
+        return {
+          title: (
+            <>
+              Primée Versailles 2025.
+              <br />
+              Peinte main au Vésinet.
+              <br />
+              Livrée chez vous.
+            </>
+          ),
+          subtitle:
+            "Faïence émaillée Art Nouveau, sur mesure pour cuisines, salles de bain et façades. 30 ans d'atelier, expédition France entière.",
+          primary: "Réserver un appel avec Laurence",
+          secondary: { label: "Voir les réalisations", kind: "gallery" as const },
+        };
+      case "C":
+        return {
+          title: <>La crédence qui n'existe nulle part ailleurs.</>,
+          subtitle:
+            "Vous décrivez votre projet, Laurence dessine, peint et cuit chaque carreau dans son atelier. Une pièce unique, signée, livrée chez vous.",
+          primary: "Lancer mon projet sur mesure",
+          secondary: { label: "📞 Appeler Laurence", kind: "phone" as const },
+        };
+      default:
+        return {
+          title: <>Crédences en céramique, peintes à la main.</>,
+          subtitle:
+            "Faïence émaillée Art Nouveau, créée sur mesure dans notre atelier du Vésinet. Sur rendez-vous, livraison France entière.",
+          primary: "Recevoir mon étude personnalisée",
+          secondary: { label: "📞 Appeler Laurence", kind: "phone" as const },
+        };
+    }
+  })();
+
   return (
     <div id="main" className="min-h-screen bg-[var(--cream)]">
       {/* HEADER */}
@@ -67,7 +175,11 @@ function Index() {
       </header>
 
       {/* HERO */}
-      <section className="relative h-[100vh] md:h-[85vh] w-full overflow-hidden">
+      <section
+        className="relative h-[100vh] md:h-[85vh] w-full overflow-hidden"
+        data-ab-experiment="hero_headline_v1"
+        data-ab-variant={headlineVariant}
+      >
         <video
           autoPlay muted loop playsInline preload="auto"
           poster="/images/header-poster.jpg"
@@ -78,19 +190,63 @@ function Index() {
           <source src="/video/header.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/40 to-black/20" />
+
+        {badgeVariant === "B" && (
+          <button
+            type="button"
+            onClick={onBadgeClick}
+            data-ab-experiment="hero_badge_v1"
+            data-ab-variant={badgeVariant}
+            className="absolute top-0 left-0 right-0 z-20 flex items-center justify-center gap-2 bg-amber-400 px-4 py-2 text-sm font-semibold text-stone-900 hover:bg-amber-300 transition-colors"
+          >
+            <TrophyIcon className="h-4 w-4 shrink-0" />
+            <span className="hidden sm:inline">Premier Prix du Ravalement Versailles 2025 · Découvrir la réalisation primée</span>
+            <span className="sm:hidden">Primé Versailles 2025 · Découvrir</span>
+          </button>
+        )}
+
         <div className="relative z-10 mx-auto flex h-full max-w-5xl flex-col justify-end px-6 pb-16 sm:pb-24">
-          <p className="eyebrow text-[var(--gold)]">Atelier d'art au Vésinet · Prix du Ravalement Versailles 2025</p>
+          {badgeVariant === "control" && (
+            <p
+              className="eyebrow text-[var(--gold)]"
+              data-ab-experiment="hero_badge_v1"
+              data-ab-variant={badgeVariant}
+            >
+              Atelier d'art au Vésinet · Prix du Ravalement Versailles 2025
+            </p>
+          )}
+          {badgeVariant === "A" && (
+            <button
+              type="button"
+              onClick={onBadgeClick}
+              data-ab-experiment="hero_badge_v1"
+              data-ab-variant={badgeVariant}
+              className="self-start inline-flex items-center gap-2 rounded-full border border-amber-300/40 bg-amber-300/10 px-4 py-1.5 text-xs sm:text-sm font-medium text-amber-200 hover:bg-amber-300/20 transition-colors"
+            >
+              <TrophyIcon className="h-4 w-4" />
+              <span>1er Prix du Ravalement, Versailles 2025 →</span>
+            </button>
+          )}
+
           <h1 className="mt-4 max-w-3xl font-display text-[40px] leading-[1.05] text-white sm:text-6xl">
-            Crédences en céramique, peintes à la main.
+            {headlineContent.title}
           </h1>
           <p className="mt-5 max-w-2xl text-[17px] text-white/90 sm:text-[20px]">
-            Faïence émaillée Art Nouveau, créée sur mesure dans notre atelier du Vésinet. Sur rendez-vous, livraison France entière.
+            {headlineContent.subtitle}
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a href="#formulaire" className="btn-primary">Recevoir mon étude personnalisée</a>
-            <a href="tel:+33670025133" onClick={onPhoneDesktop} className="btn-secondary-light">
-              📞 Appeler Laurence
+            <a href="#formulaire" onClick={onPrimaryCta} className="btn-primary">
+              {headlineContent.primary}
             </a>
+            {headlineContent.secondary.kind === "phone" ? (
+              <a href="tel:+33670025133" onClick={onPhoneCta} className="btn-secondary-light">
+                {headlineContent.secondary.label}
+              </a>
+            ) : (
+              <a href="#galerie" onClick={onGalleryCta} className="btn-secondary-light">
+                {headlineContent.secondary.label}
+              </a>
+            )}
           </div>
           <p className="mt-4 text-sm italic text-white/80">Réponse en 20 minutes pendant les heures ouvrées.</p>
         </div>
@@ -134,7 +290,7 @@ function Index() {
       </section>
 
       {/* GALERIE */}
-      <section className="bg-[var(--cream)] py-20 sm:py-28">
+      <section id="galerie" className="bg-[var(--cream)] py-20 sm:py-28">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <h2 className="text-center font-display text-3xl italic sm:text-[44px]">Quelques crédences réalisées.</h2>
           <div className="mt-12 grid grid-cols-1 gap-6 min-[380px]:grid-cols-2">
@@ -206,6 +362,7 @@ function Index() {
 
       {/* BANDEAU PRIX */}
       <section
+        id="award-section"
         className="relative h-[400px] md:h-[500px] w-full bg-cover bg-center"
         style={{ backgroundImage: `url(${PRIX_BG})` }}
       >
