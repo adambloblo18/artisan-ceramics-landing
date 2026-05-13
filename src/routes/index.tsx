@@ -5,6 +5,7 @@ import ConsentBanner from "@/components/ConsentBanner";
 import StickyMobileBar from "@/components/StickyMobileBar";
 import MultiStepForm from "@/components/MultiStepForm";
 import Faq from "@/components/Faq";
+import VisualiseurSection from "@/components/sections/VisualiseurSection";
 import { trackConversion } from "@/lib/ab-helpers";
 import { Trophy, ArrowRight, Phone, Hand, Landmark, MapPin, Truck } from "lucide-react";
 
@@ -286,6 +287,8 @@ function Index() {
           </ol>
         </div>
       </section>
+
+      <VisualiseurSection />
 
       {/* PRIX */}
       <section className="bg-[var(--cream)] py-20 sm:py-28">
