@@ -144,15 +144,11 @@ function Index() {
     if (!isMobile) { e.preventDefault(); setPhoneOpen(true); }
   };
 
-  const headlineVariant = useABVariant("hero_headline_v1", ["control", "A", "B", "C"]);
-  const badgeVariant = useABVariant("hero_badge_v1", ["control", "A", "B"]);
   const reassVariant = useABVariant("reassurance_icons_v1", ["control", "A"]);
 
   useEffect(() => {
-    trackExposure("hero_headline_v1", headlineVariant);
-    trackExposure("hero_badge_v1", badgeVariant);
     trackExposure("reassurance_icons_v1", reassVariant);
-  }, [headlineVariant, badgeVariant, reassVariant]);
+  }, [reassVariant]);
 
   const scrollToId = (id: string) => {
     const el = document.getElementById(id);
@@ -161,76 +157,19 @@ function Index() {
 
   const onPrimaryCta = (e: React.MouseEvent) => {
     e.preventDefault();
-    trackConversion("hero_cta_primary_click", { variant: headlineVariant });
+    trackEvent("hero_cta_primary_click");
     scrollToId("formulaire");
   };
 
   const onPhoneCta = (e: React.MouseEvent) => {
     e.preventDefault();
-    trackConversion("hero_cta_secondary_click", { variant: headlineVariant });
+    trackEvent("hero_cta_phone_click");
     if (isMobile) {
       window.location.href = "tel:+33670025133";
     } else {
       setPhoneOpen(true);
     }
   };
-
-  const onGalleryCta = (e: React.MouseEvent) => {
-    e.preventDefault();
-    trackConversion("hero_cta_secondary_click", { variant: headlineVariant });
-    scrollToId("galerie");
-  };
-
-  const onBadgeClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    trackConversion("hero_badge_click", { variant: badgeVariant });
-    scrollToId("award-section");
-  };
-
-  const headlineContent = (() => {
-    switch (headlineVariant) {
-      case "A":
-        return {
-          title: <>Faites entrer l'Art Nouveau dans votre cuisine.</>,
-          subtitle:
-            "Chaque carreau est dessiné, peint et cuit à la main au Vésinet. Une œuvre unique, posée chez vous, livrée partout en France.",
-          primary: "Voir mon devis en 30 secondes",
-          secondary: { label: "📞 Parler à Laurence", kind: "phone" as const },
-        };
-      case "B":
-        return {
-          title: (
-            <>
-              Primée Versailles 2025.
-              <br />
-              Peinte main au Vésinet.
-              <br />
-              Livrée chez vous.
-            </>
-          ),
-          subtitle:
-            "Faïence émaillée Art Nouveau, sur mesure pour cuisines, salles de bain et façades. 30 ans d'atelier, expédition France entière.",
-          primary: "Réserver un appel avec Laurence",
-          secondary: { label: "Voir les réalisations", kind: "gallery" as const },
-        };
-      case "C":
-        return {
-          title: <>La crédence qui n'existe nulle part ailleurs.</>,
-          subtitle:
-            "Vous décrivez votre projet, Laurence dessine, peint et cuit chaque carreau dans son atelier. Une pièce unique, signée, livrée chez vous.",
-          primary: "Lancer mon projet sur mesure",
-          secondary: { label: "📞 Appeler Laurence", kind: "phone" as const },
-        };
-      default:
-        return {
-          title: <>Crédences en céramique, peintes à la main.</>,
-          subtitle:
-            "Faïence émaillée Art Nouveau, créée sur mesure dans notre atelier du Vésinet. Sur rendez-vous, livraison France entière.",
-          primary: "Découvrir le prix de mon projet",
-          secondary: { label: "📞 Appeler Laurence", kind: "phone" as const },
-        };
-    }
-  })();
 
   return (
     <div id="main" className="min-h-screen bg-[var(--cream)]">
