@@ -421,6 +421,14 @@ function Index() {
         </div>
       </section>
 
+      <InlineCta
+        eyebrow="Étude personnalisée"
+        title="Recevez le tarif exact pour votre projet."
+        subtitle="Décrivez votre envie en 30 secondes. Laurence vous rappelle en moins de 20 minutes avec une fourchette précise."
+        variant="dark"
+        source="after_prix"
+      />
+
       {/* BANDEAU PRIX */}
       <section id="award-section" className="relative w-full overflow-hidden">
         {/* TODO: remplacer bandeau-versailles.jpg par la vraie photo de la façade primée à Versailles dès que Laurence l'a */}
