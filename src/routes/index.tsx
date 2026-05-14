@@ -364,6 +364,12 @@ function Index() {
         </div>
       </section>
 
+      <InlineCta
+        eyebrow="Inspiré ?"
+        title="Combien coûterait votre crédence sur mesure ?"
+        source="after_gallery"
+      />
+
       <div className="reveal-on-scroll"><LeDetail /></div>
 
       {/* PROCESS */}
