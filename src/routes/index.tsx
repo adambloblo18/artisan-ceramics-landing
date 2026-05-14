@@ -363,10 +363,10 @@ function Index() {
         </div>
       </section>
 
-      <LeDetail />
+      <div className="reveal-on-scroll"><LeDetail /></div>
 
       {/* PROCESS */}
-      <section className="bg-white py-20 sm:py-28">
+      <section className="bg-white py-20 sm:py-28 reveal-on-scroll">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <h2 className="text-center font-display text-3xl italic sm:text-[44px]">De l'esquisse à la pose, en 5 étapes.</h2>
           <ol className="mt-12 grid gap-10 md:grid-cols-5 md:gap-6">
@@ -381,11 +381,11 @@ function Index() {
         </div>
       </section>
 
-      <Temoignages />
+      <div className="reveal-on-scroll"><Temoignages /></div>
 
-      <Prescripteurs />
+      <div className="reveal-on-scroll"><Prescripteurs /></div>
 
-      <VisualiseurSection />
+      <div className="reveal-on-scroll"><VisualiseurSection /></div>
 
       {/* PRIX */}
       <section className="bg-[var(--cream)] py-20 sm:py-28">
