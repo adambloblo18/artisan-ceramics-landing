@@ -13,6 +13,7 @@ import Prescripteurs from "@/components/sections/Prescripteurs";
 import TrustStrip from "@/components/sections/TrustStrip";
 
 import LeDetail from "@/components/sections/LeDetail";
+import InlineCta from "@/components/InlineCta";
 import { trackEvent } from "@/lib/analytics";
 import { Trophy, ArrowRight, Phone, Hand, Landmark, MapPin, Truck } from "lucide-react";
 
@@ -363,6 +364,12 @@ function Index() {
         </div>
       </section>
 
+      <InlineCta
+        eyebrow="Inspiré ?"
+        title="Combien coûterait votre crédence sur mesure ?"
+        source="after_gallery"
+      />
+
       <div className="reveal-on-scroll"><LeDetail /></div>
 
       {/* PROCESS */}
@@ -382,6 +389,12 @@ function Index() {
       </section>
 
       <div className="reveal-on-scroll"><Temoignages /></div>
+
+      <InlineCta
+        eyebrow="À votre tour"
+        title="Parlez de votre projet à Laurence."
+        source="after_temoignages"
+      />
 
       <div className="reveal-on-scroll"><Prescripteurs /></div>
 
@@ -413,6 +426,14 @@ function Index() {
           <p className="mt-8 text-center italic text-[var(--muted-text)]">Tarifs indicatifs. Étude personnalisée gratuite et sans engagement.</p>
         </div>
       </section>
+
+      <InlineCta
+        eyebrow="Étude personnalisée"
+        title="Recevez le tarif exact pour votre projet."
+        subtitle="Décrivez votre envie en 30 secondes. Laurence vous rappelle en moins de 20 minutes avec une fourchette précise."
+        variant="dark"
+        source="after_prix"
+      />
 
       {/* BANDEAU PRIX */}
       <section id="award-section" className="relative w-full overflow-hidden">
