@@ -319,7 +319,7 @@ function Index() {
       </section>
 
       {/* GALERIE */}
-      <section id="galerie" className="bg-[var(--cream)] py-20 sm:py-28">
+      <section id="galerie" className="bg-[var(--cream)] py-20 sm:py-28 reveal-on-scroll">
         <div className="mx-auto max-w-5xl px-4 md:px-8">
           <div className="flex items-center justify-center gap-4 mb-4">
             <div className="h-px w-12 bg-[#b8860b]/30" />
