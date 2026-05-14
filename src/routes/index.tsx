@@ -13,6 +13,7 @@ import Prescripteurs from "@/components/sections/Prescripteurs";
 import TrustStrip from "@/components/sections/TrustStrip";
 
 import LeDetail from "@/components/sections/LeDetail";
+import InlineCta from "@/components/InlineCta";
 import { trackEvent } from "@/lib/analytics";
 import { Trophy, ArrowRight, Phone, Hand, Landmark, MapPin, Truck } from "lucide-react";
 
