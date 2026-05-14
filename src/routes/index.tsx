@@ -390,6 +390,12 @@ function Index() {
 
       <div className="reveal-on-scroll"><Temoignages /></div>
 
+      <InlineCta
+        eyebrow="À votre tour"
+        title="Parlez de votre projet à Laurence."
+        source="after_temoignages"
+      />
+
       <div className="reveal-on-scroll"><Prescripteurs /></div>
 
       <div className="reveal-on-scroll"><VisualiseurSection /></div>
