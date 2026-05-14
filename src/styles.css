@@ -146,3 +146,15 @@
   0%, 100% { box-shadow: 0 0 0 0 rgba(184, 134, 11, 0.4); }
   50% { box-shadow: 0 0 0 12px rgba(184, 134, 11, 0); }
 }
+
+/* Reveal on scroll — appliqué via IntersectionObserver dans __root.tsx */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 1100ms cubic-bezier(0.22, 1, 0.36, 1), transform 1100ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: none;
+}

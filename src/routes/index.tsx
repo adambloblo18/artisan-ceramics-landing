@@ -178,8 +178,8 @@ function Index() {
       </header>
 
       <main id="main-content">
-      {/* HERO */}
-      <section className="relative min-h-[95vh] md:min-h-[100vh] w-full overflow-hidden">
+      {/* HERO — vidéo plein écran, immersive */}
+      <section className="relative h-[calc(100vh-3.5rem)] md:h-[calc(100vh-4rem)] w-full overflow-hidden bg-[#2a2a2a]">
         <video
           autoPlay
           muted
@@ -195,27 +195,51 @@ function Index() {
           <source src="/video/header.webm" type="video/webm" />
           <source src="/video/header.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-t from-[#2a2a2a]/85 via-[#2a2a2a]/40 to-transparent" />
+        {/* voile très léger en bas pour le scroll cue, sans masquer l'œuvre */}
+        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#2a2a2a]/40 to-transparent pointer-events-none" />
 
-        <div className="relative z-10 mx-auto flex min-h-[95vh] md:min-h-[100vh] max-w-5xl flex-col justify-end items-center pb-20 md:pb-32 px-6">
-          <span className="inline-flex items-center gap-2 rounded-full border border-[#b8860b]/40 bg-[#b8860b]/10 px-4 py-2 text-xs md:text-sm font-medium text-[#d4a02a] mb-6">
+        {/* indicateur de scroll discret */}
+        <button
+          type="button"
+          onClick={() => scrollToId("intro")}
+          aria-label="Découvrir"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-[#f9f7f2]/80 hover:text-[#f9f7f2] transition-colors animate-[subtle-pulse_2.4s_ease-in-out_infinite]"
+        >
+          <span className="font-['DM_Sans'] text-[10px] uppercase tracking-[0.4em]">Découvrir</span>
+          <svg width="20" height="28" viewBox="0 0 20 28" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden>
+            <rect x="1" y="1" width="18" height="26" rx="9" />
+            <line x1="10" y1="7" x2="10" y2="13" />
+          </svg>
+        </button>
+      </section>
+
+      {/* INTRO — texte révélé après la vidéo */}
+      <section id="intro" className="bg-[#f9f7f2] py-24 md:py-32 reveal-on-scroll">
+        <div className="mx-auto max-w-4xl px-6 flex flex-col items-center text-center">
+          <span className="inline-flex items-center gap-2 rounded-full border border-[#b8860b]/40 bg-[#b8860b]/5 px-4 py-2 text-xs md:text-sm font-medium text-[#a07308] mb-8">
             <Trophy className="h-4 w-4" aria-hidden />
             1er Prix du Ravalement Versailles 2025
           </span>
 
-          <h1 className={`font-["Cormorant_Garamond"] font-light text-4xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight text-center text-[#f9f7f2]`}>
+          <div className="flex items-center gap-4 mb-6">
+            <div className="h-px w-12 bg-[#b8860b]/40" />
+            <span className="font-['DM_Sans'] text-[10px] tracking-[0.4em] uppercase text-[#b8860b] font-medium">Atelier Le Vésinet</span>
+            <div className="h-px w-12 bg-[#b8860b]/40" />
+          </div>
+
+          <h1 className="font-['Cormorant_Garamond'] font-light text-4xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight text-[#2a2a2a]">
             Votre crédence céramique,<br /><span className="italic font-light">peinte à la main au Vésinet.</span>
           </h1>
 
-          <p className="text-base md:text-lg text-[#f9f7f2]/90 mt-6 max-w-2xl text-center leading-relaxed">
-            Chaque pièce est dessinée, peinte et cuite à la main pour s'adapter à votre cuisine. 30 ans d'atelier, expédition France entière.
+          <p className="font-['DM_Sans'] text-base md:text-lg text-[#2a2a2a]/75 mt-8 max-w-2xl leading-relaxed">
+            Chaque pièce est dessinée, peinte et cuite à la main pour s'adapter à votre intérieur. 30 ans d'atelier, expédition France entière.
           </p>
 
-          <div className="flex flex-col md:flex-row gap-3 mt-8">
+          <div className="flex flex-col md:flex-row gap-3 mt-10">
             <a
               href="#formulaire"
               onClick={onPrimaryCta}
-              className="inline-flex items-center justify-center gap-2 rounded-md bg-[#b8860b] px-8 py-4 font-semibold text-[#2a2a2a] hover:bg-[#a87708] transition-colors"
+              className="inline-flex items-center justify-center gap-2 rounded-md bg-[#b8860b] px-8 py-4 font-semibold text-[#f9f7f2] hover:bg-[#a87708] transition-colors"
             >
               Recevoir mon étude personnalisée
               <ArrowRight className="h-4 w-4" aria-hidden />
@@ -223,14 +247,14 @@ function Index() {
             <a
               href="tel:+33670025133"
               onClick={onPhoneCta}
-              className="inline-flex items-center justify-center gap-2 rounded-md border border-[#f9f7f2] bg-transparent px-8 py-4 font-semibold text-[#f9f7f2] hover:bg-[#f9f7f2]/10 transition-colors"
+              className="inline-flex items-center justify-center gap-2 rounded-md border border-[#2a2a2a]/30 bg-transparent px-8 py-4 font-semibold text-[#2a2a2a] hover:bg-[#2a2a2a]/5 transition-colors"
             >
               <Phone className="h-4 w-4" aria-hidden />
               06 70 02 51 33
             </a>
           </div>
 
-          <p className="text-xs md:text-sm text-stone-300 mt-4 text-center">
+          <p className="font-['DM_Sans'] text-xs md:text-sm text-[#2a2a2a]/55 mt-5">
             Réponse en 20 minutes pendant les heures ouvrées.
           </p>
         </div>
@@ -295,7 +319,7 @@ function Index() {
       </section>
 
       {/* GALERIE */}
-      <section id="galerie" className="bg-[var(--cream)] py-20 sm:py-28">
+      <section id="galerie" className="bg-[var(--cream)] py-20 sm:py-28 reveal-on-scroll">
         <div className="mx-auto max-w-5xl px-4 md:px-8">
           <div className="flex items-center justify-center gap-4 mb-4">
             <div className="h-px w-12 bg-[#b8860b]/30" />
@@ -339,10 +363,10 @@ function Index() {
         </div>
       </section>
 
-      <LeDetail />
+      <div className="reveal-on-scroll"><LeDetail /></div>
 
       {/* PROCESS */}
-      <section className="bg-white py-20 sm:py-28">
+      <section className="bg-white py-20 sm:py-28 reveal-on-scroll">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <h2 className="text-center font-display text-3xl italic sm:text-[44px]">De l'esquisse à la pose, en 5 étapes.</h2>
           <ol className="mt-12 grid gap-10 md:grid-cols-5 md:gap-6">
@@ -357,11 +381,11 @@ function Index() {
         </div>
       </section>
 
-      <Temoignages />
+      <div className="reveal-on-scroll"><Temoignages /></div>
 
-      <Prescripteurs />
+      <div className="reveal-on-scroll"><Prescripteurs /></div>
 
-      <VisualiseurSection />
+      <div className="reveal-on-scroll"><VisualiseurSection /></div>
 
       {/* PRIX */}
       <section className="bg-[var(--cream)] py-20 sm:py-28">
