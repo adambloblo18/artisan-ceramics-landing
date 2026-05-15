@@ -7,7 +7,7 @@ import { trackEvent } from "@/lib/analytics";
 
 const REDIRECT_BASE =
   "https://www.ceramique-murale.com/merci-pour-votre-demande-de-projet/";
-const ENDPOINT = "https://formsubmit.co/ajax/ceramiquemurale@gmail.com";
+const ENDPOINT = "/api/public/contact";
 
 function buildRedirectUrl(values: { nom: string; telephone: string }) {
   const parts = values.nom.trim().split(/\s+/);
