@@ -1,7 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
 
-const FORMSUBMIT_ENDPOINT = "https://formsubmit.co/ajax/ceramiquemurale@gmail.com";
+const RESEND_ENDPOINT = "https://api.resend.com/emails";
+const TO_EMAIL = "ceramiquemurale@gmail.com";
+const FROM_EMAIL = "Atelier Céramique Murale <onboarding@resend.dev>";
 
 const contactSchema = z.object({
   _subject: z.string().min(1).max(120),
@@ -20,19 +22,42 @@ function jsonResponse(body: unknown, status = 200) {
   });
 }
 
+function buildEmailHtml(payload: z.infer<typeof contactSchema>) {
+  return `
+    <h2>${payload._subject}</h2>
+    <table cellpadding="8" cellspacing="0" style="border-collapse:collapse;font-family:Arial,sans-serif">
+      <tr><td><strong>Nom</strong></td><td>${payload.nom}</td></tr>
+      <tr><td><strong>Téléphone</strong></td><td>${payload.telephone}</td></tr>
+      <tr><td><strong>Type</strong></td><td>${payload.type}</td></tr>
+      <tr><td><strong>Projet</strong></td><td>${payload.projet}</td></tr>
+    </table>
+  `;
+}
+
 export const Route = createFileRoute("/api/public/contact")({
   server: {
     handlers: {
       POST: async ({ request }) => {
         try {
           const payload = contactSchema.parse(await request.json());
-          const response = await fetch(FORMSUBMIT_ENDPOINT, {
+          const apiKey = process.env.RESEND_API_KEY;
+
+          if (!apiKey) {
+            return jsonResponse({ success: false, error: "missing_email_key" }, 503);
+          }
+
+          const response = await fetch(RESEND_ENDPOINT, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              Accept: "application/json",
+              Authorization: `Bearer ${apiKey}`,
             },
-            body: JSON.stringify(payload),
+            body: JSON.stringify({
+              from: FROM_EMAIL,
+              to: [TO_EMAIL],
+              subject: payload._subject,
+              html: buildEmailHtml(payload),
+            }),
           });
 
           if (!response.ok) {
