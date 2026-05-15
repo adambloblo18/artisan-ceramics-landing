@@ -78,18 +78,26 @@ export default function MultiStepForm() {
         ? "Nouveau lead [Architecte]"
         : "Nouveau lead [Particulier]";
 
-    const fd = new window.FormData();
     const redirectUrl = buildRedirectUrl(values);
-    fd.append("_next", redirectUrl);
-    fd.append("_captcha", "false");
-    fd.append("_subject", subject);
-    fd.append("nom", values.nom);
-    fd.append("telephone", values.telephone);
-    fd.append("projet", values.projet);
-    fd.append("type", values.type);
+    const payload = {
+      _subject: subject,
+      _captcha: "false",
+      _template: "table",
+      nom: values.nom,
+      telephone: values.telephone,
+      projet: values.projet,
+      type: values.type,
+    };
 
     try {
-      const res = await fetch(ENDPOINT, { method: "POST", body: fd });
+      const res = await fetch(ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
       if (!res.ok) throw new Error("submit failed");
       trackEvent("form_submitted", { type: values.type });
       window.location.href = redirectUrl;
