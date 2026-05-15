@@ -1,37 +1,11 @@
-## Problème
+## Objectif
+Corriger définitivement l’envoi du formulaire : l’appel arrive bien sur `/api/public/contact`, mais cette route renvoie `502` car FormSubmit refuse encore le relais côté serveur.
 
-L'endpoint `https://formsubmit.co/ajax/...` renvoie les en-têtes CORS **uniquement** quand la requête est en `application/json`. Actuellement on envoie un `FormData` (multipart), donc pas de header `Access-Control-Allow-Origin` → bloqué par le navigateur.
+## Plan
+1. Remplacer FormSubmit dans la route interne par un envoi email serveur via l’API HTTP Resend.
+2. Ajouter une vérification claire côté serveur : validation des champs, anti-spam simple, et réponse JSON `{ success: true }` uniquement si l’email est accepté.
+3. Garder le formulaire frontend inchangé : mêmes champs, même bouton, même redirection vers la page merci après succès.
+4. Vérifier l’endpoint `/api/public/contact` avec un test serveur pour confirmer qu’il ne renvoie plus `502`.
 
-De plus, FormSubmit AJAX **ne suit pas** `_next` (pas de redirection serveur). Il faut faire la redirection côté client après succès (déjà en place via `window.location.href = redirectUrl`).
-
-## Changements dans `src/components/MultiStepForm.tsx`
-
-Dans `onSubmit`, remplacer le bloc `FormData` + `fetch` par un POST JSON :
-
-```ts
-const payload = {
-  _subject: subject,
-  _captcha: "false",
-  _template: "table",
-  nom: values.nom,
-  telephone: values.telephone,
-  projet: values.projet,
-  type: values.type,
-};
-
-const res = await fetch(ENDPOINT, {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-    Accept: "application/json",
-  },
-  body: JSON.stringify(payload),
-});
-if (!res.ok) throw new Error("submit failed");
-trackEvent("form_submitted", { type: values.type });
-window.location.href = redirectUrl;
-```
-
-(`_next` retiré — inutile en mode AJAX, la redirection est faite côté client.)
-
-Tout le reste (validation Zod, honeypot, anti-bot 2s, gestion d'erreur, UI) reste identique.
+## À prévoir
+Il faudra une clé `RESEND_API_KEY` en secret pour que l’envoi email fonctionne en production.
