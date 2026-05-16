@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
 
-const RESEND_ENDPOINT = "https://connector-gateway.lovable.dev/resend/emails";
+const RESEND_ENDPOINT = "https://api.resend.com/emails";
 const TO_EMAIL = "ceramiquemurale@gmail.com";
 const FROM_EMAIL = "Atelier Céramique Murale <onboarding@resend.dev>";
 
@@ -41,12 +41,10 @@ export const Route = createFileRoute("/api/public/contact")({
         try {
           const payload = contactSchema.parse(await request.json());
           const resendKey = process.env.RESEND_API_KEY;
-          const lovableKey = process.env.LOVABLE_API_KEY;
 
-          if (!resendKey || !lovableKey) {
+          if (!resendKey) {
             console.error("[contact] missing email keys", {
               hasResend: !!resendKey,
-              hasLovable: !!lovableKey,
             });
             return jsonResponse({ success: false, error: "missing_email_key" }, 503);
           }
@@ -55,8 +53,7 @@ export const Route = createFileRoute("/api/public/contact")({
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer ${lovableKey}`,
-              "X-Connection-Api-Key": resendKey,
+              Authorization: `Bearer ${resendKey}`,
             },
             body: JSON.stringify({
               from: FROM_EMAIL,
