@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
 
-const RESEND_ENDPOINT = "https://api.resend.com/emails";
+const RESEND_ENDPOINT = "https://connector-gateway.lovable.dev/resend/emails";
 const TO_EMAIL = "ceramiquemurale@gmail.com";
 const FROM_EMAIL = "Atelier Céramique Murale <onboarding@resend.dev>";
 
@@ -40,9 +40,14 @@ export const Route = createFileRoute("/api/public/contact")({
       POST: async ({ request }) => {
         try {
           const payload = contactSchema.parse(await request.json());
-          const apiKey = process.env.RESEND_API_KEY;
+          const resendKey = process.env.RESEND_API_KEY;
+          const lovableKey = process.env.LOVABLE_API_KEY;
 
-          if (!apiKey) {
+          if (!resendKey || !lovableKey) {
+            console.error("[contact] missing email keys", {
+              hasResend: !!resendKey,
+              hasLovable: !!lovableKey,
+            });
             return jsonResponse({ success: false, error: "missing_email_key" }, 503);
           }
 
@@ -50,7 +55,8 @@ export const Route = createFileRoute("/api/public/contact")({
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer ${apiKey}`,
+              Authorization: `Bearer ${lovableKey}`,
+              "X-Connection-Api-Key": resendKey,
             },
             body: JSON.stringify({
               from: FROM_EMAIL,
@@ -61,11 +67,14 @@ export const Route = createFileRoute("/api/public/contact")({
           });
 
           if (!response.ok) {
+            const body = await response.text().catch(() => "");
+            console.error("[contact] resend failed", response.status, body);
             return jsonResponse({ success: false }, 502);
           }
 
           return jsonResponse({ success: true });
-        } catch {
+        } catch (err) {
+          console.error("[contact] handler error", err);
           return jsonResponse({ success: false }, 400);
         }
       },

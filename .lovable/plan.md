@@ -1,11 +1,13 @@
-## Objectif
-Corriger définitivement l’envoi du formulaire : l’appel arrive bien sur `/api/public/contact`, mais cette route renvoie `502` car FormSubmit refuse encore le relais côté serveur.
-
 ## Plan
-1. Remplacer FormSubmit dans la route interne par un envoi email serveur via l’API HTTP Resend.
-2. Ajouter une vérification claire côté serveur : validation des champs, anti-spam simple, et réponse JSON `{ success: true }` uniquement si l’email est accepté.
-3. Garder le formulaire frontend inchangé : mêmes champs, même bouton, même redirection vers la page merci après succès.
-4. Vérifier l’endpoint `/api/public/contact` avec un test serveur pour confirmer qu’il ne renvoie plus `502`.
 
-## À prévoir
-Il faudra une clé `RESEND_API_KEY` en secret pour que l’envoi email fonctionne en production.
+1. Remplacer l’appel Resend direct par l’appel via le connecteur sécurisé Lovable, avec `LOVABLE_API_KEY` + `RESEND_API_KEY`, car les deux secrets sont bien présents.
+2. Ajouter un log serveur minimal quand le fournisseur email refuse l’envoi, pour voir le vrai statut sans exposer d’information au visiteur.
+3. Conserver le formulaire et la redirection tels quels côté visiteur.
+4. Tester `/api/public/contact` avec un payload valide pour confirmer que la route ne renvoie plus l’erreur générique.
+
+## Détail technique
+
+- Modifier uniquement `src/routes/api/public/contact.ts`.
+- Utiliser `https://connector-gateway.lovable.dev/resend/emails` au lieu de `https://api.resend.com/emails`.
+- Envoyer les headers requis : `Authorization: Bearer ${LOVABLE_API_KEY}` et `X-Connection-Api-Key: ${RESEND_API_KEY}`.
+- Garder `from: "Atelier Céramique Murale <onboarding@resend.dev>"` tant que le domaine d’envoi n’est pas vérifié dans Resend.
