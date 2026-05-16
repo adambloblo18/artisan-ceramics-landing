@@ -7,13 +7,15 @@ import { trackEvent } from "@/lib/analytics";
 
 const REDIRECT_BASE =
   "https://www.ceramique-murale.com/merci-pour-votre-demande-de-projet/";
-const ENDPOINT = "/api/public/contact";
+const ENDPOINT = "https://api.web3forms.com/submit";
+const WEB3FORMS_KEY = "31bd2d6f-50c1-427d-9efd-cab0d1fada12";
 
-function buildRedirectUrl(values: { nom: string; telephone: string }) {
+function buildRedirectUrl(values: { nom: string; telephone: string; email?: string }) {
   const parts = values.nom.trim().split(/\s+/);
   const fn = parts[0] ?? "";
   const ln = parts.slice(1).join(" ");
   const params = new URLSearchParams({
+    email: values.email ?? "",
     phone: values.telephone,
     fn,
     ln,
@@ -73,20 +75,20 @@ export default function MultiStepForm() {
     if (values.website) return;
     if (Date.now() - mountedAt.current < 2000) return;
 
-    const subject =
-      values.type === "architecte"
-        ? "Nouveau lead [Architecte]"
-        : "Nouveau lead [Particulier]";
-
     const redirectUrl = buildRedirectUrl(values);
     const payload = {
-      _subject: subject,
-      _captcha: "false",
-      _template: "table",
-      nom: values.nom,
-      telephone: values.telephone,
-      projet: values.projet,
-      type: values.type,
+      access_key: WEB3FORMS_KEY,
+      subject: "🏛️ Nouveau projet façade/restaurant - ceramique-murale.com",
+      from_name: "Formulaire artisan-facade-forge",
+      cc: "bloch-adam@hotmail.com",
+      name: values.nom,
+      email: "",
+      phone: values.telephone,
+      message: values.projet,
+      profil: values.type,
+      type_projet: values.type,
+      budget: "",
+      echeance: "",
     };
 
     try {
@@ -98,7 +100,8 @@ export default function MultiStepForm() {
         },
         body: JSON.stringify(payload),
       });
-      if (!res.ok) throw new Error("submit failed");
+      const data = await res.json().catch(() => ({ success: false }));
+      if (!res.ok || !data.success) throw new Error("submit failed");
       trackEvent("form_submitted", { type: values.type });
       window.location.href = redirectUrl;
     } catch {
