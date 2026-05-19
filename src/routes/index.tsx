@@ -222,52 +222,6 @@ function Index() {
         </button>
       </section>
 
-      {/* INTRO — texte révélé après la vidéo */}
-      <section id="intro" className="bg-[#f9f7f2] py-24 md:py-32 reveal-on-scroll">
-        <div className="mx-auto max-w-4xl px-6 flex flex-col items-center text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-[#b8860b]/40 bg-[#b8860b]/5 px-4 py-2 text-xs md:text-sm font-medium text-[#a07308] mb-8">
-            <Trophy className="h-4 w-4" aria-hidden />
-            1er Prix du Ravalement Versailles 2025
-          </span>
-
-          <div className="flex items-center gap-4 mb-6">
-            <div className="h-px w-12 bg-[#b8860b]/40" />
-            <span className="font-['DM_Sans'] text-[10px] tracking-[0.4em] uppercase text-[#b8860b] font-medium">Atelier Le Vésinet</span>
-            <div className="h-px w-12 bg-[#b8860b]/40" />
-          </div>
-
-          <h1 className="font-['Cormorant_Garamond'] font-light text-4xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight text-[#2a2a2a]">
-            Votre crédence céramique,<br /><span className="italic font-light">peinte à la main au Vésinet.</span>
-          </h1>
-
-          <p className="font-['DM_Sans'] text-base md:text-lg text-[#2a2a2a]/75 mt-8 max-w-2xl leading-relaxed">
-            Chaque pièce est dessinée, peinte et cuite à la main pour s'adapter à votre intérieur. 30 ans d'atelier, expédition France entière.
-          </p>
-
-          <div className="flex flex-col md:flex-row gap-3 mt-10">
-            <a
-              href="#formulaire"
-              onClick={onPrimaryCta}
-              className="inline-flex items-center justify-center gap-2 rounded-md bg-[#b8860b] px-8 py-4 font-semibold text-[#f9f7f2] hover:bg-[#a87708] transition-colors"
-            >
-              Recevoir mon étude personnalisée
-              <ArrowRight className="h-4 w-4" aria-hidden />
-            </a>
-            <a
-              href="tel:+33670025133"
-              onClick={onPhoneCta}
-              className="inline-flex items-center justify-center gap-2 rounded-md border border-[#2a2a2a]/30 bg-transparent px-8 py-4 font-semibold text-[#2a2a2a] hover:bg-[#2a2a2a]/5 transition-colors"
-            >
-              <Phone className="h-4 w-4" aria-hidden />
-              06 70 02 51 33
-            </a>
-          </div>
-
-          <p className="font-['DM_Sans'] text-xs md:text-sm text-[#2a2a2a]/55 mt-5">
-            Réponse en 20 minutes pendant les heures ouvrées.
-          </p>
-        </div>
-      </section>
 
       
 
