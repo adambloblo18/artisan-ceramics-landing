@@ -70,12 +70,20 @@ const projets = [
     height: 758,
   },
   {
-    src: "/images/frise-vaucresson.jpg",
-    alt: "Frise florale céramique sur façade en pierre meulière, maison à Vaucresson",
-    caption: "Frise florale de façade",
-    sublegend: "Maison « La Salvarina » · Vaucresson",
-    width: 1280,
-    height: 1707,
+    src: "/images/cuisine-credence-bleue.jpg",
+    alt: "Crédence céramique aux motifs bleus et verts dans une cuisine contemporaine",
+    caption: "Crédence motifs bleus et verts",
+    sublegend: "Cuisine contemporaine · Île-de-France",
+    width: 1920,
+    height: 1275,
+  },
+  {
+    src: "/images/cuisine-credence-orange.jpg",
+    alt: "Crédence céramique aux tons orangés et motifs floraux dans une cuisine de campagne",
+    caption: "Crédence florale tons orangés",
+    sublegend: "Cuisine de campagne · Sur mesure",
+    width: 1920,
+    height: 1440,
   },
 ];
 
