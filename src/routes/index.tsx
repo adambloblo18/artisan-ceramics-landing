@@ -46,28 +46,20 @@ const LAURENCE_IMG = "/images/portrait-laurence.jpg";
 
 const projets = [
   {
+    src: "/images/cuisine-credence-orange.jpg",
+    alt: "Crédence céramique aux tons orangés et motifs floraux dans une cuisine de campagne",
+    caption: "Crédence florale tons orangés",
+    sublegend: "Cuisine de campagne · Sur mesure",
+    width: 1920,
+    height: 1440,
+  },
+  {
     src: "/images/cuisine-credence-fleurs.png",
     alt: "Motifs floraux sur tons verts, crédence cuisine",
     caption: "Motifs floraux sur tons verts",
     sublegend: "Île-de-France · 2025 · 2,8 m²",
     width: 1024,
     height: 921,
-  },
-  {
-    src: "/images/galerie-2-dessin-floral.jpg",
-    alt: "Crédence céramique dessin floral peint à la main",
-    caption: "Composition florale unique",
-    sublegend: "Maison de famille · 2024",
-    width: 1920,
-    height: 1280,
-  },
-  {
-    src: "/images/galerie-3-frise-pivoines.jpg",
-    alt: "Crédence autour d'un lavabo, frise pivoines bleues",
-    caption: "Frise pivoines bleues",
-    sublegend: "Salle de bain · Île-de-France · 2024",
-    width: 1024,
-    height: 758,
   },
   {
     src: "/images/cuisine-credence-bleue.jpg",
@@ -78,12 +70,20 @@ const projets = [
     height: 1275,
   },
   {
-    src: "/images/cuisine-credence-orange.jpg",
-    alt: "Crédence céramique aux tons orangés et motifs floraux dans une cuisine de campagne",
-    caption: "Crédence florale tons orangés",
-    sublegend: "Cuisine de campagne · Sur mesure",
+    src: "/images/galerie-3-frise-pivoines.jpg",
+    alt: "Crédence autour d'un lavabo, frise pivoines bleues",
+    caption: "Frise pivoines bleues",
+    sublegend: "Salle de bain · Île-de-France · 2024",
+    width: 1024,
+    height: 758,
+  },
+  {
+    src: "/images/galerie-2-dessin-floral.jpg",
+    alt: "Crédence industrielle peinte à la main",
+    caption: "Crédence industrielle",
+    sublegend: "Maison de famille · 2024",
     width: 1920,
-    height: 1440,
+    height: 1280,
   },
 ];
 
@@ -240,7 +240,7 @@ function Index() {
 
       {/* GALERIE */}
       <section id="galerie" className="bg-[var(--cream)] py-20 sm:py-28 reveal-on-scroll">
-        <div className="mx-auto max-w-5xl px-4 md:px-8">
+        <div className="mx-auto max-w-7xl px-4 md:px-8">
           <div className="flex items-center justify-center gap-4 mb-4">
             <div className="h-px w-12 bg-[#b8860b]/30" />
             <span className="font-['DM_Sans'] text-[10px] tracking-[0.4em] uppercase text-[#b8860b] font-medium">Collection</span>
