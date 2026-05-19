@@ -240,7 +240,7 @@ function Index() {
 
       {/* GALERIE */}
       <section id="galerie" className="bg-[var(--cream)] py-20 sm:py-28 reveal-on-scroll">
-        <div className="mx-auto max-w-5xl px-4 md:px-8">
+        <div className="mx-auto max-w-7xl px-4 md:px-8">
           <div className="flex items-center justify-center gap-4 mb-4">
             <div className="h-px w-12 bg-[#b8860b]/30" />
             <span className="font-['DM_Sans'] text-[10px] tracking-[0.4em] uppercase text-[#b8860b] font-medium">Collection</span>
