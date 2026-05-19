@@ -70,12 +70,20 @@ const projets = [
     height: 758,
   },
   {
-    src: "/images/frise-vaucresson.jpg",
-    alt: "Frise florale céramique sur façade en pierre meulière, maison à Vaucresson",
-    caption: "Frise florale de façade",
-    sublegend: "Maison « La Salvarina » · Vaucresson",
-    width: 1280,
-    height: 1707,
+    src: "/images/cuisine-credence-bleue.jpg",
+    alt: "Crédence céramique aux motifs bleus et verts dans une cuisine contemporaine",
+    caption: "Crédence motifs bleus et verts",
+    sublegend: "Cuisine contemporaine · Île-de-France",
+    width: 1920,
+    height: 1275,
+  },
+  {
+    src: "/images/cuisine-credence-orange.jpg",
+    alt: "Crédence céramique aux tons orangés et motifs floraux dans une cuisine de campagne",
+    caption: "Crédence florale tons orangés",
+    sublegend: "Cuisine de campagne · Sur mesure",
+    width: 1920,
+    height: 1440,
   },
 ];
 
@@ -214,52 +222,6 @@ function Index() {
         </button>
       </section>
 
-      {/* INTRO — texte révélé après la vidéo */}
-      <section id="intro" className="bg-[#f9f7f2] py-24 md:py-32 reveal-on-scroll">
-        <div className="mx-auto max-w-4xl px-6 flex flex-col items-center text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-[#b8860b]/40 bg-[#b8860b]/5 px-4 py-2 text-xs md:text-sm font-medium text-[#a07308] mb-8">
-            <Trophy className="h-4 w-4" aria-hidden />
-            1er Prix du Ravalement Versailles 2025
-          </span>
-
-          <div className="flex items-center gap-4 mb-6">
-            <div className="h-px w-12 bg-[#b8860b]/40" />
-            <span className="font-['DM_Sans'] text-[10px] tracking-[0.4em] uppercase text-[#b8860b] font-medium">Atelier Le Vésinet</span>
-            <div className="h-px w-12 bg-[#b8860b]/40" />
-          </div>
-
-          <h1 className="font-['Cormorant_Garamond'] font-light text-4xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight text-[#2a2a2a]">
-            Votre crédence céramique,<br /><span className="italic font-light">peinte à la main au Vésinet.</span>
-          </h1>
-
-          <p className="font-['DM_Sans'] text-base md:text-lg text-[#2a2a2a]/75 mt-8 max-w-2xl leading-relaxed">
-            Chaque pièce est dessinée, peinte et cuite à la main pour s'adapter à votre intérieur. 30 ans d'atelier, expédition France entière.
-          </p>
-
-          <div className="flex flex-col md:flex-row gap-3 mt-10">
-            <a
-              href="#formulaire"
-              onClick={onPrimaryCta}
-              className="inline-flex items-center justify-center gap-2 rounded-md bg-[#b8860b] px-8 py-4 font-semibold text-[#f9f7f2] hover:bg-[#a87708] transition-colors"
-            >
-              Recevoir mon étude personnalisée
-              <ArrowRight className="h-4 w-4" aria-hidden />
-            </a>
-            <a
-              href="tel:+33670025133"
-              onClick={onPhoneCta}
-              className="inline-flex items-center justify-center gap-2 rounded-md border border-[#2a2a2a]/30 bg-transparent px-8 py-4 font-semibold text-[#2a2a2a] hover:bg-[#2a2a2a]/5 transition-colors"
-            >
-              <Phone className="h-4 w-4" aria-hidden />
-              06 70 02 51 33
-            </a>
-          </div>
-
-          <p className="font-['DM_Sans'] text-xs md:text-sm text-[#2a2a2a]/55 mt-5">
-            Réponse en 20 minutes pendant les heures ouvrées.
-          </p>
-        </div>
-      </section>
 
       
 
@@ -274,49 +236,6 @@ function Index() {
             </li>
           ))}
         </ul>
-      </section>
-
-      {/* L'ARTISTE */}
-      <section className="bg-white">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center max-w-6xl mx-auto px-6 py-24 md:py-32">
-          <div className="md:col-span-5">
-            <picture>
-              <source type="image/webp" srcSet="/images/portrait-laurence.webp" />
-              <img
-                src={LAURENCE_IMG}
-                alt="Laurence Brecher, céramiste, dans son atelier du Vésinet"
-                loading="lazy"
-                decoding="async"
-                width={800}
-                height={1000}
-                className="w-full max-h-[750px] object-cover rounded-md shadow-2xl shadow-[#2a2a2a]/20"
-              />
-            </picture>
-            <blockquote className="font-['Cormorant_Garamond'] italic text-xl md:text-2xl text-[#2a2a2a]/70 mt-6 text-center md:text-left">
-              « La main porte ce qu'aucune machine ne saura jamais reproduire. »
-            </blockquote>
-          </div>
-          <div className="md:col-span-7">
-            <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-5xl text-[#2a2a2a] leading-tight">
-              Laurence Brecher,<br />30 ans à la pince
-            </h2>
-            <p className="mt-6 text-[17px] leading-[1.7] text-[var(--anthracite)]">
-              Laurence dessine, peint et cuit chaque pièce à la main dans son atelier du Vésinet. Diplômée des Beaux Arts, elle s'est spécialisée dans la céramique murale d'intérieur et de façade. Son 1er Prix du Ravalement Versailles 2025 récompense 30 ans de travail patient.
-            </p>
-            <p className="mt-4 text-[17px] leading-[1.7] text-[var(--anthracite)]">
-              Quand vous commandez une crédence, c'est elle qui prépare la terre, peint chaque carreau à la pince, cuit deux fois à 1020°C. Aucun intermédiaire, aucune machine, juste sa main.
-            </p>
-            <a
-              href="https://www.ceramique-murale.com/laurence-brecher-creatrice-de-ceramique-murale-decorative/"
-              target="_blank"
-              rel="noopener"
-              onClick={() => trackEvent("artiste_atelier_click")}
-              className="inline-flex items-center justify-center mt-8 px-6 py-3 rounded-md border border-[#b8860b] text-[#a07308] font-semibold hover:bg-[#b8860b] hover:text-[#f9f7f2] transition-colors"
-            >
-              Découvrir mon atelier
-            </a>
-          </div>
-        </div>
       </section>
 
       {/* GALERIE */}
@@ -360,6 +279,49 @@ function Index() {
                 </figcaption>
               </figure>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* L'ARTISTE */}
+      <section className="bg-white">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center max-w-6xl mx-auto px-6 py-24 md:py-32">
+          <div className="md:col-span-5">
+            <picture>
+              <source type="image/webp" srcSet="/images/portrait-laurence.webp" />
+              <img
+                src={LAURENCE_IMG}
+                alt="Laurence Brecher, céramiste, dans son atelier du Vésinet"
+                loading="lazy"
+                decoding="async"
+                width={800}
+                height={1000}
+                className="w-full max-h-[750px] object-cover rounded-md shadow-2xl shadow-[#2a2a2a]/20"
+              />
+            </picture>
+            <blockquote className="font-['Cormorant_Garamond'] italic text-xl md:text-2xl text-[#2a2a2a]/70 mt-6 text-center md:text-left">
+              « La main porte ce qu'aucune machine ne saura jamais reproduire. »
+            </blockquote>
+          </div>
+          <div className="md:col-span-7">
+            <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-5xl text-[#2a2a2a] leading-tight">
+              Laurence Brecher,<br />30 ans à la pince
+            </h2>
+            <p className="mt-6 text-[17px] leading-[1.7] text-[var(--anthracite)]">
+              Laurence dessine, peint et cuit chaque pièce à la main dans son atelier du Vésinet. Diplômée des Beaux Arts, elle s'est spécialisée dans la céramique murale d'intérieur et de façade. Son 1er Prix du Ravalement Versailles 2025 récompense 30 ans de travail patient.
+            </p>
+            <p className="mt-4 text-[17px] leading-[1.7] text-[var(--anthracite)]">
+              Quand vous commandez une crédence, c'est elle qui prépare la terre, peint chaque carreau à la pince, cuit deux fois à 1020°C. Aucun intermédiaire, aucune machine, juste sa main.
+            </p>
+            <a
+              href="https://www.ceramique-murale.com/laurence-brecher-creatrice-de-ceramique-murale-decorative/"
+              target="_blank"
+              rel="noopener"
+              onClick={() => trackEvent("artiste_atelier_click")}
+              className="inline-flex items-center justify-center mt-8 px-6 py-3 rounded-md border border-[#b8860b] text-[#a07308] font-semibold hover:bg-[#b8860b] hover:text-[#f9f7f2] transition-colors"
+            >
+              Découvrir mon atelier
+            </a>
           </div>
         </div>
       </section>
