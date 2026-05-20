@@ -42,6 +42,8 @@ posthog.init('phc_oGmkuM4F5je7WmaLZpsF47paa8nv5V5vp58oh74Pwcwy', {
   autocapture: true,
   disable_session_recording: false,
   respect_dnt: true,
+  cross_subdomain_cookie: true,
+  persistence: 'localStorage+cookie',
   opt_out_capturing_by_default: true,
   session_recording: {
     maskAllInputs: true,
