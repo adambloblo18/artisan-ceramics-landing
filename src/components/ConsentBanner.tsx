@@ -112,7 +112,7 @@ export default function ConsentBanner() {
       const docH = document.documentElement.scrollHeight;
       if (docH <= 0) return;
       const pct = (window.scrollY + window.innerHeight) / docH;
-      if (pct > 0.4) {
+      if (pct > 0.05) {
         window.removeEventListener("scroll", onScroll);
         accept("scroll");
       }
