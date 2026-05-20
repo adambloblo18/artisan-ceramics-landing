@@ -1,145 +1,204 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-const KEY = "lcm_consent_v1";
+const STORAGE_KEY = "cookie_consent";
+const SIX_MONTHS_MS = 1000 * 60 * 60 * 24 * 30 * 6;
 
-type Cats = { ad: boolean; analytics: boolean };
+type Stored = { status: "accepted" | "refused"; timestamp: number; method?: string };
+
+function readStored(): Stored | null {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as Stored;
+    if (!parsed?.timestamp || Date.now() - parsed.timestamp > SIX_MONTHS_MS) return null;
+    return parsed;
+  } catch {
+    return null;
+  }
+}
+
+function applyGranted() {
+  (window as any).gtag?.("consent", "update", {
+    analytics_storage: "granted",
+    ad_storage: "granted",
+    ad_user_data: "granted",
+    ad_personalization: "granted",
+  });
+  try { (window as any).posthog?.opt_in_capturing?.(); } catch { /* noop */ }
+}
+
+function applyDenied() {
+  (window as any).gtag?.("consent", "update", {
+    analytics_storage: "denied",
+    ad_storage: "denied",
+    ad_user_data: "denied",
+    ad_personalization: "denied",
+  });
+  try { (window as any).posthog?.opt_out_capturing?.(); } catch { /* noop */ }
+}
 
 export default function ConsentBanner() {
-  const [show, setShow] = useState(false);
-  const [detail, setDetail] = useState(false);
-  const [cats, setCats] = useState<Cats>({ ad: false, analytics: false });
+  const [visible, setVisible] = useState(false);
+  const [entered, setEntered] = useState(false);
+  const [leaving, setLeaving] = useState(false);
+  const decidedRef = useRef(false);
 
-  const hasCookie = () => {
-    try { return document.cookie.includes(KEY + "="); } catch { return false; }
+  const close = () => {
+    setLeaving(true);
+    setTimeout(() => setVisible(false), 300);
   };
 
+  const accept = (method: "click" | "scroll") => {
+    if (decidedRef.current) return;
+    decidedRef.current = true;
+    try {
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify({ status: "accepted", timestamp: Date.now(), method }),
+      );
+    } catch { /* noop */ }
+    applyGranted();
+    try { (window as any).gtag?.("event", "cookie_consent", { value: "accepted", method }); } catch { /* noop */ }
+    try { (window as any).posthog?.capture?.("cookie_consent", { status: "accepted", method }); } catch { /* noop */ }
+    close();
+  };
+
+  const refuse = () => {
+    if (decidedRef.current) return;
+    decidedRef.current = true;
+    try {
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify({ status: "refused", timestamp: Date.now() }),
+      );
+    } catch { /* noop */ }
+    applyDenied();
+    try { (window as any).gtag?.("event", "cookie_consent", { value: "refused" }); } catch { /* noop */ }
+    close();
+  };
+
+  // Mount: check stored consent, schedule show if needed
   useEffect(() => {
-    if (!hasCookie()) setShow(true);
-    const open = () => {
-      // Permet de rouvrir la bannière depuis le footer
-      document.cookie = `${KEY}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
-      setDetail(false);
-      setShow(true);
+    const stored = readStored();
+    if (stored?.status === "accepted") { applyGranted(); return; }
+    if (stored?.status === "refused") { applyDenied(); return; }
+    const t = setTimeout(() => {
+      setVisible(true);
+      requestAnimationFrame(() => setEntered(true));
+    }, 1500);
+
+    const reopen = () => {
+      try { localStorage.removeItem(STORAGE_KEY); } catch { /* noop */ }
+      decidedRef.current = false;
+      setLeaving(false);
+      setVisible(true);
+      requestAnimationFrame(() => setEntered(true));
     };
-    window.addEventListener("lcm:open-consent", open);
-    return () => window.removeEventListener("lcm:open-consent", open);
+    window.addEventListener("lcm:open-consent", reopen);
+    return () => {
+      clearTimeout(t);
+      window.removeEventListener("lcm:open-consent", reopen);
+    };
   }, []);
 
-  const setCookie = (value: string) => {
-    const d = new Date();
-    d.setTime(d.getTime() + 365 * 24 * 60 * 60 * 1000);
-    document.cookie = `${KEY}=${value};expires=${d.toUTCString()};path=/;SameSite=Lax`;
-  };
-
-  const apply = (ad: boolean, analytics: boolean) => {
-    (window as any).gtag?.("consent", "update", {
-      ad_storage: ad ? "granted" : "denied",
-      ad_user_data: ad ? "granted" : "denied",
-      ad_personalization: ad ? "granted" : "denied",
-      analytics_storage: analytics ? "granted" : "denied",
-    });
-    if (typeof window !== 'undefined' && (window as any).posthog) {
-      (window as any).posthog.opt_in_capturing();
-    }
-    setCookie(`ad=${ad ? 1 : 0};an=${analytics ? 1 : 0}`);
-    setShow(false);
-  };
-
-  const acceptAll = () => apply(true, true);
-  const refuseAll = () => apply(false, false);
-  const saveCustom = () => apply(cats.ad, cats.analytics);
-
-  // Scroll-as-consent : tout scroll = accepte implicitement
+  // Scroll-to-accept (40% of page)
   useEffect(() => {
-    if (!show) return;
+    if (!visible) return;
+    let throttled = false;
     const onScroll = () => {
-      if ((window.scrollY || document.documentElement.scrollTop) > 5) {
-        acceptAll();
+      if (throttled) return;
+      throttled = true;
+      setTimeout(() => { throttled = false; }, 200);
+      const docH = document.documentElement.scrollHeight;
+      if (docH <= 0) return;
+      const pct = (window.scrollY + window.innerHeight) / docH;
+      if (pct > 0.4) {
         window.removeEventListener("scroll", onScroll);
+        accept("scroll");
       }
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, [show]);
+  }, [visible]);
 
-  if (!show) return null;
+  // Escape = refuse
+  useEffect(() => {
+    if (!visible) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") refuse(); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [visible]);
+
+  if (!visible) return null;
+
+  const translate = leaving ? "translateY(20px)" : entered ? "translateY(0)" : "translateY(20px)";
+  const opacity = leaving ? 0 : entered ? 1 : 0;
+
   return (
     <div
       role="dialog"
-      aria-label="Consentement aux cookies"
-      className="fixed bottom-3 right-3 z-[70] w-[calc(100%-1.5rem)] max-w-[420px] border border-[var(--border)] bg-white p-3 text-xs shadow-[0_8px_30px_rgba(0,0,0,0.12)]"
+      aria-labelledby="cookie-title"
+      aria-describedby="cookie-desc"
+      className="fixed z-[1000] font-[Inter] bottom-[80px] right-4 left-4 lg:left-auto lg:bottom-6 lg:right-6"
+      style={{
+        maxWidth: 340,
+        width: "100%",
+        padding: 20,
+        background: "#FAF7F2",
+        border: "1px solid #D4A89B",
+        borderRadius: 4,
+        boxShadow: "0 4px 16px rgba(74, 107, 124, 0.12)",
+        transform: translate,
+        opacity,
+        transition: "all 400ms ease-out",
+      }}
     >
-      {!detail ? (
-        <>
-          <p className="text-xs leading-snug text-[var(--anthracite)]">
-            Cookies pour mesurer l'audience. En naviguant, vous acceptez leur dépôt.
-          </p>
-          <div className="mt-2 grid grid-cols-2 gap-1.5">
-            <button
-              onClick={refuseAll}
-              className="border border-[var(--anthracite)] px-2 py-1.5 text-xs font-semibold text-[var(--anthracite)] transition hover:bg-[var(--anthracite)] hover:text-white"
-            >
-              Refuser
-            </button>
-            <button
-              onClick={acceptAll}
-              className="border px-2 py-1.5 text-xs font-semibold transition"
-              style={{ borderColor: "var(--sage)", color: "var(--sage)" }}
-              onMouseEnter={(e) => { e.currentTarget.style.background = "var(--sage)"; e.currentTarget.style.color = "#fff"; }}
-              onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "var(--sage)"; }}
-            >
-              Tout accepter
-            </button>
-          </div>
-          <button onClick={() => setDetail(true)} className="mt-1.5 block w-full text-center text-[10px] text-[var(--muted-text)] underline">
-            Personnaliser
-          </button>
-        </>
-      ) : (
-        <>
-          <p className="h-display text-lg">Vos préférences</p>
-          <ul className="mt-4 space-y-3 text-sm">
-            <li className="flex items-start justify-between gap-4 border-b border-[var(--border)] pb-3">
-              <div>
-                <p className="font-semibold text-[var(--anthracite)]">Strictement nécessaires</p>
-                <p className="text-xs text-[var(--muted-text)]">Indispensables au fonctionnement du site.</p>
-              </div>
-              <span className="text-xs italic text-[var(--muted-text)]">Toujours actifs</span>
-            </li>
-            <li className="flex items-start justify-between gap-4 border-b border-[var(--border)] pb-3">
-              <div>
-                <p className="font-semibold text-[var(--anthracite)]">Mesure d'audience</p>
-                <p className="text-xs text-[var(--muted-text)]">Statistiques de visite anonymisées.</p>
-              </div>
-              <input type="checkbox" className="mt-1 h-5 w-5 accent-[var(--gold)]"
-                checked={cats.analytics} onChange={(e) => setCats({ ...cats, analytics: e.target.checked })} />
-            </li>
-            <li className="flex items-start justify-between gap-4">
-              <div>
-                <p className="font-semibold text-[var(--anthracite)]">Publicité et personnalisation</p>
-                <p className="text-xs text-[var(--muted-text)]">Mesure des campagnes et contenus personnalisés.</p>
-              </div>
-              <input type="checkbox" className="mt-1 h-5 w-5 accent-[var(--gold)]"
-                checked={cats.ad} onChange={(e) => setCats({ ...cats, ad: e.target.checked })} />
-            </li>
-          </ul>
-          <div className="mt-4 grid grid-cols-2 gap-2">
-            <button
-              onClick={() => setDetail(false)}
-              className="border-[1.5px] border-[var(--anthracite)] px-4 py-3 text-sm font-semibold text-[var(--anthracite)]"
-            >
-              Retour
-            </button>
-            <button
-              onClick={saveCustom}
-              className="border-[1.5px] px-4 py-3 text-sm font-semibold"
-              style={{ borderColor: "var(--sage)", color: "var(--sage)" }}
-            >
-              Enregistrer
-            </button>
-          </div>
-        </>
-      )}
+      <p id="cookie-title" style={{ fontWeight: 500, fontSize: 15, color: "#4A6B7C", margin: 0 }}>
+        Cookies et données
+      </p>
+      <p id="cookie-desc" style={{ fontWeight: 400, fontSize: 13, color: "#2A2A2A", lineHeight: 1.5, marginTop: 8 }}>
+        Nous utilisons des cookies pour mesurer l'audience et améliorer votre expérience. En poursuivant votre navigation, vous acceptez leur dépôt.
+      </p>
+      <div style={{ display: "flex", gap: 8, marginTop: 16 }}>
+        <button
+          onClick={() => accept("click")}
+          style={{
+            background: "#6B8E7F", color: "#FAF7F2", padding: "10px 18px",
+            fontWeight: 500, fontSize: 14, borderRadius: 2, flexGrow: 2, border: "none", cursor: "pointer",
+          }}
+          onMouseEnter={(e) => { (e.currentTarget.style.background = "#5a7a6f"); }}
+          onMouseLeave={(e) => { (e.currentTarget.style.background = "#6B8E7F"); }}
+          className="focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#6B8E7F]"
+        >
+          Accepter
+        </button>
+        <button
+          onClick={refuse}
+          style={{
+            background: "transparent", color: "rgba(42,42,42,0.7)", padding: "10px 18px",
+            fontWeight: 400, fontSize: 14, borderRadius: 2, flexGrow: 1,
+            border: "1px solid rgba(42,42,42,0.2)", cursor: "pointer",
+          }}
+          onMouseEnter={(e) => { e.currentTarget.style.color = "#2A2A2A"; }}
+          onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(42,42,42,0.7)"; }}
+          className="focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#6B8E7F]"
+        >
+          Refuser
+        </button>
+      </div>
+      <a
+        href="https://www.ceramique-murale.com/mentions-legales/"
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{
+          display: "block", marginTop: 12, fontSize: 11, color: "#6B6B6B",
+          opacity: 0.7, textDecoration: "none",
+        }}
+        onMouseEnter={(e) => { e.currentTarget.style.textDecoration = "underline"; }}
+        onMouseLeave={(e) => { e.currentTarget.style.textDecoration = "none"; }}
+      >
+        En savoir plus sur nos cookies
+      </a>
     </div>
   );
 }
