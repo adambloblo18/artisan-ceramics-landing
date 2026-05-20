@@ -101,18 +101,19 @@ export default function ConsentBanner() {
     };
   }, []);
 
-  // Scroll-to-accept (40% of page)
+  // Scroll-to-accept: 5% de la hauteur scrollable, mesurée depuis la position initiale
   useEffect(() => {
     if (!visible) return;
+    const startY = window.scrollY;
     let throttled = false;
     const onScroll = () => {
       if (throttled) return;
       throttled = true;
-      setTimeout(() => { throttled = false; }, 200);
-      const docH = document.documentElement.scrollHeight;
+      setTimeout(() => { throttled = false; }, 150);
+      const docH = document.documentElement.scrollHeight - window.innerHeight;
       if (docH <= 0) return;
-      const pct = (window.scrollY + window.innerHeight) / docH;
-      if (pct > 0.05) {
+      const delta = window.scrollY - startY;
+      if (delta / docH > 0.05) {
         window.removeEventListener("scroll", onScroll);
         accept("scroll");
       }
