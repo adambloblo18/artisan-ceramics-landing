@@ -1,10 +1,9 @@
 import { createStart, createMiddleware } from "@tanstack/react-start";
 
 import { renderErrorPage } from "./lib/error-page";
-import { initPostHog } from "./lib/posthog";
 
-// Client-only init (no-op on the server).
-initPostHog();
+// PostHog est initialisé uniquement via le script inline dans src/routes/__root.tsx
+// (source unique de vérité). Ne pas réintroduire initPostHog() ici.
 
 const errorMiddleware = createMiddleware().server(async ({ next }) => {
   try {

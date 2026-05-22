@@ -37,22 +37,18 @@ const posthogScript = `!function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i
 posthog.init('phc_oGmkuM4F5je7WmaLZpsF47paa8nv5V5vp58oh74Pwcwy', {
   api_host: 'https://eu.i.posthog.com',
   person_profiles: 'identified_only',
-  capture_pageview: true,
+  capture_pageview: 'history_change',
   capture_pageleave: true,
   autocapture: true,
   disable_session_recording: false,
-  respect_dnt: true,
+  respect_dnt: false,
   cross_subdomain_cookie: true,
-  persistence: 'localStorage+cookie',
-  opt_out_capturing_by_default: true,
+  persistence: 'memory',
   session_recording: {
     maskAllInputs: true,
     maskTextSelector: '.ph-mask, input[type="email"], input[type="tel"]'
   }
-});
-if (typeof window !== 'undefined' && localStorage.getItem('lcm_consent') === 'accepted') {
-  setTimeout(function(){ window.posthog && window.posthog.opt_in_capturing(); }, 500);
-}`;
+});`;
 
 const googleAdsScript = `gtag('js', new Date()); gtag('config', 'AW-11400865534');`;
 
