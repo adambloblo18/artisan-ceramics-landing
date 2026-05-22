@@ -152,32 +152,32 @@ export default function ConsentBanner() {
       role="dialog"
       aria-labelledby="cookie-title"
       aria-describedby="cookie-desc"
-      className="fixed z-[1000] font-[Inter] bottom-[80px] right-4 left-4 lg:left-auto lg:bottom-6 lg:right-6"
+      className="fixed z-[1000] font-[Inter] bottom-4 right-3 left-3 lg:left-auto lg:bottom-4 lg:right-4"
       style={{
-        maxWidth: 340,
+        maxWidth: 280,
         width: "100%",
-        padding: 20,
+        padding: "10px 12px",
         background: "#FAF7F2",
         border: "1px solid #D4A89B",
         borderRadius: 4,
-        boxShadow: "0 4px 16px rgba(74, 107, 124, 0.12)",
+        boxShadow: "0 3px 12px rgba(74, 107, 124, 0.10)",
         transform: translate,
         opacity,
         transition: "all 400ms ease-out",
       }}
     >
-      <p id="cookie-title" style={{ fontWeight: 500, fontSize: 15, color: "#4A6B7C", margin: 0 }}>
+      <p id="cookie-title" style={{ fontWeight: 500, fontSize: 13, color: "#4A6B7C", margin: 0 }}>
         Cookies et données
       </p>
-      <p id="cookie-desc" style={{ fontWeight: 400, fontSize: 13, color: "#2A2A2A", lineHeight: 1.5, marginTop: 8 }}>
+      <p id="cookie-desc" style={{ fontWeight: 400, fontSize: 11, color: "#2A2A2A", lineHeight: 1.4, marginTop: 6 }}>
         Nous utilisons des cookies pour mesurer l'audience et améliorer votre expérience. En poursuivant votre navigation, vous acceptez leur dépôt.
       </p>
-      <div style={{ display: "flex", gap: 8, marginTop: 16 }}>
+      <div style={{ display: "flex", gap: 6, marginTop: 10 }}>
         <button
           onClick={() => accept("click")}
           style={{
-            background: "#6B8E7F", color: "#FAF7F2", padding: "10px 18px",
-            fontWeight: 500, fontSize: 14, borderRadius: 2, flexGrow: 2, border: "none", cursor: "pointer",
+            background: "#6B8E7F", color: "#FAF7F2", padding: "7px 14px",
+            fontWeight: 500, fontSize: 12, borderRadius: 2, flexGrow: 2, border: "none", cursor: "pointer",
           }}
           onMouseEnter={(e) => { (e.currentTarget.style.background = "#5a7a6f"); }}
           onMouseLeave={(e) => { (e.currentTarget.style.background = "#6B8E7F"); }}
@@ -188,8 +188,8 @@ export default function ConsentBanner() {
         <button
           onClick={refuse}
           style={{
-            background: "transparent", color: "rgba(42,42,42,0.7)", padding: "10px 18px",
-            fontWeight: 400, fontSize: 14, borderRadius: 2, flexGrow: 1,
+            background: "transparent", color: "rgba(42,42,42,0.7)", padding: "7px 14px",
+            fontWeight: 400, fontSize: 12, borderRadius: 2, flexGrow: 1,
             border: "1px solid rgba(42,42,42,0.2)", cursor: "pointer",
           }}
           onMouseEnter={(e) => { e.currentTarget.style.color = "#2A2A2A"; }}
@@ -204,7 +204,7 @@ export default function ConsentBanner() {
         target="_blank"
         rel="noopener noreferrer"
         style={{
-          display: "block", marginTop: 12, fontSize: 11, color: "#6B6B6B",
+          display: "block", marginTop: 8, fontSize: 10, color: "#6B6B6B",
           opacity: 0.7, textDecoration: "none",
         }}
         onMouseEnter={(e) => { e.currentTarget.style.textDecoration = "underline"; }}
