@@ -47,6 +47,7 @@ const LAURENCE_IMG = "/images/portrait-laurence.jpg";
 const projets = [
   {
     src: "/images/cuisine-credence-orange.jpg",
+    webp: "/images/cuisine-credence-orange.webp",
     alt: "Crédence céramique aux tons orangés et motifs floraux dans une cuisine de campagne",
     caption: "Crédence florale tons orangés",
     sublegend: "Cuisine de campagne · Sur mesure",
@@ -55,6 +56,7 @@ const projets = [
   },
   {
     src: "/images/cuisine-credence-fleurs.png",
+    webp: "/images/cuisine-credence-fleurs.webp",
     alt: "Motifs floraux sur tons verts, crédence cuisine",
     caption: "Motifs floraux sur tons verts",
     sublegend: "Île-de-France · 2025 · 2,8 m²",
@@ -63,6 +65,7 @@ const projets = [
   },
   {
     src: "/images/cuisine-credence-bleue.jpg",
+    webp: "/images/cuisine-credence-bleue.webp",
     alt: "Crédence céramique aux motifs bleus et verts dans une cuisine contemporaine",
     caption: "Crédence motifs bleus et verts",
     sublegend: "Cuisine contemporaine · Île-de-France",
@@ -71,6 +74,7 @@ const projets = [
   },
   {
     src: "/images/galerie-3-frise-pivoines.jpg",
+    webp: "/images/galerie-3-frise-pivoines.webp",
     alt: "Crédence autour d'un lavabo, frise pivoines bleues",
     caption: "Frise pivoines bleues",
     sublegend: "Salle de bain · Île-de-France · 2024",
@@ -79,6 +83,7 @@ const projets = [
   },
   {
     src: "/images/galerie-2-dessin-floral.jpg",
+    webp: "/images/galerie-2-dessin-floral.webp",
     alt: "Crédence industrielle peinte à la main",
     caption: "Crédence industrielle",
     sublegend: "Maison de famille · 2024",
@@ -86,6 +91,7 @@ const projets = [
     height: 1280,
   },
 ];
+
 
 const reassPillars = [
   { Icon: Trophy, title: "1er Prix Versailles 2025", subtitle: "Ravalement décor céramique" },
@@ -195,7 +201,7 @@ function Index() {
           loop
           playsInline
           preload="metadata"
-          poster="/images/hero-credence.jpg"
+          poster="/images/hero-credence.webp"
           width="1920"
           height="1080"
           aria-label="Crédence en céramique peinte à la main, atelier Le Vésinet"
@@ -262,16 +268,21 @@ function Index() {
                   aria-label={`Agrandir : ${p.alt}`}
                 >
                   <div className="overflow-hidden">
-                    <img
-                      src={p.src}
-                      alt={p.alt}
-                      width={p.width}
-                      height={p.height}
-                      loading={i === 0 ? "eager" : "lazy"}
-                      decoding="async"
-                      className="w-full h-auto block transition-transform duration-1000 group-hover:scale-[1.03]"
-                    />
+                    <picture>
+                      <source type="image/webp" srcSet={p.webp} />
+                      <img
+                        src={p.src}
+                        alt={p.alt}
+                        width={p.width}
+                        height={p.height}
+                        loading={i === 0 ? "eager" : "lazy"}
+                        fetchPriority={i === 0 ? "high" : "auto"}
+                        decoding="async"
+                        className="w-full h-auto block transition-transform duration-1000 group-hover:scale-[1.03]"
+                      />
+                    </picture>
                   </div>
+
                 </button>
                 <figcaption className="mt-5 text-center">
                   <p className="font-['Cormorant_Garamond'] italic text-lg md:text-xl text-[#2a2a2a]">{p.caption}</p>
