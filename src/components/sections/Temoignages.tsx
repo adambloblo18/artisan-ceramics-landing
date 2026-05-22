@@ -4,7 +4,7 @@ import { trackEvent } from "@/lib/analytics";
 const projets = [
   {
     img: "/images/cuisine-credence-fleurs.png",
-    webp: "/images/cuisine-credence-fleurs.png",
+    webp: "/images/cuisine-credence-fleurs.webp",
     pill: "Cuisine",
     titre: "Une crédence verte pour une famille en Île-de-France",
     recit:
@@ -22,7 +22,7 @@ const projets = [
   },
   {
     img: "/images/frise-vaucresson.jpg",
-    webp: "/images/frise-vaucresson.jpg",
+    webp: "/images/frise-vaucresson.webp",
     pill: "Façade",
     titre: "Une frise florale pour une maison à Vaucresson",
     recit:

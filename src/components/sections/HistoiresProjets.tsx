@@ -6,7 +6,7 @@ import { trackEvent } from "@/lib/analytics";
 const histoires = [
   {
     img: "/images/cuisine-credence-fleurs.png",
-    webp: "/images/cuisine-credence-fleurs.png",
+    webp: "/images/cuisine-credence-fleurs.webp",
     titre: "Une cuisine de famille en Île-de-France",
     histoire:
       "Le couple voulait un motif qui rappelle les rideaux Liberty hérités de la grand-mère. Laurence a peint 28 carreaux sur tons verts pour habiller toute la crédence, en gardant la signature florale Art Nouveau.",
@@ -22,7 +22,7 @@ const histoires = [
   },
   {
     img: "/images/frise-vaucresson.jpg",
-    webp: "/images/frise-vaucresson.jpg",
+    webp: "/images/frise-vaucresson.webp",
     titre: "Une frise florale pour une maison à Vaucresson",
     histoire:
       "Les propriétaires de « La Salvarina » voulaient habiller leur façade en pierre meulière avec des motifs floraux Art Nouveau. Sept carreaux peints à la main, plus le cartouche signé sous la fenêtre, posés dans l'esprit des villas du début du XXᵉ siècle.",
