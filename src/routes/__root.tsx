@@ -53,8 +53,8 @@ const deferredThirdPartyScript = `
       disable_session_recording: false,
       respect_dnt: false,
       cross_subdomain_cookie: true,
-      persistence: 'memory',
-      session_recording: { maskAllInputs: true, maskTextSelector: '.ph-mask, input[type="email"], input[type="tel"]' }
+      persistence: 'localStorage+cookie',
+      session_recording: { maskAllInputs: false, maskInputOptions: { password: true, email: false } }
     });
   }
   var schedule = function(){ ('requestIdleCallback' in window) ? requestIdleCallback(boot, { timeout: 3000 }) : setTimeout(boot, 1500); };
