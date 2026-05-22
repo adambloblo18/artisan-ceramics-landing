@@ -24,7 +24,13 @@ function applyGranted() {
     ad_user_data: "granted",
     ad_personalization: "granted",
   });
-  try { (window as any).posthog?.opt_in_capturing?.(); } catch { /* noop */ }
+  try {
+    (window as any).posthog?.set_config?.({
+      persistence: "localStorage+cookie",
+      disable_session_recording: false,
+    });
+    (window as any).posthog?.startSessionRecording?.();
+  } catch { /* noop */ }
 }
 
 function applyDenied() {
@@ -34,7 +40,13 @@ function applyDenied() {
     ad_user_data: "denied",
     ad_personalization: "denied",
   });
-  try { (window as any).posthog?.opt_out_capturing?.(); } catch { /* noop */ }
+  try {
+    (window as any).posthog?.set_config?.({
+      persistence: "memory",
+      disable_session_recording: true,
+    });
+    (window as any).posthog?.stopSessionRecording?.();
+  } catch { /* noop */ }
 }
 
 export default function ConsentBanner() {
