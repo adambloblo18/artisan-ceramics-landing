@@ -63,7 +63,7 @@ const deferredThirdPartyScript = `
 })();
 `;
 
-const googleAdsScript = `gtag('js', new Date()); gtag('config', 'AW-11400865534');`;
+// googleAdsScript fusionné dans deferredThirdPartyScript ci-dessus
 
 const telConversionScript = `document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('a[href^="tel:"]').forEach(function(el) {
