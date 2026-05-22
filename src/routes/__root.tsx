@@ -67,6 +67,7 @@ posthog.init('phc_oGmkuM4F5je7WmaLZpsF47paa8nv5V5vp58oh74Pwcwy', {
   capture_pageleave: true,
   session_recording: { maskAllInputs: false, maskInputOptions: { password: true, email: false } }
 });
+`;
 
 // googleAdsScript fusionné dans deferredThirdPartyScript ci-dessus
 
