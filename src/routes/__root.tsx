@@ -181,8 +181,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "preconnect", href: "https://www.googletagmanager.com" },
-      { rel: "preconnect", href: "https://www.clarity.ms" },
-      { rel: "preconnect", href: "https://bat.bing.com" },
       { rel: "preload", as: "image", href: "/images/hero-credence.webp", type: "image/webp", fetchPriority: "high" },
       {
         rel: "stylesheet",
@@ -191,12 +189,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     scripts: [
       { children: consentScript },
-      
-      { children: clarityScript },
-      { children: uetScript },
-      { children: posthogScript },
-      { src: "https://www.googletagmanager.com/gtag/js?id=AW-11400865534", async: true },
-      { children: googleAdsScript },
+      { children: deferredThirdPartyScript },
       { children: telConversionScript },
       { type: "application/ld+json", children: jsonLd },
       { type: "application/ld+json", children: JSON.stringify(localBusinessSchema) },
