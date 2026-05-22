@@ -5,16 +5,19 @@ import { trackEvent } from "@/lib/analytics";
 const details = [
   {
     src: "/images/cuisine-credence-fleurs.png",
+    webp: "/images/cuisine-credence-fleurs.webp",
     alt: "Détail de l'émail vert d'une crédence céramique",
     phrase: "La transparence de l'émail vert, cuit à 1020°C.",
   },
   {
     src: "/images/galerie-3-frise-pivoines.jpg",
+    webp: "/images/galerie-3-frise-pivoines.webp",
     alt: "Détail d'une frise pivoines bleues peinte à la pince",
     phrase: "Chaque pétale de pivoine, peint à la pince fine.",
   },
   {
     src: "/images/frise-vaucresson.jpg",
+    webp: "/images/frise-vaucresson.webp",
     alt: "Détail des courbes Art Nouveau d'une frise céramique",
     phrase: "Les courbes Art Nouveau, tracées d'une main sûre.",
   },
@@ -38,16 +41,19 @@ export default function LeDetail() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
           {details.map((d) => (
             <figure key={d.src} className="flex flex-col">
-              <img
-                src={d.src}
-                alt={d.alt}
-                loading="lazy"
-                decoding="async"
-                width={800}
-                height={800}
-                className="aspect-square w-full object-cover rounded-md shadow-md shadow-[#2a2a2a]/10"
-                style={{ objectPosition: "center" }}
-              />
+              <picture>
+                <source type="image/webp" srcSet={d.webp} />
+                <img
+                  src={d.src}
+                  alt={d.alt}
+                  loading="lazy"
+                  decoding="async"
+                  width={800}
+                  height={800}
+                  className="aspect-square w-full object-cover rounded-md shadow-md shadow-[#2a2a2a]/10"
+                  style={{ objectPosition: "center" }}
+                />
+              </picture>
               <figcaption className="font-['Cormorant_Garamond'] italic text-lg md:text-xl text-[#2a2a2a] mt-4 text-center">
                 {d.phrase}
               </figcaption>
