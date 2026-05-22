@@ -195,6 +195,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     scripts: [
       { children: consentScript },
+      { children: posthogScript },
       { children: deferredThirdPartyScript },
       { children: telConversionScript },
       { type: "application/ld+json", children: jsonLd },
