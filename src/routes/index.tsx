@@ -524,7 +524,7 @@ function Index() {
       </footer>
 
       <StickyMobileBar onPhoneClick={() => setPhoneOpen(true)} />
-      <FloatingPhoneDesktop />
+      
       <PhoneModal open={phoneOpen} onClose={() => setPhoneOpen(false)} />
       <ConsentBanner />
 
