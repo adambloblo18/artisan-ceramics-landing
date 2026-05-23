@@ -7,7 +7,7 @@ export default function FloatingPhoneDesktop() {
 
   useEffect(() => {
     const onScroll = () => {
-      setVisible(window.scrollY > window.innerHeight);
+      setVisible(window.scrollY > 200);
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
