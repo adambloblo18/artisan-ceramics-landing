@@ -76,6 +76,13 @@ export default function MultiStepForm() {
     if (Date.now() - mountedAt.current < 2000) return;
 
     const redirectUrl = buildRedirectUrl(values);
+    const urlParams = typeof window !== "undefined" ? new URLSearchParams(window.location.search) : new URLSearchParams();
+    const source = urlParams.get("utm_source") || urlParams.get("source") || (typeof document !== "undefined" && document.referrer ? "referral" : "direct");
+    const page = typeof window !== "undefined" ? window.location.pathname : "";
+    const landingPage = typeof window !== "undefined" ? window.location.href : "";
+    const referrer = typeof document !== "undefined" ? document.referrer || "(aucun)" : "";
+    const submittedAt = new Date().toLocaleString("fr-FR", { timeZone: "Europe/Paris" });
+
     const payload = {
       access_key: WEB3FORMS_KEY,
       subject: "🏛️ Nouveau projet façade/restaurant - ceramique-murale.com",
@@ -89,6 +96,12 @@ export default function MultiStepForm() {
       type_projet: values.type,
       budget: "",
       echeance: "",
+      source,
+      page,
+      photo_facade_url: "(non applicable)",
+      landing_page: landingPage,
+      referrer,
+      submitted_at: submittedAt,
     };
 
     try {
