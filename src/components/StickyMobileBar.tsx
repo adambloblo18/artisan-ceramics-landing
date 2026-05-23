@@ -69,7 +69,7 @@ export default function StickyMobileBar(_props: Props) {
         className="flex-[2] inline-flex items-center justify-center gap-2 rounded-md border border-[#f9f7f2] bg-transparent text-[#f9f7f2] font-semibold py-3"
       >
         <Mail className="h-4 w-4" aria-hidden />
-        Devis
+        Contacter
       </a>
     </nav>
   );

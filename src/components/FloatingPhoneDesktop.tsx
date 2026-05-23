@@ -16,7 +16,7 @@ export default function FloatingPhoneDesktop() {
 
   return (
     <div
-      className={`fixed bottom-6 right-6 z-30 hidden md:flex transition-all duration-300 ${
+      className={`fixed bottom-6 right-6 z-30 flex transition-all duration-300 ${
         visible ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-5 pointer-events-none"
       }`}
     >
