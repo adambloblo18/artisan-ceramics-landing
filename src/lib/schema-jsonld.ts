@@ -51,6 +51,53 @@ export const serviceSchema = {
   },
 };
 
+export const professionalServiceSchema = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: "Atelier Le Vésinet — Laurence Brecher, céramiste",
+  image: "https://credence-ceramique.lovable.app/images/portrait-laurence.jpg",
+  url: "https://credence-ceramique.lovable.app/",
+  telephone: "+33670025133",
+  priceRange: "€€€",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "14 rue Ernest André",
+    addressLocality: "Le Vésinet",
+    postalCode: "78110",
+    addressCountry: "FR",
+    addressRegion: "Île-de-France",
+  },
+  areaServed: { "@type": "Country", name: "France" },
+  founder: { "@type": "Person", name: "Laurence Brecher" },
+  award:
+    "1er Prix du Ravalement de la Ville de Versailles 2025, catégorie Restitution de Décors",
+  serviceType: "Crédence céramique sur mesure peinte à la main",
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Crédences céramique",
+    itemListElement: [
+      {
+        "@type": "Offer",
+        itemOffered: { "@type": "Service", name: "Crédence simple" },
+        priceCurrency: "EUR",
+        price: "1000",
+      },
+      {
+        "@type": "Offer",
+        itemOffered: { "@type": "Service", name: "Crédence sur mesure" },
+        priceCurrency: "EUR",
+        price: "2500",
+      },
+      {
+        "@type": "Offer",
+        itemOffered: { "@type": "Service", name: "Crédence d'exception" },
+        priceCurrency: "EUR",
+        price: "5000",
+      },
+    ],
+  },
+};
+
 export const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",

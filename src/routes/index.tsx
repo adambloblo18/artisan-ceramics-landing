@@ -20,7 +20,20 @@ const SectionSkeleton = ({ minHeight = 600 }: { minHeight?: number }) => (
   <div style={{ minHeight }} aria-hidden />
 );
 
-export const Route = createFileRoute("/")({ component: Index });
+import { professionalServiceSchema } from "@/lib/schema-jsonld";
+
+export const Route = createFileRoute("/")({
+  head: () => ({
+    links: [{ rel: "canonical", href: "https://credence-ceramique.lovable.app/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(professionalServiceSchema),
+      },
+    ],
+  }),
+  component: Index,
+});
 
 const TrophyIcon = ({ className = "h-4 w-4" }: { className?: string }) => (
   <svg
