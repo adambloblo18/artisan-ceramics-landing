@@ -71,10 +71,6 @@ posthog.init('phc_oGmkuM4F5je7WmaLZpsF47paa8nv5V5vp58oh74Pwcwy', {
 
 // googleAdsScript fusionné dans deferredThirdPartyScript ci-dessus
 
-// Promeut la feuille de styles Google Fonts (chargée en media="print" pour
-// ne pas bloquer le rendu) vers media="all" dès qu'elle est prête.
-const fontSwapScript = `(function(){var l=document.querySelector('link[data-font-swap]');if(!l)return;function s(){l.media='all'}if(l.sheet){s()}else{l.addEventListener('load',s,{once:true})}})();`;
-
 const telConversionScript = `document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('a[href^="tel:"]').forEach(function(el) {
     el.addEventListener('click', function() {
