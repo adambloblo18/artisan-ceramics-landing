@@ -1,21 +1,24 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import PhoneModal from "@/components/PhoneModal";
-import ConsentBanner from "@/components/ConsentBanner";
 import StickyMobileBar from "@/components/StickyMobileBar";
 import FloatingPhoneDesktop from "@/components/FloatingPhoneDesktop";
-import MultiStepForm from "@/components/MultiStepForm";
-import Faq from "@/components/Faq";
-import VisualiseurSection from "@/components/sections/VisualiseurSection";
-import HistoiresProjets from "@/components/sections/HistoiresProjets";
-import Temoignages from "@/components/sections/Temoignages";
-import Prescripteurs from "@/components/sections/Prescripteurs";
 import TrustStrip from "@/components/sections/TrustStrip";
-
-import LeDetail from "@/components/sections/LeDetail";
 import InlineCta from "@/components/InlineCta";
 import { trackEvent } from "@/lib/analytics";
 import { Trophy, ArrowRight, Phone, Hand, Landmark, MapPin, Truck } from "lucide-react";
+
+const MultiStepForm = lazy(() => import("@/components/MultiStepForm"));
+const Faq = lazy(() => import("@/components/Faq"));
+const VisualiseurSection = lazy(() => import("@/components/sections/VisualiseurSection"));
+const Temoignages = lazy(() => import("@/components/sections/Temoignages"));
+const Prescripteurs = lazy(() => import("@/components/sections/Prescripteurs"));
+const LeDetail = lazy(() => import("@/components/sections/LeDetail"));
+const ConsentBanner = lazy(() => import("@/components/ConsentBanner"));
+
+const SectionSkeleton = ({ minHeight = 600 }: { minHeight?: number }) => (
+  <div style={{ minHeight }} aria-hidden />
+);
 
 export const Route = createFileRoute("/")({ component: Index });
 
@@ -343,7 +346,9 @@ function Index() {
         source="after_gallery"
       />
 
-      <div className="reveal-on-scroll"><LeDetail /></div>
+      <Suspense fallback={<SectionSkeleton minHeight={700} />}>
+        <div className="reveal-on-scroll"><LeDetail /></div>
+      </Suspense>
 
       {/* PROCESS */}
       <section className="bg-white py-20 sm:py-28 reveal-on-scroll">
@@ -361,7 +366,9 @@ function Index() {
         </div>
       </section>
 
-      <div className="reveal-on-scroll"><Temoignages /></div>
+      <Suspense fallback={<SectionSkeleton minHeight={600} />}>
+        <div className="reveal-on-scroll"><Temoignages /></div>
+      </Suspense>
 
       <InlineCta
         eyebrow="À votre tour"
@@ -369,9 +376,14 @@ function Index() {
         source="after_temoignages"
       />
 
-      <div className="reveal-on-scroll"><Prescripteurs /></div>
+      <Suspense fallback={<SectionSkeleton minHeight={700} />}>
+        <div className="reveal-on-scroll"><Prescripteurs /></div>
+      </Suspense>
 
-      <div className="reveal-on-scroll"><VisualiseurSection /></div>
+      <Suspense fallback={<SectionSkeleton minHeight={600} />}>
+        <div className="reveal-on-scroll"><VisualiseurSection /></div>
+      </Suspense>
+
 
       {/* PRIX */}
       <section className="bg-[var(--cream)] py-20 sm:py-28">
@@ -454,7 +466,9 @@ function Index() {
             Décrivez-nous votre envie en quelques clics. Laurence vous rappelle personnellement en moins de 20 minutes.
           </p>
           <div className="mt-10">
-            <MultiStepForm />
+            <Suspense fallback={<SectionSkeleton minHeight={500} />}>
+              <MultiStepForm />
+            </Suspense>
           </div>
         </div>
       </section>
@@ -464,10 +478,13 @@ function Index() {
         <div className="mx-auto max-w-4xl px-4 sm:px-6">
           <h2 className="text-center font-display text-3xl italic sm:text-[44px]">Vos questions.</h2>
           <div className="mt-12">
-            <Faq />
+            <Suspense fallback={<SectionSkeleton minHeight={400} />}>
+              <Faq />
+            </Suspense>
           </div>
         </div>
       </section>
+
 
       </main>
 
@@ -526,7 +543,7 @@ function Index() {
       <StickyMobileBar onPhoneClick={() => setPhoneOpen(true)} />
       
       <PhoneModal open={phoneOpen} onClose={() => setPhoneOpen(false)} />
-      <ConsentBanner />
+      <Suspense fallback={null}><ConsentBanner /></Suspense>
 
       {lightbox && (
         <div
