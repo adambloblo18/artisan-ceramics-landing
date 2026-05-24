@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState, useEffect, lazy, Suspense } from "react";
+import { useState, useEffect, useRef, lazy, Suspense } from "react";
 import PhoneModal from "@/components/PhoneModal";
 import StickyMobileBar from "@/components/StickyMobileBar";
 import FloatingPhoneDesktop from "@/components/FloatingPhoneDesktop";
