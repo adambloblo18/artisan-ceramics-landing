@@ -185,16 +185,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon-16x16.png" },
       { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
       { rel: "manifest", href: "/site.webmanifest" },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "preconnect", href: "https://www.googletagmanager.com" },
       { rel: "preload", as: "image", href: "/images/hero-credence.webp", type: "image/webp", fetchPriority: "high" },
-      {
-        rel: "preload",
-        as: "style",
-        href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap",
-        onLoad: "this.onload=null;this.rel='stylesheet'",
-      } as unknown as { rel: string; href: string },
+      { rel: "preload", as: "font", href: "/fonts/dm-sans-latin.woff2", type: "font/woff2", crossOrigin: "anonymous" },
+      { rel: "preload", as: "font", href: "/fonts/cormorant-garamond-400-latin.woff2", type: "font/woff2", crossOrigin: "anonymous" },
     ],
     scripts: [
       { children: consentScript },
