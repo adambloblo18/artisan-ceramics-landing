@@ -216,7 +216,15 @@ function RootShell({ children }: { children: React.ReactNode }) {
   return (
     <html lang="fr">
       <head>
+        {/* Critical CSS inline — above-the-fold (header + hero) */}
+        <style dangerouslySetInnerHTML={{ __html: criticalCss }} />
         <HeadContent />
+        {/* Fallback no-JS : si onLoad ne s'exécute pas, on charge la CSS normalement */}
+        <noscript>
+          <link rel="stylesheet" href={appCss} />
+        </noscript>
+        {/* Safety net : si l'onLoad a déjà été manqué (cache, parsing), forcer le swap */}
+        <script dangerouslySetInnerHTML={{ __html: cssSwapScript }} />
       </head>
       <body>
         {children}
