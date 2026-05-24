@@ -183,7 +183,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { httpEquiv: "content-language", content: "fr-FR" },
     ],
     links: [
-      { rel: "stylesheet", href: appCss },
+      // Non-render-blocking : media="print" puis swap vers 'all' via script onload
+      { rel: "stylesheet", href: appCss, id: "app-css", media: "print", onLoad: "this.media='all'" } as unknown as { rel: string; href: string },
       { rel: "icon", href: "/favicon.ico", sizes: "any" },
       { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32x32.png" },
       { rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon-16x16.png" },
