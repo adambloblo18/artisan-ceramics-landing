@@ -466,7 +466,9 @@ function Index() {
             Décrivez-nous votre envie en quelques clics. Laurence vous rappelle personnellement en moins de 20 minutes.
           </p>
           <div className="mt-10">
-            <MultiStepForm />
+            <Suspense fallback={<SectionSkeleton minHeight={500} />}>
+              <MultiStepForm />
+            </Suspense>
           </div>
         </div>
       </section>
@@ -476,10 +478,13 @@ function Index() {
         <div className="mx-auto max-w-4xl px-4 sm:px-6">
           <h2 className="text-center font-display text-3xl italic sm:text-[44px]">Vos questions.</h2>
           <div className="mt-12">
-            <Faq />
+            <Suspense fallback={<SectionSkeleton minHeight={400} />}>
+              <Faq />
+            </Suspense>
           </div>
         </div>
       </section>
+
 
       </main>
 
