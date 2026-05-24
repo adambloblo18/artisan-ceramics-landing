@@ -60,121 +60,31 @@ const HERO_IMG = "/images/cuisine-verte.jpg";
 const PRIX_BG = "/images/prix.jpg";
 
 /**
- * Vidéo hero chargée APRÈS le LCP.
- * - preload="none" + pas de autoPlay au montage
- * - Sources injectées seulement quand : (a) section visible ET (b) 2s écoulées depuis 'load'
- * - Désactivée via CSS si prefers-reduced-data: reduce
+ * Vidéo hero : autoplay muted loop, preload="metadata".
+ * Fichiers réencodés : WebM VP9 ~410 Ko + MP4 H.264 ~379 Ko, 720p, 6s loop.
+ * Le poster <img> au-dessus reste le LCP candidate (affiché immédiatement).
  */
-function HeroLazyVideo() {
-  const videoRef = useRef<HTMLVideoElement | null>(null);
-  const [activate, setActivate] = useState(false);
-  const [ready, setReady] = useState(false);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    // Respect data saver
-    if (window.matchMedia?.("(prefers-reduced-data: reduce)").matches) return;
-    const conn = (navigator as unknown as { connection?: { saveData?: boolean; effectiveType?: string } }).connection;
-    if (conn?.saveData) return;
-    if (conn?.effectiveType && /2g/.test(conn.effectiveType)) return;
-
-    let cancelled = false;
-    let io: IntersectionObserver | null = null;
-    let delayTimer: number | null = null;
-    let visible = false;
-    let delayElapsed = false;
-
-    const maybeActivate = () => {
-      if (!cancelled && visible && delayElapsed) setActivate(true);
-    };
-
-    const startDelay = () => {
-      const w = window as unknown as { requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number };
-      const trigger = () => {
-        delayElapsed = true;
-        maybeActivate();
-      };
-      if (w.requestIdleCallback) {
-        delayTimer = window.setTimeout(() => w.requestIdleCallback!(trigger, { timeout: 1000 }), 2000);
-      } else {
-        delayTimer = window.setTimeout(trigger, 2000);
-      }
-    };
-
-    const armObserver = () => {
-      const el = videoRef.current;
-      if (!el) return;
-      io = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((e) => {
-            if (e.isIntersecting) {
-              visible = true;
-              maybeActivate();
-            }
-          });
-        },
-        { rootMargin: "0px", threshold: 0.01 }
-      );
-      io.observe(el);
-    };
-
-    if (document.readyState === "complete") {
-      startDelay();
-      armObserver();
-    } else {
-      window.addEventListener("load", () => {
-        startDelay();
-        armObserver();
-      }, { once: true });
-    }
-
-    return () => {
-      cancelled = true;
-      if (delayTimer) window.clearTimeout(delayTimer);
-      io?.disconnect();
-    };
-  }, []);
-
-  // Quand activé : assigne les sources et déclenche la lecture
-  useEffect(() => {
-    if (!activate) return;
-    const v = videoRef.current;
-    if (!v) return;
-    // Inject sources dynamically
-    if (!v.querySelector("source")) {
-      const webm = document.createElement("source");
-      webm.src = "/video/header.webm";
-      webm.type = "video/webm";
-      const mp4 = document.createElement("source");
-      mp4.src = "/video/header.mp4";
-      mp4.type = "video/mp4";
-      v.appendChild(webm);
-      v.appendChild(mp4);
-      v.load();
-    }
-    const onCanPlay = () => {
-      setReady(true);
-      v.play().catch(() => {});
-    };
-    v.addEventListener("canplay", onCanPlay, { once: true });
-    return () => v.removeEventListener("canplay", onCanPlay);
-  }, [activate]);
-
+function HeroVideo() {
   return (
     <video
-      ref={videoRef}
+      autoPlay
       muted
       loop
       playsInline
-      preload="none"
+      preload="metadata"
       aria-hidden="true"
       tabIndex={-1}
       width={1280}
       height={720}
-      className={`hero-lazy-video absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${ready ? "opacity-100" : "opacity-0"}`}
-    />
+      poster="/images/hero-credence.webp"
+      className="hero-lazy-video absolute inset-0 w-full h-full object-cover"
+    >
+      <source src="/video/header.webm" type="video/webm" />
+      <source src="/video/header.mp4" type="video/mp4" />
+    </video>
   );
 }
+
 const LAURENCE_IMG = "/images/portrait-laurence.jpg";
 
 const projets = [
@@ -338,7 +248,7 @@ function Index() {
           decoding="async"
           className="absolute inset-0 w-full h-full object-cover"
         />
-        <HeroLazyVideo />
+        <HeroVideo />
         <h1 className="sr-only">Crédence céramique sur mesure peinte à la main — Atelier Le Vésinet</h1>
         {/* voile très léger en bas pour le scroll cue, sans masquer l'œuvre */}
         <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#2a2a2a]/40 to-transparent pointer-events-none" />
