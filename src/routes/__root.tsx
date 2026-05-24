@@ -201,9 +201,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap",
         media: "print",
-        // @ts-expect-error promu en "all" via le script fontSwapScript ci-dessous
         "data-font-swap": "true",
-      },
+      } as unknown as { rel: string; href: string },
     ],
     scripts: [
       { children: consentScript },
