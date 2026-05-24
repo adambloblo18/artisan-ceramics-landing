@@ -12,6 +12,10 @@ import {
 import appCss from "../styles.css?url";
 import { localBusinessSchema, serviceSchema, faqSchema } from "@/lib/schema-jsonld";
 
+// Critical CSS — above-the-fold (header + hero), inline + non-render-blocking
+const criticalCss = `*,*::before,*::after{box-sizing:border-box}*{margin:0;padding:0}html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}@font-face{font-family:"DM Sans";font-style:normal;font-weight:100 1000;font-display:swap;font-synthesis:none;src:url("/fonts/dm-sans-latin.woff2") format("woff2-variations"),url("/fonts/dm-sans-latin.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:"Cormorant Garamond";font-style:normal;font-weight:400;font-display:swap;font-synthesis:weight;src:url("/fonts/cormorant-garamond-400-latin.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}body{background:#f9f7f2;color:#2a2a2a;font-family:"DM Sans",system-ui,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;margin:0}img,svg,video{display:block;max-width:100%}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.h-display{font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;letter-spacing:-0.01em}#site-header{position:sticky;top:0;z-index:50;height:56px;background:rgba(249,247,242,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #e8e8e8}#site-header>div{margin:0 auto;display:flex;height:100%;max-width:72rem;align-items:center;justify-content:space-between;padding:0 1rem}#site-header a{color:#2a2a2a;text-decoration:none;display:inline-flex;align-items:center;gap:.5rem}#site-header a[href^="tel:"]{color:#a07308;font-weight:600;font-size:14px;min-height:48px}@media(min-width:640px){#site-header>div{padding:0 1.5rem}}@media(min-width:768px){#site-header{height:64px}}#hero{position:relative;width:100%;height:calc(100vh - 3.5rem);overflow:hidden;background:#2a2a2a}@media(min-width:768px){#hero{height:calc(100vh - 4rem)}}#hero>img,#hero>video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}#hero>div{position:absolute;left:0;right:0;bottom:0;height:8rem;background:linear-gradient(to top,rgba(42,42,42,.4),transparent);pointer-events:none}#hero>button{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);z-index:10;display:flex;flex-direction:column;align-items:center;gap:.5rem;color:rgba(249,247,242,.8);background:transparent;border:0;cursor:pointer;font-family:"DM Sans",system-ui,sans-serif}`;
+const cssSwapScript = `(function(){var l=document.getElementById('app-css');if(l){l.media='all'}})();`;
+
 const consentScript = `
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
@@ -179,7 +183,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { httpEquiv: "content-language", content: "fr-FR" },
     ],
     links: [
-      { rel: "stylesheet", href: appCss },
+      // Non-render-blocking : media="print" puis swap vers 'all' via script onload
+      { rel: "stylesheet", href: appCss, id: "app-css", media: "print", onLoad: "this.media='all'" } as unknown as { rel: string; href: string },
       { rel: "icon", href: "/favicon.ico", sizes: "any" },
       { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32x32.png" },
       { rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon-16x16.png" },
@@ -211,7 +216,15 @@ function RootShell({ children }: { children: React.ReactNode }) {
   return (
     <html lang="fr">
       <head>
+        {/* Critical CSS inline — above-the-fold (header + hero) */}
+        <style dangerouslySetInnerHTML={{ __html: criticalCss }} />
         <HeadContent />
+        {/* Fallback no-JS : si onLoad ne s'exécute pas, on charge la CSS normalement */}
+        <noscript>
+          <link rel="stylesheet" href={appCss} />
+        </noscript>
+        {/* Safety net : si l'onLoad a déjà été manqué (cache, parsing), forcer le swap */}
+        <script dangerouslySetInnerHTML={{ __html: cssSwapScript }} />
       </head>
       <body>
         {children}
