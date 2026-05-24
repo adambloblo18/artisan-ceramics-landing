@@ -90,6 +90,13 @@
     outline-offset: 2px;
   }
   input, textarea, select { font-size: 16px; }
+  /* Cible tactile minimum (WCAG 2.5.5) — boutons, liens tel, et inputs de formulaire */
+  button, a[href^="tel:"], [role="button"] { min-height: 48px; }
+  a[href^="tel:"] { display: inline-flex; align-items: center; }
+  form input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]),
+  form textarea,
+  form select,
+  form button[type="submit"] { min-height: 48px; }
 }
 
 @layer components {
