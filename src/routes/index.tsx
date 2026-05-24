@@ -209,23 +209,19 @@ function Index() {
       </header>
 
       <main id="main-content">
-      {/* HERO — vidéo plein écran, immersive */}
+      {/* HERO — poster image = LCP candidate, vidéo chargée après le LCP */}
       <section className="relative h-[calc(100vh-3.5rem)] md:h-[calc(100vh-4rem)] w-full overflow-hidden bg-[#2a2a2a]">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          poster="/images/hero-credence.webp"
-          width="1920"
-          height="1080"
-          aria-label="Crédence en céramique peinte à la main, atelier Le Vésinet"
+        <img
+          src="/images/hero-credence.webp"
+          alt="Crédence en céramique peinte à la main, atelier Le Vésinet"
+          width={1920}
+          height={1080}
+          fetchPriority="high"
+          loading="eager"
+          decoding="async"
           className="absolute inset-0 w-full h-full object-cover"
-        >
-          <source src="/video/header.webm" type="video/webm" />
-          <source src="/video/header.mp4" type="video/mp4" />
-        </video>
+        />
+        <HeroLazyVideo />
         <h1 className="sr-only">Crédence céramique sur mesure peinte à la main — Atelier Le Vésinet</h1>
         {/* voile très léger en bas pour le scroll cue, sans masquer l'œuvre */}
         <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#2a2a2a]/40 to-transparent pointer-events-none" />
