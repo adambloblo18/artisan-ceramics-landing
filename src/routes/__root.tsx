@@ -192,17 +192,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "preload",
         as: "style",
         href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap",
-      },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap",
-        media: "print",
-        "data-font-swap": "true",
+        onLoad: "this.onload=null;this.rel='stylesheet'",
       } as unknown as { rel: string; href: string },
     ],
     scripts: [
       { children: consentScript },
-      { children: fontSwapScript },
       { children: posthogScript },
       { children: deferredThirdPartyScript },
       { children: telConversionScript },
