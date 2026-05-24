@@ -12,4 +12,29 @@ export default defineConfig({
   tanstackStart: {
     server: { entry: "server" },
   },
+  vite: {
+    build: {
+      target: "es2020",
+      minify: "esbuild",
+      sourcemap: false,
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (!id.includes("node_modules")) return;
+            if (id.includes("react-dom") || id.match(/[\\/]react[\\/]/)) return "vendor-react";
+            if (id.includes("@tanstack")) return "vendor-router";
+            if (id.includes("@radix-ui") || id.includes("lucide-react")) return "vendor-ui";
+            if (
+              id.includes("zod") ||
+              id.includes("react-hook-form") ||
+              id.includes("clsx") ||
+              id.includes("tailwind-merge") ||
+              id.includes("class-variance-authority")
+            )
+              return "vendor-utils";
+          },
+        },
+      },
+    },
+  },
 });
