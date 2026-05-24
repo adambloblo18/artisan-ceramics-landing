@@ -65,7 +65,8 @@ posthog.init('phc_oGmkuM4F5je7WmaLZpsF47paa8nv5V5vp58oh74Pwcwy', {
   autocapture: true,
   capture_pageview: 'history_change',
   capture_pageleave: true,
-  session_recording: { maskAllInputs: false, maskInputOptions: { password: true, email: false } }
+  rate_limiting: { events_per_second: 50, events_burst_limit: 500 },
+  session_recording: { sampleRate: 1.0, minimumDurationMilliseconds: 0, maskAllInputs: false, maskInputOptions: { password: true, email: false } }
 });
 `;
 
