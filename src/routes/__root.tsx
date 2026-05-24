@@ -180,8 +180,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { httpEquiv: "content-language", content: "fr-FR" },
     ],
     links: [
-      // Non-render-blocking : media="print" puis swap vers 'all' via script onload
-      { rel: "stylesheet", href: appCss, id: "app-css", media: "print", onLoad: "this.media='all'" } as unknown as { rel: string; href: string },
+      { rel: "stylesheet", href: appCss },
+
       { rel: "icon", href: "/favicon.ico", sizes: "any" },
       { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32x32.png" },
       { rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon-16x16.png" },
@@ -213,15 +213,8 @@ function RootShell({ children }: { children: React.ReactNode }) {
   return (
     <html lang="fr">
       <head>
-        {/* Critical CSS inline — above-the-fold (header + hero) */}
-        <style dangerouslySetInnerHTML={{ __html: criticalCss }} />
         <HeadContent />
-        {/* Fallback no-JS : si onLoad ne s'exécute pas, on charge la CSS normalement */}
-        <noscript>
-          <link rel="stylesheet" href={appCss} />
-        </noscript>
-        {/* Safety net : si l'onLoad a déjà été manqué (cache, parsing), forcer le swap */}
-        <script dangerouslySetInnerHTML={{ __html: cssSwapScript }} />
+
       </head>
       <body>
         {children}
