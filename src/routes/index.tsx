@@ -543,7 +543,7 @@ function Index() {
       <StickyMobileBar onPhoneClick={() => setPhoneOpen(true)} />
       
       <PhoneModal open={phoneOpen} onClose={() => setPhoneOpen(false)} />
-      <ConsentBanner />
+      <Suspense fallback={null}><ConsentBanner /></Suspense>
 
       {lightbox && (
         <div
