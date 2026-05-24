@@ -165,3 +165,8 @@
   opacity: 1;
   transform: none;
 }
+
+/* Data Saver / connexions économes : ne pas charger la vidéo hero */
+@media (prefers-reduced-data: reduce) {
+  .hero-lazy-video { display: none !important; }
+}
