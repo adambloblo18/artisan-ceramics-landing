@@ -71,6 +71,10 @@ posthog.init('phc_oGmkuM4F5je7WmaLZpsF47paa8nv5V5vp58oh74Pwcwy', {
 
 // googleAdsScript fusionné dans deferredThirdPartyScript ci-dessus
 
+// Promeut la feuille de styles Google Fonts (chargée en media="print" pour
+// ne pas bloquer le rendu) vers media="all" dès qu'elle est prête.
+const fontSwapScript = `(function(){var l=document.querySelector('link[data-font-swap]');if(!l)return;function s(){l.media='all'}if(l.sheet){s()}else{l.addEventListener('load',s,{once:true})}})();`;
+
 const telConversionScript = `document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('a[href^="tel:"]').forEach(function(el) {
     el.addEventListener('click', function() {
@@ -189,12 +193,20 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://www.googletagmanager.com" },
       { rel: "preload", as: "image", href: "/images/hero-credence.webp", type: "image/webp", fetchPriority: "high" },
       {
-        rel: "stylesheet",
+        rel: "preload",
+        as: "style",
         href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap",
       },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap",
+        media: "print",
+        "data-font-swap": "true",
+      } as unknown as { rel: string; href: string },
     ],
     scripts: [
       { children: consentScript },
+      { children: fontSwapScript },
       { children: posthogScript },
       { children: deferredThirdPartyScript },
       { children: telConversionScript },
