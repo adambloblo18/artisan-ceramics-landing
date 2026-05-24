@@ -65,9 +65,9 @@ const PRIX_BG = "/images/prix.jpg";
  * Le poster <img> au-dessus reste le LCP candidate (affiché immédiatement).
  */
 function HeroVideo() {
-  const ref = React.useRef<HTMLVideoElement | null>(null);
+  const ref = useRef<HTMLVideoElement | null>(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const video = ref.current;
     if (!video) return;
     let io: IntersectionObserver | null = null;
