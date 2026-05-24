@@ -202,6 +202,7 @@ export default function MultiStepForm() {
           <input
             id="telephone"
             type="tel"
+            inputMode="tel"
             autoComplete="tel"
             placeholder="06 12 34 56 78"
             aria-required="true"
