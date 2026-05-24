@@ -346,7 +346,9 @@ function Index() {
         source="after_gallery"
       />
 
-      <div className="reveal-on-scroll"><LeDetail /></div>
+      <Suspense fallback={<SectionSkeleton minHeight={700} />}>
+        <div className="reveal-on-scroll"><LeDetail /></div>
+      </Suspense>
 
       {/* PROCESS */}
       <section className="bg-white py-20 sm:py-28 reveal-on-scroll">
@@ -364,7 +366,9 @@ function Index() {
         </div>
       </section>
 
-      <div className="reveal-on-scroll"><Temoignages /></div>
+      <Suspense fallback={<SectionSkeleton minHeight={600} />}>
+        <div className="reveal-on-scroll"><Temoignages /></div>
+      </Suspense>
 
       <InlineCta
         eyebrow="À votre tour"
@@ -372,9 +376,14 @@ function Index() {
         source="after_temoignages"
       />
 
-      <div className="reveal-on-scroll"><Prescripteurs /></div>
+      <Suspense fallback={<SectionSkeleton minHeight={700} />}>
+        <div className="reveal-on-scroll"><Prescripteurs /></div>
+      </Suspense>
 
-      <div className="reveal-on-scroll"><VisualiseurSection /></div>
+      <Suspense fallback={<SectionSkeleton minHeight={600} />}>
+        <div className="reveal-on-scroll"><VisualiseurSection /></div>
+      </Suspense>
+
 
       {/* PRIX */}
       <section className="bg-[var(--cream)] py-20 sm:py-28">
