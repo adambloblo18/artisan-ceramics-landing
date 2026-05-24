@@ -60,14 +60,44 @@ const HERO_IMG = "/images/cuisine-verte.jpg";
 const PRIX_BG = "/images/prix.jpg";
 
 /**
- * Vidéo hero : autoplay muted loop, preload="metadata".
- * Fichiers réencodés : WebM VP9 ~410 Ko + MP4 H.264 ~379 Ko, 720p, 6s loop.
+ * Vidéo hero : autoplay différé via IntersectionObserver après LCP (>2s).
+ * Fichiers : WebM VP9 ~410 Ko + MP4 H.264 ~379 Ko, 720p, 6s loop.
  * Le poster <img> au-dessus reste le LCP candidate (affiché immédiatement).
  */
 function HeroVideo() {
+  const ref = React.useRef<HTMLVideoElement | null>(null);
+
+  React.useEffect(() => {
+    const video = ref.current;
+    if (!video) return;
+    let io: IntersectionObserver | null = null;
+    let started = false;
+    const start = () => {
+      if (started) return;
+      started = true;
+      io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              video.play().catch(() => {});
+              io?.disconnect();
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+      io.observe(video);
+    };
+    const t = window.setTimeout(start, 2000);
+    return () => {
+      window.clearTimeout(t);
+      io?.disconnect();
+    };
+  }, []);
+
   return (
     <video
-      autoPlay
+      ref={ref}
       muted
       loop
       playsInline
@@ -84,6 +114,7 @@ function HeroVideo() {
     </video>
   );
 }
+
 
 const LAURENCE_IMG = "/images/portrait-laurence.jpg";
 
