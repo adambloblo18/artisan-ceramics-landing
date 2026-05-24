@@ -216,7 +216,7 @@ function Index() {
   return (
     <div id="main" className="min-h-screen bg-[var(--cream)]">
       {/* HEADER */}
-      <header className="sticky top-0 z-50 h-14 md:h-16 border-b border-[var(--border)] bg-[#f9f7f2]/90 backdrop-blur-md">
+      <header id="site-header" className="sticky top-0 z-50 h-14 md:h-16 border-b border-[var(--border)] bg-[#f9f7f2]/90 backdrop-blur-md">
         <div className="mx-auto flex h-full max-w-6xl items-center justify-between px-4 sm:px-6">
           <a href="#main-content" className="h-display text-[15px] sm:text-xl leading-tight text-[var(--anthracite)]">
             Les Céramiques Murales du Vésinet
@@ -237,7 +237,7 @@ function Index() {
 
       <main id="main-content">
       {/* HERO — poster image = LCP candidate, vidéo chargée après le LCP */}
-      <section className="relative h-[calc(100vh-3.5rem)] md:h-[calc(100vh-4rem)] w-full overflow-hidden bg-[#2a2a2a]">
+      <section id="hero" className="relative h-[calc(100vh-3.5rem)] md:h-[calc(100vh-4rem)] w-full overflow-hidden bg-[#2a2a2a]">
         <img
           src="/images/hero-credence.webp"
           alt="Crédence en céramique peinte à la main, atelier Le Vésinet"
