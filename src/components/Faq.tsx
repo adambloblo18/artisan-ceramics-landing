@@ -5,12 +5,12 @@ const items = [
   {
     id: "Q1",
     q: "Combien coûte une crédence en céramique sur mesure ?",
-    a: "Les projets démarrent à partir de 1 000 € pour une petite réalisation. Pour une crédence sur mesure de 2 à 4 m², comptez entre 2 500 et 5 000 €. Au-delà, le budget dépend de la complexité du projet. Nous établissons une étude personnalisée gratuite après un premier échange.",
+    a: "Les projets démarrent à partir de 1 000 € pour une petite réalisation. Pour une crédence sur mesure de 2 à 4 m², comptez entre 2 500 et 5 000 €. Au-delà, le budget dépend de la complexité du projet. Nous établissons une étude personnalisée après un premier échange.",
   },
   {
     id: "Q2",
     q: "En combien de temps livrez-vous ?",
-    a: "Comptez 6 à 10 semaines de création artisanale. Laurence prépare les terres, peint chaque carreau à la pince, le cuit deux fois à 1020°C, et personnalise selon votre projet. C'est ce temps qui fait la différence entre une crédence industrielle et la vôtre. Pour les projets urgents, nous pouvons accélérer : nous avons restauré 30 carreaux Art Nouveau à Maisons-Lafitte en moins de deux mois.",
+    a: "Comptez 6 à 10 semaines de création artisanale. Laurence prépare les terres, peint chaque carreau à la pince, le cuit deux fois à 1020°C, et personnalise selon votre projet. C'est ce temps qui fait la différence entre une crédence industrielle et la vôtre. Pour les projets urgents, nous pouvons accélérer.",
   },
   {
     id: "Q3",
@@ -20,7 +20,7 @@ const items = [
   {
     id: "Q4",
     q: "Travaillez-vous avec des architectes et des décorateurs ?",
-    a: "Absolument. Nous accompagnons les architectes et décorateurs sur les projets résidentiels et hospitality avec : échantillons techniques gratuits sous 5 jours, BDD motifs et coloris pour vos planches matériaux, tarification dégressive sur volumes 5m² et plus, et un référent unique chez nous pour vos projets clients. Contactez-nous directement à laurence@ceramique-murale.com avec mention 'Prescripteur' en objet.",
+    a: "Absolument. Nous accompagnons les architectes et décorateurs sur les projets résidentiels et hospitality avec : échantillons techniques sous 5 jours, BDD motifs et coloris pour vos planches matériaux, tarification dégressive sur volumes 5m² et plus, et un référent unique chez nous pour vos projets clients. Contactez-nous directement à laurence@ceramique-murale.com avec mention 'Prescripteur' en objet.",
   },
   {
     id: "Q5",

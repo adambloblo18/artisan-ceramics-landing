@@ -6,19 +6,19 @@ const projets = [
     img: "/images/cuisine-credence-fleurs.png",
     webp: "/images/cuisine-credence-fleurs.webp",
     pill: "Cuisine",
-    titre: "Une crédence verte pour une famille en Île-de-France",
+    titre: "Une crédence florale sur tons verts",
     recit:
-      "Un couple voulait une cuisine vivante, qui sortait du blanc et du gris. Laurence a dessiné une composition florale sur tons verts, peinte à la pince sur 2,8 m². 8 semaines de travail, 6 cuissons, livraison sans casse.",
-    meta: "Île-de-France · 2025",
+      "Une composition florale peinte à la main, sur toute la longueur de la crédence.",
+    meta: "Crédence de cuisine",
   },
   {
     img: "/images/galerie-3-frise-pivoines.jpg",
     webp: "/images/galerie-3-frise-pivoines.webp",
     pill: "Salle de bain",
-    titre: "Une frise pivoines pour une salle de bain de caractère",
+    titre: "Une frise fleurie au-dessus d'un évier",
     recit:
-      "Une frise large de pivoines bleues autour du lavabo, dans une salle de bain à la décoration affirmée. Le défi : un motif qui dialogue avec la robinetterie ancienne sans saturer l'espace. 5 maquettes aquarelle avant la version finale.",
-    meta: "Île-de-France · 2024",
+      "Une frise de fleurs bleu-vert sur fond blanc, peinte à la main.",
+    meta: "Mini-crédence",
   },
   {
     img: "/images/frise-vaucresson.jpg",
@@ -26,7 +26,7 @@ const projets = [
     pill: "Façade",
     titre: "Une frise florale pour une maison à Vaucresson",
     recit:
-      "Les propriétaires de « La Salvarina » voulaient habiller leur façade en pierre meulière avec des motifs floraux Art Nouveau. Sept carreaux peints à la main, plus le cartouche signé sous la fenêtre, posés dans l'esprit des villas du début du XXᵉ siècle.",
+      "Sept carreaux fleuris peints à la main au-dessus de la fenêtre, et la plaque « La Salvarina » en dessous, sur une façade de Vaucresson.",
     meta: "Vaucresson · Façade extérieure",
   },
 ];

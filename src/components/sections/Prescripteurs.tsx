@@ -2,7 +2,7 @@ import { Check } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
 
 const benefits = [
-  "Échantillons techniques gratuits sous 5 jours ouvrés",
+  "Échantillons techniques sous 5 jours ouvrés",
   "BDD motifs et coloris pour vos planches matériaux",
   "Tarification dégressive sur volumes 5 m² et plus",
   "Référent unique chez nous pour vos projets clients",

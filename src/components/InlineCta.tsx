@@ -12,7 +12,7 @@ interface Props {
 export default function InlineCta({
   eyebrow = "Votre projet",
   title,
-  subtitle = "Réponse en 20 minutes pendant les heures ouvrées. Étude gratuite, sans engagement.",
+  subtitle = "Réponse en 20 minutes pendant les heures ouvrées. Sans engagement.",
   variant = "light",
   source = "inline_cta",
 }: Props) {

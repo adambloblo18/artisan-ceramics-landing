@@ -24,6 +24,7 @@ gtag('consent', 'default', {
   'analytics_storage': 'denied',
   'wait_for_update': 500
 });
+window.lcmChargeurs=window.lcmChargeurs||[];window.lcmChargerMesure=function(){if(window.__lcmMesure)return;window.__lcmMesure=true;var go=function(){var q=window.lcmChargeurs;q.forEach(function(f){try{f()}catch(e){}});q.push=function(f){try{f()}catch(e){}return q.length};};if(document.readyState==='complete')setTimeout(go,1500);else window.addEventListener('load',function(){setTimeout(go,1500)});};try{var c=JSON.parse(localStorage.getItem('cookie_consent')||'null');if(c&&c.status==='accepted'&&Date.now()-c.timestamp<15552000000)window.lcmChargerMesure();}catch(e){}
 `;
 
 // Bootstrap des scripts tiers : différé après l'événement 'load' (+1.5s d'idle)
@@ -38,10 +39,14 @@ const deferredThirdPartyScript = `
     g.onload=function(){ window.gtag && (gtag('js', new Date()), gtag('config','AW-11400865534')); };
 
     // Microsoft Clarity
+    (window.lcmChargeurs=window.lcmChargeurs||[]).push(function(){
     (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src='https://www.clarity.ms/tag/'+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,'clarity','script','uhxdrmhaaf');
+    });
 
     // Bing UET
+    (window.lcmChargeurs=window.lcmChargeurs||[]).push(function(){
     (function(w,d,t,r,u){var f,n,i;w[u]=w[u]||[],f=function(){var o={ti:'343242701'};o.q=w[u],w[u]=new UET(o),w[u].push('pageLoad')},n=d.createElement(t),n.src=r,n.async=1,n.onload=n.onreadystatechange=function(){var s=this.readyState;s&&s!=='loaded'&&s!=='complete'||(f(),n.onload=n.onreadystatechange=null)},i=d.getElementsByTagName(t)[0],i.parentNode.insertBefore(n,i)})(window,document,'script','//bat.bing.com/bat.js','uetq');
+    });
 
   }
   var schedule = function(){ ('requestIdleCallback' in window) ? requestIdleCallback(boot, { timeout: 3000 }) : setTimeout(boot, 1500); };
@@ -50,10 +55,9 @@ const deferredThirdPartyScript = `
 })();
 `;
 
-// PostHog : chargé immédiatement (intérêt légitime / mesure d'audience).
-// Le bandeau cookies reste affiché pour conformité visuelle ; le refus explicite
-// déclenche opt_out_capturing() via ConsentBanner.tsx.
+// PostHog : chargé uniquement après acceptation (via window.lcmChargerMesure).
 const posthogScript = `
+(window.lcmChargeurs=window.lcmChargeurs||[]).push(function(){
 !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split('.');2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement('script')).type='text/javascript',p.crossOrigin='anonymous',p.async=!0,p.src=s.api_host.replace('.i.posthog.com','-assets.i.posthog.com')+'/static/array.js',(r=t.getElementsByTagName('script')[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a='posthog',u.people=u.people||[],u.toString=function(t){var e='posthog';return'posthog'!==a&&(e+='.'+a),t||(e+=' (stub)'),e},u.people.toString=function(){return u.toString(1)+'.people (stub)'},o='init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug'.split(' '),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
 posthog.init('phc_oGmkuM4F5je7WmaLZpsF47paa8nv5V5vp58oh74Pwcwy', {
   api_host: 'https://eu.i.posthog.com',
@@ -67,7 +71,8 @@ posthog.init('phc_oGmkuM4F5je7WmaLZpsF47paa8nv5V5vp58oh74Pwcwy', {
   capture_pageview: 'history_change',
   capture_pageleave: true,
   rate_limiting: { events_per_second: 50, events_burst_limit: 500 },
-  session_recording: { sampleRate: 1.0, minimumDurationMilliseconds: 0, maskAllInputs: false, maskInputOptions: { password: true, email: false } }
+  session_recording: { sampleRate: 1.0, minimumDurationMilliseconds: 0, maskAllInputs: true, maskInputOptions: { password: true, email: false } }
+});
 });
 `;
 
@@ -158,7 +163,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         property: "og:description",
         content:
-          "Crédence céramique peinte à la main. 30 ans d'atelier, 1er Prix Versailles 2025. Devis gratuit sous 20 minutes.",
+          "Crédence céramique peinte à la main. 30 ans de métier, 1er Prix Versailles 2025. Réponse sous 20 minutes.",
       },
       { property: "og:image", content: "https://credence-ceramique.lovable.app/images/og-image.jpg" },
       { property: "og:image:width", content: "1200" },
@@ -172,7 +177,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:title", content: "Crédence céramique sur mesure peinte main · Atelier Le Vésinet" },
       {
         name: "twitter:description",
-        content: "Crédence céramique peinte à la main. 30 ans d'atelier, 1er Prix Versailles 2025.",
+        content: "Crédence céramique peinte à la main. 30 ans de métier, 1er Prix Versailles 2025.",
       },
       { name: "twitter:image", content: "https://credence-ceramique.lovable.app/images/og-image.jpg" },
       // Robots & language

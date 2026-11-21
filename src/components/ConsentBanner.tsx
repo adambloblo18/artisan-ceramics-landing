@@ -18,6 +18,7 @@ function readStored(): Stored | null {
 }
 
 function applyGranted() {
+  (window as any).lcmChargerMesure?.();
   (window as any).gtag?.("consent", "update", {
     analytics_storage: "granted",
     ad_storage: "granted",
@@ -60,7 +61,7 @@ export default function ConsentBanner() {
     setTimeout(() => setVisible(false), 300);
   };
 
-  const accept = (method: "click" | "scroll") => {
+  const accept = (method: "click") => {
     if (decidedRef.current) return;
     decidedRef.current = true;
     try {
@@ -85,6 +86,7 @@ export default function ConsentBanner() {
       );
     } catch { /* noop */ }
     applyDenied();
+    try { (window as any).posthog?.opt_out_capturing?.(); } catch { /* noop */ }
     try { (window as any).gtag?.("event", "cookie_consent", { value: "refused" }); } catch { /* noop */ }
     close();
   };
@@ -112,27 +114,6 @@ export default function ConsentBanner() {
       window.removeEventListener("lcm:open-consent", reopen);
     };
   }, []);
-
-  // Scroll-to-accept: 5% de la hauteur scrollable, mesurée depuis la position initiale
-  useEffect(() => {
-    if (!visible) return;
-    const startY = window.scrollY;
-    let throttled = false;
-    const onScroll = () => {
-      if (throttled) return;
-      throttled = true;
-      setTimeout(() => { throttled = false; }, 150);
-      const docH = document.documentElement.scrollHeight - window.innerHeight;
-      if (docH <= 0) return;
-      const delta = window.scrollY - startY;
-      if (delta / docH > 0.05) {
-        window.removeEventListener("scroll", onScroll);
-        accept("scroll");
-      }
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [visible]);
 
   // Escape = refuse
   useEffect(() => {
@@ -170,31 +151,27 @@ export default function ConsentBanner() {
         Cookies et données
       </p>
       <p id="cookie-desc" style={{ fontWeight: 400, fontSize: 11, color: "#2A2A2A", lineHeight: 1.4, marginTop: 6 }}>
-        Nous utilisons des cookies pour mesurer l'audience et améliorer votre expérience. En poursuivant votre navigation, vous acceptez leur dépôt.
+        Nous utilisons des cookies pour mesurer l'audience et améliorer votre expérience. Nous mesurons l'audience seulement si vous l'acceptez. Refuser ne change rien à votre visite.
       </p>
       <div style={{ display: "flex", gap: 6, marginTop: 10 }}>
         <button
           onClick={() => accept("click")}
           style={{
-            background: "#6B8E7F", color: "#FAF7F2", padding: "7px 14px",
-            fontWeight: 500, fontSize: 12, borderRadius: 2, flexGrow: 2, border: "none", cursor: "pointer",
+            background: "transparent", color: "#2A2A2A", padding: "7px 14px",
+            fontWeight: 500, fontSize: 12, borderRadius: 2, flexGrow: 1, border: "1px solid #6B8E7F", cursor: "pointer",
           }}
-          onMouseEnter={(e) => { (e.currentTarget.style.background = "#5a7a6f"); }}
-          onMouseLeave={(e) => { (e.currentTarget.style.background = "#6B8E7F"); }}
-          className="focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#6B8E7F]"
+                    className="focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#6B8E7F]"
         >
           Accepter
         </button>
         <button
           onClick={refuse}
           style={{
-            background: "transparent", color: "rgba(42,42,42,0.7)", padding: "7px 14px",
-            fontWeight: 400, fontSize: 12, borderRadius: 2, flexGrow: 1,
-            border: "1px solid rgba(42,42,42,0.2)", cursor: "pointer",
+            background: "transparent", color: "#2A2A2A", padding: "7px 14px",
+            fontWeight: 500, fontSize: 12, borderRadius: 2, flexGrow: 1,
+            border: "1px solid #6B8E7F", cursor: "pointer",
           }}
-          onMouseEnter={(e) => { e.currentTarget.style.color = "#2A2A2A"; }}
-          onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(42,42,42,0.7)"; }}
-          className="focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#6B8E7F]"
+                    className="focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#6B8E7F]"
         >
           Refuser
         </button>

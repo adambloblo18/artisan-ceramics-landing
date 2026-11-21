@@ -21,7 +21,7 @@ export default function VisualiseurSection() {
         </h2>
 
         <p className="font-['DM_Sans'] text-base md:text-lg text-[#f9f7f2]/85 max-w-2xl mx-auto mt-6">
-          Uploadez la photo de votre cuisine ou salle de bain. Choisissez un motif. Ajustez la taille. Voyez le rendu en quelques secondes. C'est gratuit et sans inscription.
+          Uploadez la photo de votre cuisine ou salle de bain. Choisissez un motif. Ajustez la taille. Voyez le rendu en quelques secondes. Sans inscription.
         </p>
 
         <ul className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mt-12">

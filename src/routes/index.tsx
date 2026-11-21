@@ -132,8 +132,7 @@ const projets = [
     src: "/images/cuisine-credence-fleurs.png",
     webp: "/images/cuisine-credence-fleurs.webp",
     alt: "Motifs floraux sur tons verts, crédence cuisine",
-    caption: "Motifs floraux sur tons verts",
-    sublegend: "Île-de-France · 2025 · 2,8 m²",
+    caption: "Crédence de cuisine",
     width: 1024,
     height: 921,
   },
@@ -150,17 +149,17 @@ const projets = [
     src: "/images/galerie-3-frise-pivoines.jpg",
     webp: "/images/galerie-3-frise-pivoines.webp",
     alt: "Crédence autour d'un lavabo, frise pivoines bleues",
-    caption: "Frise pivoines bleues",
-    sublegend: "Salle de bain · Île-de-France · 2024",
+    caption: "Frise fleurie bleu-vert au-dessus d'un évier",
+    sublegend: "Mini-crédence",
     width: 1024,
     height: 758,
   },
   {
     src: "/images/galerie-2-dessin-floral.jpg",
     webp: "/images/galerie-2-dessin-floral.webp",
-    alt: "Crédence industrielle peinte à la main",
-    caption: "Crédence industrielle",
-    sublegend: "Maison de famille · 2024",
+    alt: "Ustensiles de cuisine dessinés au trait noir",
+    caption: "Ustensiles au trait noir",
+    sublegend: "Crédence de cuisine",
     width: 1920,
     height: 1280,
   },
@@ -170,7 +169,7 @@ const projets = [
 const reassPillars = [
   { Icon: Trophy, title: "1er Prix Versailles 2025", subtitle: "Ravalement décor céramique" },
   { Icon: Hand, title: "100% peinte à la main", subtitle: "À la pince, au pinceau" },
-  { Icon: Landmark, title: "30 ans d'atelier", subtitle: "Au Vésinet, Île-de-France" },
+  { Icon: Landmark, title: "30 ans de métier", subtitle: "Au Vésinet, Île-de-France" },
   { Icon: MapPin, title: "Visite sur RDV", subtitle: "Atelier Le Vésinet (78)" },
   { Icon: Truck, title: "France et international", subtitle: "Livraison sécurisée" },
 ];
@@ -280,7 +279,7 @@ function Index() {
           className="absolute inset-0 w-full h-full object-cover"
         />
         <HeroVideo />
-        <h1 className="sr-only">Crédence céramique sur mesure peinte à la main — Atelier Le Vésinet</h1>
+        <h1 className="sr-only">Crédence céramique sur mesure peinte à la main, Atelier Le Vésinet</h1>
         {/* voile très léger en bas pour le scroll cue, sans masquer l'œuvre */}
         <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#2a2a2a]/40 to-transparent pointer-events-none" />
 
@@ -381,16 +380,13 @@ function Index() {
                 className="w-full max-h-[750px] object-cover rounded-md shadow-2xl shadow-[#2a2a2a]/20"
               />
             </picture>
-            <blockquote className="font-['Cormorant_Garamond'] italic text-xl md:text-2xl text-[#2a2a2a]/70 mt-6 text-center md:text-left">
-              « La main porte ce qu'aucune machine ne saura jamais reproduire. »
-            </blockquote>
           </div>
           <div className="md:col-span-7">
             <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-5xl text-[#2a2a2a] leading-tight">
               Laurence Brecher,<br />30 ans à la pince
             </h2>
             <p className="mt-6 text-[17px] leading-[1.7] text-[var(--anthracite)]">
-              Laurence dessine, peint et cuit chaque pièce à la main dans son atelier du Vésinet. Diplômée des Beaux Arts, elle s'est spécialisée dans la céramique murale d'intérieur et de façade. Son 1er Prix du Ravalement Versailles 2025 récompense 30 ans de travail patient.
+              Laurence dessine, peint et cuit chaque pièce à la main dans son atelier du Vésinet. Formée à l'Académie de Port-Royal et aux Beaux-Arts de Paris, elle s'est spécialisée dans la céramique murale d'intérieur et de façade. En 2025, elle a reçu le Premier Prix du Ravalement de la Ville de Versailles, catégorie Restitution de Décors.
             </p>
             <p className="mt-4 text-[17px] leading-[1.7] text-[var(--anthracite)]">
               Quand vous commandez une crédence, c'est elle qui prépare la terre, peint chaque carreau à la pince, cuit deux fois à 1020°C. Aucun intermédiaire, aucune machine, juste sa main.
@@ -456,8 +452,7 @@ function Index() {
       {/* PRIX */}
       <section className="bg-[var(--cream)] py-20 sm:py-28">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <h2 className="text-center font-display text-3xl italic sm:text-[44px]">Un investissement durable.</h2>
-          <p className="mt-3 text-center italic text-[var(--muted-text)]">Trois ordres de grandeur pour situer votre projet.</p>
+                    <p className="mt-3 text-center italic text-[var(--muted-text)]">Trois ordres de grandeur pour situer votre projet.</p>
           <div className="mt-12 grid gap-6 md:grid-cols-3">
             <div className="border border-[var(--border)] bg-[var(--cream)] p-8">
               <h3 className="h-display text-xl">Crédence simple</h3>
@@ -476,7 +471,7 @@ function Index() {
               <p className="mt-6 font-display text-3xl text-[var(--gold)]">Devis personnalisé</p>
             </div>
           </div>
-          <p className="mt-8 text-center italic text-[var(--muted-text)]">Tarifs indicatifs. Étude personnalisée gratuite et sans engagement.</p>
+          <p className="mt-8 text-center italic text-[var(--muted-text)]">Tarifs indicatifs. Étude personnalisée et sans engagement.</p>
         </div>
       </section>
 
@@ -490,12 +485,10 @@ function Index() {
 
       {/* BANDEAU PRIX */}
       <section id="award-section" className="relative w-full overflow-hidden">
-        {/* TODO: remplacer bandeau-versailles.jpg par la vraie photo de la façade primée à Versailles dès que Laurence l'a */}
         <picture>
-          <source type="image/webp" srcSet="/images/bandeau-versailles.webp" />
           <img
-            src="/images/bandeau-versailles.jpg"
-            alt="Façade primée au Ravalement Versailles 2025"
+            src="https://www.ceramique-murale.com/wp-content/uploads/2026/04/Laurence-peinture-classe.jpeg"
+            alt="Laurence Brecher peignant des carreaux de céramique à la main dans son atelier du Vésinet"
             loading="lazy"
             decoding="async"
             width={1600}

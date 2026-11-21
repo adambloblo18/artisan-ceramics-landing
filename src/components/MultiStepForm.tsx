@@ -10,15 +10,8 @@ const REDIRECT_BASE =
 const ENDPOINT = "https://api.web3forms.com/submit";
 const WEB3FORMS_KEY = "31bd2d6f-50c1-427d-9efd-cab0d1fada12";
 
-function buildRedirectUrl(values: { nom: string; telephone: string; email?: string }) {
-  const parts = values.nom.trim().split(/\s+/);
-  const fn = parts[0] ?? "";
-  const ln = parts.slice(1).join(" ");
+function buildRedirectUrl(_values: { nom: string; telephone: string; email?: string }) {
   const params = new URLSearchParams({
-    email: values.email ?? "",
-    phone: values.telephone,
-    fn,
-    ln,
     value: "500",
     tx: `LEAD-${Date.now()}`,
   });
@@ -47,7 +40,7 @@ type FormValues = z.infer<typeof schema>;
 
 export default function MultiStepForm() {
   const [submitted, setSubmitted] = useState(false);
-  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [submitError, setSubmitError] = useState<boolean>(false);
   const mountedAt = useRef<number>(0);
 
   useEffect(() => {
@@ -118,9 +111,7 @@ export default function MultiStepForm() {
       trackEvent("form_submitted", { type: values.type });
       window.location.href = redirectUrl;
     } catch {
-      setSubmitError(
-        "Une erreur est survenue, merci de réessayer ou d'appeler Laurence au 06 70 02 51 33.",
-      );
+      setSubmitError(true);
     }
   };
 
@@ -297,7 +288,8 @@ export default function MultiStepForm() {
 
         {submitError && (
           <p role="alert" className="text-sm text-red-600">
-            {submitError}
+            Une erreur est survenue, merci de réessayer ou d'appeler Laurence au{" "}
+            <a href="tel:+33670025133">06 70 02 51 33</a>.
           </p>
         )}
 
@@ -317,8 +309,7 @@ export default function MultiStepForm() {
         </button>
 
         <p className="text-xs text-[#2a2a2a]/60 text-center">
-          Réponse en 20 minutes pendant les heures ouvrées. Aucun engagement,
-          devis gratuit.
+          Réponse en 20 minutes pendant les heures ouvrées. Aucun engagement.
         </p>
       </div>
     </form>
