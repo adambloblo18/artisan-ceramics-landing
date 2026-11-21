@@ -8,7 +8,7 @@ declare global {
 }
 
 export function trackEvent(name: string, props?: Record<string, unknown>) {
-  if (typeof window === "undefined" || !window.__lcmConsent) return;
+  if (typeof window === "undefined") return;
   try {
     posthog.capture?.(name, props as Record<string, unknown> | undefined);
   } catch {
@@ -19,6 +19,7 @@ export function trackEvent(name: string, props?: Record<string, unknown>) {
   } catch {
     /* ignore */
   }
+  if (!window.__lcmConsent) return;
   try {
     window.clarity?.("event", name);
   } catch {

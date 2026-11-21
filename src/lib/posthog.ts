@@ -6,7 +6,7 @@ declare global {
     __lcmConsent?: boolean;
     __lcmClarityQueue?: unknown[][];
     lcmChargeurs?: Array<() => void>;
-    lcmChargerMesure?: () => void;
+    lcmChargerMesure?: (restored?: boolean) => void;
     lcmRefuserMesure?: () => void;
     UET?: new (options: { ti: string; q: unknown }) => { push: (...args: unknown[]) => void };
     uetq?: { push: (...args: unknown[]) => void };

@@ -26,16 +26,51 @@ gtag('consent', 'default', {
 });
 window.lcmChargeurs=window.lcmChargeurs||[];
 window.__lcmConsent=false;
-window.lcmChargerMesure=function(){
+var lcmTimer=null;
+var lcmPending=false;
+var lcmAfterLoad=function(){lcmTimer=setTimeout(lcmStart,1500);};
+var lcmCancel=function(){
+  clearTimeout(lcmTimer);
+  window.removeEventListener('load',lcmAfterLoad);
+  lcmPending=false;
+};
+var lcmStart=function(){
+  lcmCancel();
   if(window.__lcmConsent)return;
   window.__lcmConsent=true;
-  window.lcmChargeurs.forEach(function(f){f()});
+  window.lcmChargeurs.forEach(function(f){try{f()}catch(e){}});
 };
-window.lcmRefuserMesure=function(){window.__lcmConsent=false;};
+window.lcmChargerMesure=function(restored){
+  if(window.__lcmConsent)return;
+  if(restored||document.readyState!=='complete'){
+    if(lcmPending)return;
+    lcmPending=true;
+    if(document.readyState==='complete')lcmAfterLoad();
+    else window.addEventListener('load',lcmAfterLoad,{once:true});
+  }else lcmStart();
+};
+window.lcmRefuserMesure=function(){lcmCancel();window.__lcmConsent=false;};
 try{var c=JSON.parse(localStorage.getItem('cookie_consent')||'null');if(c&&c.status==='accepted'&&Date.now()-c.timestamp<15552000000){
   gtag('consent','update',{analytics_storage:'granted',ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted'});
-  window.lcmChargerMesure();
+  window.lcmChargerMesure(true);
 }}catch(e){}
+`;
+
+const googleAdsScript = `
+var lcmGoogleAfterLoad=function(){setTimeout(function(){
+  if(document.querySelector('script[data-lcm-google-ads]'))return;
+  var script=document.createElement('script');
+  script.async=true;
+  script.setAttribute('data-lcm-google-ads','');
+  script.src='https://www.googletagmanager.com/gtag/js?id=AW-11400865534';
+  script.onload=function(){
+    window.gtag('js',new Date());
+    window.gtag('config','AW-11400865534');
+  };
+  document.head.appendChild(script);
+},1000);};
+if(document.readyState==='complete')lcmGoogleAfterLoad();
+else window.addEventListener('load',lcmGoogleAfterLoad,{once:true});
 `;
 
 const telConversionScript = `document.addEventListener('DOMContentLoaded', function() {
@@ -147,6 +182,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     scripts: [
       { children: consentScript },
+      { children: googleAdsScript },
       { children: telConversionScript },
       { type: "application/ld+json", children: jsonLd },
       { type: "application/ld+json", children: JSON.stringify(localBusinessSchema) },

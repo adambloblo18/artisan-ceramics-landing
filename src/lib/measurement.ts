@@ -38,16 +38,6 @@ export function startMeasurement() {
     },
   });
 
-  const google = document.createElement("script");
-  google.async = true;
-  google.src = "https://www.googletagmanager.com/gtag/js?id=AW-11400865534";
-  google.onload = () => {
-    if (!window.__lcmConsent) return;
-    window.gtag?.("js", new Date());
-    window.gtag?.("config", "AW-11400865534");
-  };
-  document.head.appendChild(google);
-
   window.__lcmClarityQueue ??= [];
   window.clarity = window.clarity || ((...args: unknown[]) => {
     window.__lcmClarityQueue?.push(args);

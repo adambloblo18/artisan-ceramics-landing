@@ -17,14 +17,14 @@ function readStored(): Stored | null {
   }
 }
 
-function applyGranted() {
+function applyGranted(restored = false) {
   (window as any).gtag?.("consent", "update", {
     analytics_storage: "granted",
     ad_storage: "granted",
     ad_user_data: "granted",
     ad_personalization: "granted",
   });
-  window.lcmChargerMesure?.();
+  window.lcmChargerMesure?.(restored);
   try {
     (window as any).posthog?.set_config?.({
       persistence: "localStorage+cookie",
@@ -107,7 +107,7 @@ export default function ConsentBanner() {
     const cleanup = () => window.removeEventListener("lcm:open-consent", reopen);
 
     const stored = readStored();
-    if (stored?.status === "accepted") { applyGranted(); return cleanup; }
+    if (stored?.status === "accepted") { applyGranted(true); return cleanup; }
     if (stored?.status === "refused") { applyDenied(); return cleanup; }
     const t = setTimeout(() => {
       setVisible(true);
