@@ -64,7 +64,7 @@ export default function MultiStepForm() {
   });
 
   const onSubmit = async (values: FormValues) => {
-    setSubmitError(null);
+    setSubmitError(false);
     if (values.website) return;
     if (Date.now() - mountedAt.current < 2000) return;
 
