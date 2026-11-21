@@ -569,7 +569,7 @@ function Index() {
       <TrustStrip />
 
       {/* FOOTER */}
-      <footer className="bg-[var(--anthracite)] px-4 py-12 text-white/70 sm:px-6">
+      <footer className="bg-[var(--anthracite)] px-4 pb-28 pt-12 text-white/70 sm:px-6">
         <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-3">
           <div>
             <p className="font-display text-lg text-white">Les Céramiques Murales du Vésinet</p>
