@@ -452,7 +452,8 @@ function Index() {
       {/* PRIX */}
       <section className="bg-[var(--cream)] py-20 sm:py-28">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
-                    <p className="mt-3 text-center italic text-[var(--muted-text)]">Trois ordres de grandeur pour situer votre projet.</p>
+          <h2 className="text-center font-display text-3xl italic sm:text-[44px]">Combien coûte une crédence en céramique ?</h2>
+          <p className="mt-3 text-center italic text-[var(--muted-text)]">Trois ordres de grandeur pour situer votre projet.</p>
           <div className="mt-12 grid gap-6 md:grid-cols-3">
             <div className="border border-[var(--border)] bg-[var(--cream)] p-8">
               <h3 className="h-display text-xl">Crédence simple</h3>

@@ -10,7 +10,7 @@ const items = [
   {
     id: "Q2",
     q: "En combien de temps livrez-vous ?",
-    a: "Comptez 6 à 10 semaines de création artisanale. Laurence prépare les terres, peint chaque carreau à la pince, le cuit deux fois à 1020°C, et personnalise selon votre projet. C'est ce temps qui fait la différence entre une crédence industrielle et la vôtre. Pour les projets urgents, nous pouvons accélérer.",
+    a: "Comptez 6 à 10 semaines de création artisanale. Laurence prépare les terres, peint chaque carreau à la pince, le cuit deux fois à 1020°C, et personnalise selon votre projet. Pour les projets urgents, nous pouvons accélérer.",
   },
   {
     id: "Q3",
