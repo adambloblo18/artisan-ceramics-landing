@@ -17,7 +17,7 @@ export default function VisualiseurSection() {
         </div>
 
         <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-5xl text-[#f9f7f2] mt-6 leading-tight">
-          Visualisez votre crédence<br />avant même de la commander
+          Visualisez votre crédence{" "}<br />avant même de la commander
         </h2>
 
         <p className="font-['DM_Sans'] text-base md:text-lg text-[#f9f7f2]/85 max-w-2xl mx-auto mt-6">

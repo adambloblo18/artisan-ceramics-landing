@@ -1,94 +1,4 @@
-export const localBusinessSchema = {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  name: "Atelier Le Vésinet - Laurence Brecher",
-  image: "https://credence.ceramique-murale.com/images/portrait-laurence.jpg",
-  "@id": "https://ceramique-murale.com/",
-  url: "https://ceramique-murale.com/",
-  telephone: "+33670025133",
-  priceRange: "€€€",
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Le Vésinet",
-    postalCode: "78110",
-    addressCountry: "FR",
-    addressRegion: "Île-de-France",
-  },
-  geo: {
-    "@type": "GeoCoordinates",
-    latitude: 48.892,
-    longitude: 2.1262,
-  },
-  award: "1er Prix du Ravalement Versailles 2025, Catégorie Restitution de Décors",
-  sameAs: [
-    "https://www.instagram.com/ceramique_murale/",
-    "https://www.facebook.com/ceramiquemurale/",
-  ],
-};
-
-export const serviceSchema = {
-  "@context": "https://schema.org",
-  "@type": "Service",
-  serviceType: "Crédence en céramique sur mesure peinte à la main",
-  provider: { "@type": "LocalBusiness", name: "Atelier Le Vésinet - Laurence Brecher" },
-  areaServed: { "@type": "Country", name: "France" },
-  description:
-    "Crédence en céramique peinte à la main au Vésinet, dessinée sur mesure pour votre cuisine.",
-  offers: {
-    "@type": "AggregateOffer",
-    priceCurrency: "EUR",
-    lowPrice: "1000",
-    highPrice: "5000",
-    offerCount: "3",
-  },
-};
-
-export const professionalServiceSchema = {
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  name: "Atelier Le Vésinet — Laurence Brecher, céramiste",
-  image: "https://credence.ceramique-murale.com/images/portrait-laurence.jpg",
-  url: "https://credence.ceramique-murale.com/",
-  telephone: "+33670025133",
-  priceRange: "€€€",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "14 rue Ernest André",
-    addressLocality: "Le Vésinet",
-    postalCode: "78110",
-    addressCountry: "FR",
-    addressRegion: "Île-de-France",
-  },
-  areaServed: { "@type": "Country", name: "France" },
-  founder: { "@type": "Person", name: "Laurence Brecher" },
-  award:
-    "1er Prix du Ravalement de la Ville de Versailles 2025, catégorie Restitution de Décors",
-  serviceType: "Crédence céramique sur mesure peinte à la main",
-  hasOfferCatalog: {
-    "@type": "OfferCatalog",
-    name: "Crédences céramique",
-    itemListElement: [
-      {
-        "@type": "Offer",
-        itemOffered: { "@type": "Service", name: "Crédence simple" },
-        priceCurrency: "EUR",
-        price: "1000",
-      },
-      {
-        "@type": "Offer",
-        itemOffered: { "@type": "Service", name: "Crédence sur mesure" },
-        priceCurrency: "EUR",
-        price: "2500",
-      },
-      {
-        "@type": "Offer",
-        itemOffered: { "@type": "Service", name: "Crédence d'exception" },
-        priceCurrency: "EUR",
-        price: "5000",
-      },
-    ],
-  },
-};
+export const HOME_TITLE = "Crédence céramique sur mesure peinte à la main · Le Vésinet";
 
 export const faqSchema = {
   "@context": "https://schema.org",
@@ -142,5 +52,61 @@ export const faqSchema = {
         text: "Un acompte de 40% à la signature du devis, le solde à la livraison avant la pose. Tous nos devis sont établis TTC et sans frais cachés.",
       },
     },
+  ],
+};
+
+
+export const homepageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://www.ceramique-murale.com/#organization",
+      name: "Les Céramiques Murales du Vésinet",
+      url: "https://www.ceramique-murale.com/",
+      telephone: "+33670025133",
+      foundingDate: "2008",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "14 rue Ernest André",
+        postalCode: "78110",
+        addressLocality: "Le Vésinet",
+        addressRegion: "Île-de-France",
+        addressCountry: "FR",
+      },
+      founder: { "@id": "https://www.ceramique-murale.com/#laurence-brecher" },
+      award: "Prix du Ravalement de la ville de Versailles 2025, catégorie Restitution de Décors",
+      sameAs: [
+        "https://www.instagram.com/ceramiquesmurales/",
+        "https://www.linkedin.com/company/les-ceramiques-murales/",
+      ],
+    },
+    {
+      "@type": "Person",
+      "@id": "https://www.ceramique-murale.com/#laurence-brecher",
+      name: "Laurence Brecher",
+      jobTitle: "Artiste céramiste",
+      url: "https://www.ceramique-murale.com/laurence-brecher-creatrice-de-ceramique-murale-decorative/",
+      worksFor: { "@id": "https://www.ceramique-murale.com/#organization" },
+    },
+    {
+      "@type": "Service",
+      "@id": "https://credence.ceramique-murale.com/#service",
+      name: "Crédence en céramique peinte à la main, sur mesure",
+      serviceType: "Crédence de cuisine en faïence émaillée",
+      provider: { "@id": "https://www.ceramique-murale.com/#organization" },
+      areaServed: "France",
+      url: "https://credence.ceramique-murale.com/",
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://credence.ceramique-murale.com/#webpage",
+      url: "https://credence.ceramique-murale.com/",
+      name: HOME_TITLE,
+      inLanguage: "fr-FR",
+      about: { "@id": "https://credence.ceramique-murale.com/#service" },
+      publisher: { "@id": "https://www.ceramique-murale.com/#organization" },
+    },
+    faqSchema,
   ],
 };

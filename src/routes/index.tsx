@@ -21,12 +21,12 @@ const SectionSkeleton = ({ minHeight = 600 }: { minHeight?: number }) => (
   <div style={{ minHeight }} aria-hidden />
 );
 
-import { professionalServiceSchema } from "@/lib/schema-jsonld";
+import { HOME_TITLE, homepageSchema } from "@/lib/schema-jsonld";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Crédence céramique sur mesure peinte main, Atelier Le Vésinet · 1er Prix Versailles 2025" },
+      { title: HOME_TITLE },
       { name: "description", content: "Crédence céramique peinte à la main au Vésinet. Chaque pièce est unique, dessinée pour votre cuisine. 1er Prix Versailles 2025. Réponse sous 20 minutes." },
       { property: "og:title", content: "Crédence céramique sur mesure peinte main · Atelier Le Vésinet" },
       { property: "og:description", content: "Crédence céramique peinte à la main. 30 ans de métier, 1er Prix Versailles 2025. Réponse sous 20 minutes." },
@@ -39,7 +39,7 @@ export const Route = createFileRoute("/")({
     scripts: [
       {
         type: "application/ld+json",
-        children: JSON.stringify(professionalServiceSchema),
+        children: JSON.stringify(homepageSchema),
       },
     ],
   }),
@@ -399,7 +399,7 @@ function Index() {
           </div>
           <div className="md:col-span-7">
             <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-5xl text-[#2a2a2a] leading-tight">
-              Laurence Brecher,<br />30 ans à la pince
+              Laurence Brecher,{" "}<br />30 ans à la pince
             </h2>
             <p className="mt-6 text-[17px] leading-[1.7] text-[var(--anthracite)]">
               Laurence dessine, peint et cuit chaque pièce à la main dans son atelier du Vésinet. Formée à l'Académie de Port-Royal et aux Beaux-Arts de Paris, elle s'est spécialisée dans la céramique murale d'intérieur et de façade. En 2025, elle a reçu le Premier Prix du Ravalement de la Ville de Versailles, catégorie Restitution de Décors.

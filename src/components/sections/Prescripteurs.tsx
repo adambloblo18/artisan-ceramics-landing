@@ -22,7 +22,7 @@ export default function Prescripteurs() {
             Architectes &amp; Décorateurs
           </span>
           <h2 className="font-display text-3xl md:text-5xl text-[#f9f7f2] mt-4 leading-tight">
-            Travaillons sur vos
+            Travaillons sur vos{" "}
             <br />
             projets clients
           </h2>

@@ -10,7 +10,7 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
-import { localBusinessSchema, serviceSchema, faqSchema } from "@/lib/schema-jsonld";
+
 
 
 const consentScript = `
@@ -81,27 +81,6 @@ const telConversionScript = `document.addEventListener('DOMContentLoaded', funct
   });
 });`;
 
-const jsonLd = JSON.stringify({
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  name: "Les Céramiques Murales du Vésinet",
-  image:
-    "https://www.ceramique-murale.com/wp-content/uploads/2023/10/ceramique-murale-cuisine-credence22-1024x921.jpg",
-  url: "https://www.ceramique-murale.com/",
-  telephone: "+33670025133",
-  priceRange: "€€€",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "14 rue Ernest André",
-    addressLocality: "Le Vésinet",
-    postalCode: "78110",
-    addressCountry: "FR",
-  },
-  founder: { "@type": "Person", name: "Laurence Brecher" },
-  award:
-    "Premier Prix du Ravalement de la Ville de Versailles 2025, catégorie Restitution de Décors",
-});
-
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-cream px-4">
@@ -137,7 +116,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1, maximum-scale=5" },
-      { title: "Crédence céramique sur mesure peinte main, Atelier Le Vésinet · 1er Prix Versailles 2025" },
       { name: "theme-color", content: "#2a2a2a" },
       {
         name: "description",
@@ -184,10 +162,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { children: consentScript },
       { children: googleAdsScript },
       { children: telConversionScript },
-      { type: "application/ld+json", children: jsonLd },
-      { type: "application/ld+json", children: JSON.stringify(localBusinessSchema) },
-      { type: "application/ld+json", children: JSON.stringify(serviceSchema) },
-      { type: "application/ld+json", children: JSON.stringify(faqSchema) },
     ],
   }),
   shellComponent: RootShell,

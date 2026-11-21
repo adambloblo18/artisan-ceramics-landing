@@ -1,3 +1,10 @@
+# SEO visibility pass
+- [x] Replace crawler rules and add the requested homepage sitemap, llms.txt and IndexNow key.
+- [x] Consolidate homepage structured data, update its title and separate heading words; preserve the existing FAQ literally.
+- [x] Verify four exact 200 responses, initial HTML, legal noindex, console and 19 regression tests; do not publish.
+- [ ] Verify XML MIME type: preview static serving returns application/octet-stream despite public/_headers; production header is configured but cannot be checked without publication.
+- Existing FAQ discrepancy: delays, prescribers and atelier-visit answers are abbreviated in the preserved schema versus the visible FAQ; changing them conflicts with the request to keep FAQPage unchanged.
+
 # Mobile loading pass
 - [x] Restore independent delayed Google Ads loading and consent-mode events.
 - [x] Delay restored measurement consent and isolate loader errors.
