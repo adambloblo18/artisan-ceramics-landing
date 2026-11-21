@@ -26,12 +26,12 @@ function MentionsLegales() {
         <h2 className="font-display text-2xl mt-10 text-[#2a2a2a]">Éditeur du site</h2>
         <p className="mt-3">
           Nom : Laurence Brecher<br />
-          {/* TODO: à confirmer par Adam (auto-entrepreneur, EI ou EURL) */}
-          Statut : <strong>[À compléter]</strong> (auto-entrepreneur / EI / EURL)<br />
-          Adresse : <strong>[À compléter]</strong><br />
-          SIRET : <strong>[À compléter]</strong><br />
           Email : <a href="mailto:laurence@ceramique-murale.com" className="underline">laurence@ceramique-murale.com</a><br />
           Téléphone : <a href="tel:+33670025133" className="underline">06 70 02 51 33</a>
+        </p>
+        <p className="mt-3">
+          Les mentions légales complètes de l'atelier sont sur{" "}
+          <a href="https://www.ceramique-murale.com/mentions-legales/" className="underline">https://www.ceramique-murale.com/mentions-legales/</a>
         </p>
 
         <h2 className="font-display text-2xl mt-10 text-[#2a2a2a]">Directeur de publication</h2>
@@ -39,8 +39,7 @@ function MentionsLegales() {
 
         <h2 className="font-display text-2xl mt-10 text-[#2a2a2a]">Hébergeur</h2>
         <p className="mt-3">
-          Cloudflare Inc.<br />
-          101 Townsend St, San Francisco, CA 94107, USA
+          Lovable Labs Sweden AB
         </p>
 
         <h2 className="font-display text-2xl mt-10 text-[#2a2a2a]">Crédits photos</h2>

@@ -10,12 +10,12 @@ const items = [
   {
     id: "Q2",
     q: "En combien de temps livrez-vous ?",
-    a: "Comptez 6 à 10 semaines de création artisanale. Laurence prépare les terres, peint chaque carreau à la pince, le cuit deux fois à 1020°C, et personnalise selon votre projet. Pour les projets urgents, nous pouvons accélérer.",
+    a: "Comptez 6 à 10 semaines de création artisanale. Laurence prépare les terres, peint chaque carreau à la pince, le cuit deux fois au grand feu, et personnalise selon votre projet. Pour les projets urgents, nous pouvons accélérer.",
   },
   {
     id: "Q3",
     q: "À quoi servent les petites irrégularités visibles sur les carreaux ?",
-    a: "La céramique peinte à la main porte la trace du geste : légères variations de couleur, reliefs d'émail, bordures jamais parfaitement rectilignes. Ces imperfections distinguent une œuvre artisanale d'un carreau industriel. Elles sont la signature de la main.",
+    a: "La céramique peinte à la main porte la trace du geste : légères variations de couleur, reliefs d'émail, bordures jamais parfaitement rectilignes. Elles sont la signature de la main.",
   },
   {
     id: "Q4",
@@ -25,7 +25,7 @@ const items = [
   {
     id: "Q5",
     q: "Peut-on visiter l'atelier ?",
-    a: "Absolument. Laurence reçoit sur rendez-vous, du lundi au samedi, dans son atelier du Vésinet. C'est l'occasion de toucher la matière, voir les émaux, comprendre le geste. Nous sommes à 20 minutes de Paris en RER A, station Le Vésinet Centre.",
+    a: "Oui, Laurence reçoit sur rendez-vous dans son atelier du Vésinet. C'est l'occasion de toucher la matière, voir les émaux, comprendre le geste. Nous sommes à 20 minutes de Paris en RER A, station Le Vésinet Centre.",
   },
   {
     id: "Q6",

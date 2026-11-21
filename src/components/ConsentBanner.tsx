@@ -93,14 +93,6 @@ export default function ConsentBanner() {
 
   // Mount: check stored consent, schedule show if needed
   useEffect(() => {
-    const stored = readStored();
-    if (stored?.status === "accepted") { applyGranted(); return; }
-    if (stored?.status === "refused") { applyDenied(); return; }
-    const t = setTimeout(() => {
-      setVisible(true);
-      requestAnimationFrame(() => setEntered(true));
-    }, 1500);
-
     const reopen = () => {
       try { localStorage.removeItem(STORAGE_KEY); } catch { /* noop */ }
       decidedRef.current = false;
@@ -109,9 +101,19 @@ export default function ConsentBanner() {
       requestAnimationFrame(() => setEntered(true));
     };
     window.addEventListener("lcm:open-consent", reopen);
+    const cleanup = () => window.removeEventListener("lcm:open-consent", reopen);
+
+    const stored = readStored();
+    if (stored?.status === "accepted") { applyGranted(); return cleanup; }
+    if (stored?.status === "refused") { applyDenied(); return cleanup; }
+    const t = setTimeout(() => {
+      setVisible(true);
+      requestAnimationFrame(() => setEntered(true));
+    }, 1500);
+
     return () => {
       clearTimeout(t);
-      window.removeEventListener("lcm:open-consent", reopen);
+      cleanup();
     };
   }, []);
 

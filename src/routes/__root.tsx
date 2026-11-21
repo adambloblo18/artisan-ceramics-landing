@@ -71,7 +71,7 @@ posthog.init('phc_oGmkuM4F5je7WmaLZpsF47paa8nv5V5vp58oh74Pwcwy', {
   capture_pageview: 'history_change',
   capture_pageleave: true,
   rate_limiting: { events_per_second: 50, events_burst_limit: 500 },
-  session_recording: { sampleRate: 1.0, minimumDurationMilliseconds: 0, maskAllInputs: true, maskInputOptions: { password: true, email: false } }
+  session_recording: { sampleRate: 1.0, minimumDurationMilliseconds: 0, maskAllInputs: true }
 });
 });
 `;
@@ -88,7 +88,7 @@ const telConversionScript = `document.addEventListener('DOMContentLoaded', funct
 
 const jsonLd = JSON.stringify({
   "@context": "https://schema.org",
-  "@type": ["LocalBusiness", "Store"],
+  "@type": "LocalBusiness",
   name: "Les Céramiques Murales du Vésinet",
   image:
     "https://www.ceramique-murale.com/wp-content/uploads/2023/10/ceramique-murale-cuisine-credence22-1024x921.jpg",
@@ -105,14 +105,6 @@ const jsonLd = JSON.stringify({
   founder: { "@type": "Person", name: "Laurence Brecher" },
   award:
     "Premier Prix du Ravalement de la Ville de Versailles 2025, catégorie Restitution de Décors",
-  openingHoursSpecification: [
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-      opens: "09:00",
-      closes: "18:00",
-    },
-  ],
 });
 
 function NotFoundComponent() {
@@ -155,7 +147,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "Crédence céramique peinte à la main au Vésinet. Chaque pièce est unique, dessinée pour votre cuisine. 1er Prix Versailles 2025. Devis sous 20 minutes.",
+          "Crédence céramique peinte à la main au Vésinet. Chaque pièce est unique, dessinée pour votre cuisine. 1er Prix Versailles 2025. Réponse sous 20 minutes.",
       },
       // Open Graph
       { property: "og:type", content: "website" },
@@ -165,11 +157,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "Crédence céramique peinte à la main. 30 ans de métier, 1er Prix Versailles 2025. Réponse sous 20 minutes.",
       },
-      { property: "og:image", content: "https://credence-ceramique.lovable.app/images/og-image.jpg" },
+      { property: "og:image", content: "https://credence.ceramique-murale.com/images/og-image.jpg" },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
       { property: "og:image:alt", content: "Crédence céramique peinte à la main, atelier Le Vésinet" },
-      { property: "og:url", content: "https://credence-ceramique.lovable.app/" },
+      { property: "og:url", content: "https://credence.ceramique-murale.com/" },
       { property: "og:locale", content: "fr_FR" },
       { property: "og:site_name", content: "Atelier Le Vésinet" },
       // Twitter
@@ -179,7 +171,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         name: "twitter:description",
         content: "Crédence céramique peinte à la main. 30 ans de métier, 1er Prix Versailles 2025.",
       },
-      { name: "twitter:image", content: "https://credence-ceramique.lovable.app/images/og-image.jpg" },
+      { name: "twitter:image", content: "https://credence.ceramique-murale.com/images/og-image.jpg" },
       // Robots & language
       { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
       { httpEquiv: "content-language", content: "fr-FR" },

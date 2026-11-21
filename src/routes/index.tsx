@@ -24,7 +24,7 @@ import { professionalServiceSchema } from "@/lib/schema-jsonld";
 
 export const Route = createFileRoute("/")({
   head: () => ({
-    links: [{ rel: "canonical", href: "https://credence-ceramique.lovable.app/" }],
+    links: [{ rel: "canonical", href: "https://credence.ceramique-murale.com/" }],
     scripts: [
       {
         type: "application/ld+json",
@@ -129,14 +129,6 @@ const projets = [
     height: 1440,
   },
   {
-    src: "/images/cuisine-credence-fleurs.png",
-    webp: "/images/cuisine-credence-fleurs.webp",
-    alt: "Motifs floraux sur tons verts, crédence cuisine",
-    caption: "Crédence de cuisine",
-    width: 1024,
-    height: 921,
-  },
-  {
     src: "/images/cuisine-credence-bleue.jpg",
     webp: "/images/cuisine-credence-bleue.webp",
     alt: "Crédence céramique aux motifs bleus et verts dans une cuisine contemporaine",
@@ -148,7 +140,7 @@ const projets = [
   {
     src: "/images/galerie-3-frise-pivoines.jpg",
     webp: "/images/galerie-3-frise-pivoines.webp",
-    alt: "Crédence autour d'un lavabo, frise pivoines bleues",
+    alt: "Frise fleurie bleu-vert au-dessus d'un évier",
     caption: "Frise fleurie bleu-vert au-dessus d'un évier",
     sublegend: "Mini-crédence",
     width: 1024,
@@ -179,7 +171,7 @@ const process = [
   { n: 1, t: "Premier échange", d: "Vous nous décrivez votre projet. Réponse en 20 minutes pendant les heures ouvrées." },
   { n: 2, t: "Visite et mesures", d: "Laurence se déplace à votre domicile en Île-de-France, ou vous nous envoyez photos et cotes." },
   { n: 3, t: "Maquettes", d: "Nous vous proposons deux ou trois maquettes peintes à l'aquarelle, ajustables jusqu'à votre satisfaction." },
-  { n: 4, t: "Le temps de la main", d: "Vos carreaux sont peints, émaillés et cuits à grand feu dans l'atelier. Comptez 6 à 10 semaines de création : c'est ce qui distingue notre travail d'un carreau industriel." },
+  { n: 4, t: "Le temps de la main", d: "Vos carreaux sont peints, émaillés et cuits à grand feu dans l'atelier. Comptez 6 à 10 semaines de création." },
   { n: 5, t: "Livraison ou pose", d: "Carreaux livrés numérotés avec fiche technique, ou pose clé en main en Île-de-France." },
 ];
 
@@ -303,6 +295,7 @@ function Index() {
 
       {/* RÉASSURANCE */}
       <section className="bg-[#f9f7f2]">
+        <h2 className="sr-only">L'atelier en bref</h2>
         <ul className="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-8 max-w-6xl mx-auto px-6 py-12 md:py-16">
           {reassPillars.map(({ Icon, title, subtitle }) => (
             <li key={title} className="flex flex-col items-center text-center">
@@ -389,7 +382,7 @@ function Index() {
               Laurence dessine, peint et cuit chaque pièce à la main dans son atelier du Vésinet. Formée à l'Académie de Port-Royal et aux Beaux-Arts de Paris, elle s'est spécialisée dans la céramique murale d'intérieur et de façade. En 2025, elle a reçu le Premier Prix du Ravalement de la Ville de Versailles, catégorie Restitution de Décors.
             </p>
             <p className="mt-4 text-[17px] leading-[1.7] text-[var(--anthracite)]">
-              Quand vous commandez une crédence, c'est elle qui prépare la terre, peint chaque carreau à la pince, cuit deux fois à 1020°C. Aucun intermédiaire, aucune machine, juste sa main.
+              Quand vous commandez une crédence, c'est elle qui prépare la terre, peint chaque carreau à la pince, cuit deux fois au grand feu. Elle suit votre crédence du premier dessin à la dernière cuisson.
             </p>
             <a
               href="https://www.ceramique-murale.com/laurence-brecher-creatrice-de-ceramique-murale-decorative/"
@@ -505,7 +498,7 @@ function Index() {
             Premier Prix du Ravalement de la Ville de Versailles 2025
           </h2>
           <p className="mt-4 text-base sm:text-lg text-[#f9f7f2]/90">
-            Catégorie Restitution de Décors, pour une façade florale qui a rendu à une maison son caractère d'origine.
+            Catégorie Restitution de Décors, pour le décor floral d'un immeuble du boulevard de la République, à Versailles.
           </p>
           <a
             href="https://www.ceramique-murale.com/frise-ceramique-versailles-prix-ravalement/"

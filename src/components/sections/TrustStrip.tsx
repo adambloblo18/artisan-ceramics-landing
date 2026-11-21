@@ -12,12 +12,12 @@ export default function TrustStrip() {
       className="bg-[#f9f7f2] py-8 border-t border-[#2a2a2a]/10"
     >
       <div className="max-w-6xl mx-auto px-6">
-        <p
+        <h2
           id="trust-strip-title"
           className="text-center text-xs uppercase tracking-wider text-[#2a2a2a]/50"
         >
           Ils ont parlé de l'atelier
-        </p>
+        </h2>
 
         <ul className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-5 md:gap-6 overflow-x-auto">
           {partners.map((p) => (
@@ -29,7 +29,7 @@ export default function TrustStrip() {
                 type="button"
                 onClick={() => trackEvent("trust_strip_logo_click", { partner: p.name })}
                 className="text-[#2a2a2a]/40 italic text-sm text-center"
-                aria-label={`Partenaire : ${p.name}`}
+                aria-label={p.name}
               >
                 {p.name}
               </button>

@@ -4,10 +4,10 @@ import { trackEvent } from "@/lib/analytics";
 // TODO Laurence : remplacer ces 3 photos par de vraies macros (texture, émail, geste).
 const details = [
   {
-    src: "/images/cuisine-credence-fleurs.png",
-    webp: "/images/cuisine-credence-fleurs.webp",
+    src: "/images/galerie-3-frise-pivoines.jpg",
+    webp: "/images/galerie-3-frise-pivoines.webp",
     alt: "Détail de l'émail vert d'une crédence céramique",
-    phrase: "La transparence de l'émail vert, cuit à 1020°C.",
+    phrase: "Le détail d'une frise peinte à la main.",
   },
   {
     src: "/images/galerie-3-frise-pivoines.jpg",
@@ -35,7 +35,7 @@ export default function LeDetail() {
           Le détail qui change tout
         </h2>
         <p className="font-['DM_Sans'] text-base text-[#2a2a2a]/70 text-center max-w-2xl mx-auto mt-4">
-          Ces irrégularités, ces variations d'émail, ces bordures jamais parfaitement rectilignes : c'est la signature de la main. Aucun carreau industriel ne peut imiter cela.
+          Ces irrégularités, ces variations d'émail, ces bordures jamais parfaitement rectilignes : c'est la signature de la main.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">

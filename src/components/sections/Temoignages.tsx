@@ -3,18 +3,9 @@ import { trackEvent } from "@/lib/analytics";
 
 const projets = [
   {
-    img: "/images/cuisine-credence-fleurs.png",
-    webp: "/images/cuisine-credence-fleurs.webp",
-    pill: "Cuisine",
-    titre: "Une crédence florale sur tons verts",
-    recit:
-      "Une composition florale peinte à la main, sur toute la longueur de la crédence.",
-    meta: "Crédence de cuisine",
-  },
-  {
     img: "/images/galerie-3-frise-pivoines.jpg",
     webp: "/images/galerie-3-frise-pivoines.webp",
-    pill: "Salle de bain",
+    pill: "Cuisine",
     titre: "Une frise fleurie au-dessus d'un évier",
     recit:
       "Une frise de fleurs bleu-vert sur fond blanc, peinte à la main.",
@@ -36,10 +27,10 @@ export default function Temoignages() {
     <section className="bg-[#f9f7f2] py-20 md:py-24">
       <div className="max-w-5xl mx-auto px-6">
         <h2 className="font-display text-3xl md:text-5xl text-[#2a2a2a] text-center">
-          Trois projets, trois histoires
+          Projets de l'atelier
         </h2>
         <p className="font-body text-base text-[#2a2a2a]/70 text-center max-w-2xl mx-auto mt-4">
-          Chaque crédence raconte une rencontre entre un lieu, une intention et la main de Laurence.
+          Quelques pièces peintes par Laurence.
         </p>
 
         <div className="flex flex-col gap-16 md:gap-24 mt-16">
