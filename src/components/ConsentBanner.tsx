@@ -18,13 +18,13 @@ function readStored(): Stored | null {
 }
 
 function applyGranted() {
-  (window as any).lcmChargerMesure?.();
   (window as any).gtag?.("consent", "update", {
     analytics_storage: "granted",
     ad_storage: "granted",
     ad_user_data: "granted",
     ad_personalization: "granted",
   });
+  window.lcmChargerMesure?.();
   try {
     (window as any).posthog?.set_config?.({
       persistence: "localStorage+cookie",
@@ -35,12 +35,16 @@ function applyGranted() {
 }
 
 function applyDenied() {
+  window.lcmRefuserMesure?.();
   (window as any).gtag?.("consent", "update", {
     analytics_storage: "denied",
     ad_storage: "denied",
     ad_user_data: "denied",
     ad_personalization: "denied",
   });
+  window.posthog?.opt_out_capturing();
+  window.clarity?.("consentv2", { analytics_Storage: "denied", ad_Storage: "denied" });
+  window.uetq?.push("consent", "update", { ad_storage: "denied" });
   try {
     (window as any).posthog?.set_config?.({
       persistence: "memory",
@@ -94,7 +98,6 @@ export default function ConsentBanner() {
   // Mount: check stored consent, schedule show if needed
   useEffect(() => {
     const reopen = () => {
-      try { localStorage.removeItem(STORAGE_KEY); } catch { /* noop */ }
       decidedRef.current = false;
       setLeaving(false);
       setVisible(true);

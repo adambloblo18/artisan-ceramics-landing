@@ -7,6 +7,10 @@ export const Route = createFileRoute("/cgv")({
     meta: [
       { title: "Conditions générales de vente · Atelier Le Vésinet" },
       { name: "description", content: "Conditions générales de vente de l'Atelier Le Vésinet, crédences céramiques sur mesure." },
+      { property: "og:title", content: "Conditions générales de vente · Atelier Le Vésinet" },
+      { property: "og:description", content: "Conditions générales de vente de l'Atelier Le Vésinet, crédences céramiques sur mesure." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { name: "robots", content: "noindex" },
     ],
   }),

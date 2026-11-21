@@ -2,14 +2,13 @@ import { posthog } from "./posthog";
 
 declare global {
   interface Window {
-    posthog?: { capture: (event: string, props?: Record<string, unknown>) => void };
     gtag?: (...args: unknown[]) => void;
     clarity?: (...args: unknown[]) => void;
   }
 }
 
 export function trackEvent(name: string, props?: Record<string, unknown>) {
-  if (typeof window === "undefined") return;
+  if (typeof window === "undefined" || !window.__lcmConsent) return;
   try {
     posthog.capture?.(name, props as Record<string, unknown> | undefined);
   } catch {

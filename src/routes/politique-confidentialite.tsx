@@ -7,6 +7,10 @@ export const Route = createFileRoute("/politique-confidentialite")({
     meta: [
       { title: "Politique de confidentialité · Atelier Le Vésinet" },
       { name: "description", content: "Politique de confidentialité et gestion des données personnelles de l'Atelier Le Vésinet." },
+      { property: "og:title", content: "Politique de confidentialité · Atelier Le Vésinet" },
+      { property: "og:description", content: "Politique de confidentialité et gestion des données personnelles de l'Atelier Le Vésinet." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { name: "robots", content: "noindex" },
     ],
   }),

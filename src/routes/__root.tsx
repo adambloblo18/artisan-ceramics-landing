@@ -24,59 +24,19 @@ gtag('consent', 'default', {
   'analytics_storage': 'denied',
   'wait_for_update': 500
 });
-window.lcmChargeurs=window.lcmChargeurs||[];window.lcmChargerMesure=function(){if(window.__lcmMesure)return;window.__lcmMesure=true;var go=function(){var q=window.lcmChargeurs;q.forEach(function(f){try{f()}catch(e){}});q.push=function(f){try{f()}catch(e){}return q.length};};if(document.readyState==='complete')setTimeout(go,1500);else window.addEventListener('load',function(){setTimeout(go,1500)});};try{var c=JSON.parse(localStorage.getItem('cookie_consent')||'null');if(c&&c.status==='accepted'&&Date.now()-c.timestamp<15552000000)window.lcmChargerMesure();}catch(e){}
+window.lcmChargeurs=window.lcmChargeurs||[];
+window.__lcmConsent=false;
+window.lcmChargerMesure=function(){
+  if(window.__lcmConsent)return;
+  window.__lcmConsent=true;
+  window.lcmChargeurs.forEach(function(f){f()});
+};
+window.lcmRefuserMesure=function(){window.__lcmConsent=false;};
+try{var c=JSON.parse(localStorage.getItem('cookie_consent')||'null');if(c&&c.status==='accepted'&&Date.now()-c.timestamp<15552000000){
+  gtag('consent','update',{analytics_storage:'granted',ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted'});
+  window.lcmChargerMesure();
+}}catch(e){}
 `;
-
-// Bootstrap des scripts tiers : différé après l'événement 'load' (+1.5s d'idle)
-// pour préserver le LCP mobile. Le Consent Mode v2 (consentScript) reste prioritaire.
-const deferredThirdPartyScript = `
-(function(){
-  function boot(){
-    // Google Ads / gtag
-    var g=document.createElement('script');
-    g.async=true; g.src='https://www.googletagmanager.com/gtag/js?id=AW-11400865534';
-    document.head.appendChild(g);
-    g.onload=function(){ window.gtag && (gtag('js', new Date()), gtag('config','AW-11400865534')); };
-
-    // Microsoft Clarity
-    (window.lcmChargeurs=window.lcmChargeurs||[]).push(function(){
-    (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src='https://www.clarity.ms/tag/'+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,'clarity','script','uhxdrmhaaf');
-    });
-
-    // Bing UET
-    (window.lcmChargeurs=window.lcmChargeurs||[]).push(function(){
-    (function(w,d,t,r,u){var f,n,i;w[u]=w[u]||[],f=function(){var o={ti:'343242701'};o.q=w[u],w[u]=new UET(o),w[u].push('pageLoad')},n=d.createElement(t),n.src=r,n.async=1,n.onload=n.onreadystatechange=function(){var s=this.readyState;s&&s!=='loaded'&&s!=='complete'||(f(),n.onload=n.onreadystatechange=null)},i=d.getElementsByTagName(t)[0],i.parentNode.insertBefore(n,i)})(window,document,'script','//bat.bing.com/bat.js','uetq');
-    });
-
-  }
-  var schedule = function(){ ('requestIdleCallback' in window) ? requestIdleCallback(boot, { timeout: 3000 }) : setTimeout(boot, 1500); };
-  if (document.readyState === 'complete') schedule();
-  else window.addEventListener('load', schedule, { once: true });
-})();
-`;
-
-// PostHog : chargé uniquement après acceptation (via window.lcmChargerMesure).
-const posthogScript = `
-(window.lcmChargeurs=window.lcmChargeurs||[]).push(function(){
-!function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split('.');2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement('script')).type='text/javascript',p.crossOrigin='anonymous',p.async=!0,p.src=s.api_host.replace('.i.posthog.com','-assets.i.posthog.com')+'/static/array.js',(r=t.getElementsByTagName('script')[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a='posthog',u.people=u.people||[],u.toString=function(t){var e='posthog';return'posthog'!==a&&(e+='.'+a),t||(e+=' (stub)'),e},u.people.toString=function(){return u.toString(1)+'.people (stub)'},o='init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug'.split(' '),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-posthog.init('phc_oGmkuM4F5je7WmaLZpsF47paa8nv5V5vp58oh74Pwcwy', {
-  api_host: 'https://eu.i.posthog.com',
-  person_profiles: 'identified_only',
-  opt_out_capturing_by_default: false,
-  respect_dnt: false,
-  persistence: 'localStorage+cookie',
-  cross_subdomain_cookie: true,
-  disable_session_recording: false,
-  autocapture: true,
-  capture_pageview: 'history_change',
-  capture_pageleave: true,
-  rate_limiting: { events_per_second: 50, events_burst_limit: 500 },
-  session_recording: { sampleRate: 1.0, minimumDurationMilliseconds: 0, maskAllInputs: true }
-});
-});
-`;
-
-// googleAdsScript fusionné dans deferredThirdPartyScript ci-dessus
 
 const telConversionScript = `document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('a[href^="tel:"]').forEach(function(el) {
@@ -157,7 +117,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "Crédence céramique peinte à la main. 30 ans de métier, 1er Prix Versailles 2025. Réponse sous 20 minutes.",
       },
-      { property: "og:image", content: "https://credence.ceramique-murale.com/images/og-image.jpg" },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
       { property: "og:image:alt", content: "Crédence céramique peinte à la main, atelier Le Vésinet" },
@@ -171,7 +130,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         name: "twitter:description",
         content: "Crédence céramique peinte à la main. 30 ans de métier, 1er Prix Versailles 2025.",
       },
-      { name: "twitter:image", content: "https://credence.ceramique-murale.com/images/og-image.jpg" },
       // Robots & language
       { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
       { httpEquiv: "content-language", content: "fr-FR" },
@@ -184,15 +142,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon-16x16.png" },
       { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
       { rel: "manifest", href: "/site.webmanifest" },
-      { rel: "preconnect", href: "https://www.googletagmanager.com" },
-      { rel: "preload", as: "image", href: "/images/hero-credence.webp", type: "image/webp", fetchPriority: "high" },
-      { rel: "preload", as: "font", href: "/fonts/dm-sans-latin.woff2", type: "font/woff2", crossOrigin: "anonymous" },
+      // React emits the single hero image preload from its fetchPriority="high".
       { rel: "preload", as: "font", href: "/fonts/cormorant-garamond-400-latin.woff2", type: "font/woff2", crossOrigin: "anonymous" },
     ],
     scripts: [
       { children: consentScript },
-      { children: posthogScript },
-      { children: deferredThirdPartyScript },
       { children: telConversionScript },
       { type: "application/ld+json", children: jsonLd },
       { type: "application/ld+json", children: JSON.stringify(localBusinessSchema) },
@@ -223,6 +177,22 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+
+  useEffect(() => {
+    const loadMeasurement = () => {
+      if (!window.__lcmConsent) return;
+      void import("@/lib/measurement").then((module) => {
+        if (window.__lcmConsent) module.startMeasurement();
+      }).catch(() => {});
+    };
+    const queue = window.lcmChargeurs ??= [];
+    queue.push(loadMeasurement);
+    if (window.__lcmConsent) loadMeasurement();
+    return () => {
+      const index = queue.indexOf(loadMeasurement);
+      if (index >= 0) queue.splice(index, 1);
+    };
+  }, []);
 
   useEffect(() => {
     if (typeof window === "undefined" || !("IntersectionObserver" in window)) {

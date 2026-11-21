@@ -7,6 +7,10 @@ export const Route = createFileRoute("/mentions-legales")({
     meta: [
       { title: "Mentions légales · Atelier Le Vésinet" },
       { name: "description", content: "Mentions légales de l'Atelier Le Vésinet, Laurence Brecher, céramiste." },
+      { property: "og:title", content: "Mentions légales · Atelier Le Vésinet" },
+      { property: "og:description", content: "Mentions légales de l'Atelier Le Vésinet, Laurence Brecher, céramiste." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { name: "robots", content: "noindex" },
     ],
   }),

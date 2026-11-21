@@ -1,7 +1,25 @@
-// Neutralisé : PostHog est initialisé uniquement via le script inline
-// dans src/routes/__root.tsx (source unique de vérité).
-// On ré-exporte l'instance globale posthog-js pour les consommateurs
-// (analytics, ab-helpers) sans appeler init ici.
-import posthog from "posthog-js";
+import type { PostHog } from "posthog-js";
 
-export { posthog };
+declare global {
+  interface Window {
+    posthog?: PostHog;
+    __lcmConsent?: boolean;
+    __lcmClarityQueue?: unknown[][];
+    lcmChargeurs?: Array<() => void>;
+    lcmChargerMesure?: () => void;
+    lcmRefuserMesure?: () => void;
+    UET?: new (options: { ti: string; q: unknown }) => { push: (...args: unknown[]) => void };
+    uetq?: { push: (...args: unknown[]) => void };
+  }
+}
+
+// Lightweight bridge: importing an event helper never downloads the SDK.
+function activePostHog() {
+  return typeof window !== "undefined" && window.__lcmConsent ? window.posthog : undefined;
+}
+
+export const posthog = {
+  capture: (event: string, props?: Record<string, unknown>) => activePostHog()?.capture(event, props),
+  getFeatureFlag: (key: string) => activePostHog()?.getFeatureFlag(key),
+  onFeatureFlags: (callback: () => void) => activePostHog()?.onFeatureFlags(callback),
+};

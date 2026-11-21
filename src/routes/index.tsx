@@ -6,6 +6,7 @@ import FloatingPhoneDesktop from "@/components/FloatingPhoneDesktop";
 import TrustStrip from "@/components/sections/TrustStrip";
 import InlineCta from "@/components/InlineCta";
 import { trackEvent } from "@/lib/analytics";
+import { canLoadHeroVideo, HERO_VIDEO_DELAY_MS } from "@/lib/loading-policy";
 import { Trophy, ArrowRight, Phone, Hand, Landmark, MapPin, Truck } from "lucide-react";
 
 const MultiStepForm = lazy(() => import("@/components/MultiStepForm"));
@@ -24,6 +25,16 @@ import { professionalServiceSchema } from "@/lib/schema-jsonld";
 
 export const Route = createFileRoute("/")({
   head: () => ({
+    meta: [
+      { title: "Crédence céramique sur mesure peinte main, Atelier Le Vésinet · 1er Prix Versailles 2025" },
+      { name: "description", content: "Crédence céramique peinte à la main au Vésinet. Chaque pièce est unique, dessinée pour votre cuisine. 1er Prix Versailles 2025. Réponse sous 20 minutes." },
+      { property: "og:title", content: "Crédence céramique sur mesure peinte main · Atelier Le Vésinet" },
+      { property: "og:description", content: "Crédence céramique peinte à la main. 30 ans de métier, 1er Prix Versailles 2025. Réponse sous 20 minutes." },
+      { property: "og:type", content: "website" },
+      { property: "og:image", content: "https://credence.ceramique-murale.com/images/og-image.jpg" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://credence.ceramique-murale.com/images/og-image.jpg" },
+    ],
     links: [{ rel: "canonical", href: "https://credence.ceramique-murale.com/" }],
     scripts: [
       {
@@ -60,26 +71,30 @@ const HERO_IMG = "/images/cuisine-verte.jpg";
 const PRIX_BG = "/images/prix.jpg";
 
 /**
- * Vidéo hero : autoplay différé via IntersectionObserver après LCP (>2s).
+ * Vidéo hero : sources absentes jusqu'à load + 2s, uniquement sur ordinateur.
  * Fichiers : WebM VP9 ~410 Ko + MP4 H.264 ~379 Ko, 720p, 6s loop.
  * Le poster <img> au-dessus reste le LCP candidate (affiché immédiatement).
  */
 function HeroVideo() {
   const ref = useRef<HTMLVideoElement | null>(null);
+  const [loadSources, setLoadSources] = useState(false);
 
   useEffect(() => {
     const video = ref.current;
-    if (!video) return;
+    const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
+    if (!video || !canLoadHeroVideo({
+      width: window.innerWidth,
+      reducedMotion: window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+      saveData: connection?.saveData === true,
+    })) return;
     let io: IntersectionObserver | null = null;
-    let started = false;
+    let timer: number | undefined;
     const start = () => {
-      if (started) return;
-      started = true;
       io = new IntersectionObserver(
         (entries) => {
           entries.forEach((e) => {
             if (e.isIntersecting) {
-              video.play().catch(() => {});
+              setLoadSources(true);
               io?.disconnect();
             }
           });
@@ -88,12 +103,21 @@ function HeroVideo() {
       );
       io.observe(video);
     };
-    const t = window.setTimeout(start, 2000);
+    const schedule = () => { timer = window.setTimeout(start, HERO_VIDEO_DELAY_MS); };
+    if (document.readyState === "complete") schedule();
+    else window.addEventListener("load", schedule, { once: true });
     return () => {
-      window.clearTimeout(t);
+      window.removeEventListener("load", schedule);
+      window.clearTimeout(timer);
       io?.disconnect();
     };
   }, []);
+
+  useEffect(() => {
+    if (!loadSources || !ref.current) return;
+    ref.current.load();
+    void ref.current.play().catch(() => {});
+  }, [loadSources]);
 
   return (
     <video
@@ -101,7 +125,7 @@ function HeroVideo() {
       muted
       loop
       playsInline
-      preload="metadata"
+      preload="none"
       aria-hidden="true"
       tabIndex={-1}
       width={1280}
@@ -109,8 +133,8 @@ function HeroVideo() {
       poster="/images/hero-credence.webp"
       className="hero-lazy-video absolute inset-0 w-full h-full object-cover"
     >
-      <source src="/video/header.webm" type="video/webm" />
-      <source src="/video/header.mp4" type="video/mp4" />
+      {loadSources && <source src="/video/header.webm" type="video/webm" />}
+      {loadSources && <source src="/video/header.mp4" type="video/mp4" />}
     </video>
   );
 }
@@ -338,8 +362,7 @@ function Index() {
                         alt={p.alt}
                         width={p.width}
                         height={p.height}
-                        loading={i === 0 ? "eager" : "lazy"}
-                        fetchPriority={i === 0 ? "high" : "auto"}
+                        loading="lazy"
                         decoding="async"
                         className="w-full h-auto block transition-transform duration-1000 group-hover:scale-[1.03]"
                       />
@@ -635,6 +658,10 @@ function Index() {
           <img
             src={lightbox.src}
             alt={lightbox.alt}
+            width={lightbox.width}
+            height={lightbox.height}
+            loading="lazy"
+            decoding="async"
             onClick={(e) => e.stopPropagation()}
             className="max-h-[95vh] max-w-[95vw] object-contain"
           />
