@@ -161,7 +161,7 @@ const projets = [
 const reassPillars = [
   { Icon: Trophy, title: "1er Prix Versailles 2025", subtitle: "Ravalement décor céramique" },
   { Icon: Hand, title: "100% peinte à la main", subtitle: "À la pince, au pinceau" },
-  { Icon: Landmark, title: "30 ans de métier", subtitle: "Au Vésinet, Île-de-France" },
+  { Icon: Landmark, title: "30 ans de métier", subtitle: "Laurence Brecher, céramiste" },
   { Icon: MapPin, title: "Visite sur RDV", subtitle: "Atelier Le Vésinet (78)" },
   { Icon: Truck, title: "France et international", subtitle: "Livraison sécurisée" },
 ];

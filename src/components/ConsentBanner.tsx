@@ -135,7 +135,7 @@ export default function ConsentBanner() {
       role="dialog"
       aria-labelledby="cookie-title"
       aria-describedby="cookie-desc"
-      className="fixed z-[1000] font-[Inter] bottom-4 right-3 left-3 lg:left-auto lg:bottom-4 lg:right-4"
+      className="fixed z-[1000] font-[Inter] bottom-[calc(84px+env(safe-area-inset-bottom))] right-3 left-3 lg:left-auto lg:bottom-4 lg:right-4"
       style={{
         maxWidth: 280,
         width: "100%",

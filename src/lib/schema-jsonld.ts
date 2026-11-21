@@ -33,7 +33,7 @@ export const serviceSchema = {
   provider: { "@type": "LocalBusiness", name: "Atelier Le Vésinet - Laurence Brecher" },
   areaServed: { "@type": "Country", name: "France" },
   description:
-    "Crédence en céramique peinte à la main au Vésinet. Crédence en céramique peinte à la main au Vésinet, dessinée sur mesure pour votre cuisine.",
+    "Crédence en céramique peinte à la main au Vésinet, dessinée sur mesure pour votre cuisine.",
   offers: {
     "@type": "AggregateOffer",
     priceCurrency: "EUR",

@@ -25,21 +25,22 @@ function MentionsLegales() {
 
         <h2 className="font-display text-2xl mt-10 text-[#2a2a2a]">Éditeur du site</h2>
         <p className="mt-3">
-          Nom : Laurence Brecher<br />
-          Email : <a href="mailto:laurence@ceramique-murale.com" className="underline">laurence@ceramique-murale.com</a><br />
-          Téléphone : <a href="tel:+33670025133" className="underline">06 70 02 51 33</a>
-        </p>
-        <p className="mt-3">
-          Les mentions légales complètes de l'atelier sont sur{" "}
-          <a href="https://www.ceramique-murale.com/mentions-legales/" className="underline">https://www.ceramique-murale.com/mentions-legales/</a>
+          Laurence Bloch (Brecher), entrepreneur individuel<br />
+          Nom commercial : « Atelier de Laurence »<br />
+          SIRET : 517 776 720 00032<br />
+          Adresse : 14 rue Ernest André, 78110 Le Vésinet, France<br />
+          Téléphone : <a href="tel:+33670025133" className="underline">06 70 02 51 33</a><br />
+          E-mail : <a href="mailto:ceramiquemurale@gmail.com" className="underline">ceramiquemurale@gmail.com</a><br />
+          TVA non applicable, article 293 B du CGI.
         </p>
 
-        <h2 className="font-display text-2xl mt-10 text-[#2a2a2a]">Directeur de publication</h2>
+        <h2 className="font-display text-2xl mt-10 text-[#2a2a2a]">Directrice de la publication</h2>
         <p className="mt-3">Laurence Brecher</p>
 
         <h2 className="font-display text-2xl mt-10 text-[#2a2a2a]">Hébergeur</h2>
         <p className="mt-3">
-          Lovable Labs Sweden AB
+          Lovable Labs Sweden AB<br />
+          Regeringsgatan 25, 111 53 Stockholm, Suède
         </p>
 
         <h2 className="font-display text-2xl mt-10 text-[#2a2a2a]">Crédits photos</h2>

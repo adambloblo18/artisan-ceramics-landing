@@ -6,12 +6,6 @@ const details = [
   {
     src: "/images/galerie-3-frise-pivoines.jpg",
     webp: "/images/galerie-3-frise-pivoines.webp",
-    alt: "Détail de l'émail vert d'une crédence céramique",
-    phrase: "Le détail d'une frise peinte à la main.",
-  },
-  {
-    src: "/images/galerie-3-frise-pivoines.jpg",
-    webp: "/images/galerie-3-frise-pivoines.webp",
     alt: "Détail d'une frise pivoines bleues peinte à la pince",
     phrase: "Chaque pétale de pivoine, peint à la pince fine.",
   },
@@ -32,13 +26,13 @@ export default function LeDetail() {
     <section className="bg-[#f9f7f2] py-20 md:py-24">
       <div className="max-w-7xl mx-auto px-6">
         <h2 className="text-center font-['Cormorant_Garamond'] text-3xl md:text-5xl text-[#2a2a2a]">
-          Le détail qui change tout
+          De près
         </h2>
         <p className="font-['DM_Sans'] text-base text-[#2a2a2a]/70 text-center max-w-2xl mx-auto mt-4">
           Ces irrégularités, ces variations d'émail, ces bordures jamais parfaitement rectilignes : c'est la signature de la main.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
           {details.map((d) => (
             <figure key={d.src} className="flex flex-col">
               <picture>
