@@ -88,6 +88,14 @@ export const homepageSchema = {
       jobTitle: "Artiste céramiste",
       url: "https://www.ceramique-murale.com/laurence-brecher-creatrice-de-ceramique-murale-decorative/",
       worksFor: { "@id": "https://www.ceramique-murale.com/#organization" },
+      sameAs: [
+        "https://www.wikidata.org/wiki/Q139382961",
+        "https://instagram.com/ceramiquesmurales",
+        "https://artisansdupatrimoine.fr/professionnel/7619/laurence-brecher-le-vesinet",
+        "https://saloncroissyartactuel.fr/brecher-bloch-laurence-22/",
+        "https://www.linkedin.com/in/laurence-brecher-73b647251/",
+        "https://toutenceramique.fr/atelier",
+      ],
     },
     {
       "@type": "Service",
