@@ -474,13 +474,13 @@ function Index() {
             <div className="border border-[var(--border)] bg-[var(--cream)] p-8">
               <h3 className="h-display text-xl">Crédence simple</h3>
               <p className="mt-2 text-sm text-[var(--muted-text)]">Jusqu'à 2 m², motifs floraux ou frise.</p>
-              <p className="mt-6 font-display text-3xl text-[var(--gold)]">À partir de 1 000 €</p>
+              <p className="mt-6 font-display text-3xl text-[var(--gold)]">À partir de 1 500 €</p>
             </div>
             <div className="relative border border-[var(--border)] bg-[#f7f7f7] p-8">
               <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[var(--gold)] px-3 py-1 text-xs font-semibold text-white tracking-wide uppercase">Le plus demandé</span>
               <h3 className="h-display text-xl">Crédence sur mesure</h3>
               <p className="mt-2 text-sm text-[var(--muted-text)]">2 à 4 m², composition originale.</p>
-              <p className="mt-6 font-display text-3xl text-[var(--gold)]">2 500 à 5 000 €</p>
+              <p className="mt-6 font-display text-3xl text-[var(--gold)]">4 000 à 8 000 €</p>
             </div>
             <div className="border border-[var(--border)] bg-[var(--cream)] p-8">
               <h3 className="h-display text-xl">Crédence d'exception</h3>

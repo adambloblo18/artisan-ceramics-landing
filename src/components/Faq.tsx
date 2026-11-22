@@ -5,7 +5,7 @@ const items = [
   {
     id: "Q1",
     q: "Combien coûte une crédence en céramique sur mesure ?",
-    a: "Les projets démarrent à partir de 1 000 € pour une petite réalisation. Pour une crédence sur mesure de 2 à 4 m², comptez entre 2 500 et 5 000 €. Au-delà, le budget dépend de la complexité du projet. Nous établissons une étude personnalisée après un premier échange.",
+    a: "Les projets démarrent à partir de 1 500 € pour une petite réalisation. Pour une crédence sur mesure de 2 à 4 m², comptez entre 4 000 et 8 000 €. Au-delà, le budget dépend de la complexité du projet. Nous établissons une étude personnalisée après un premier échange.",
   },
   {
     id: "Q2",
