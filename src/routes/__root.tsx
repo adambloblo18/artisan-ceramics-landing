@@ -144,7 +144,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content: "Crédence céramique peinte à la main. 30 ans de métier, 1er Prix Versailles 2025.",
       },
       // Robots & language
-      { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
+      { name: "robots", content: "noindex, follow" },
       { httpEquiv: "content-language", content: "fr-FR" },
     ],
     links: [
